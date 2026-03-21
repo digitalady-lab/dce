@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DigitaLady — Digital Creator Empire</title>
+<meta name="description" content="Nem kell megmutatnod az arcodat. Online pénzt keresni ma már így megy."/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#FAF7F4;color:#1E1218}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
+.cta{display:inline-block;background:linear-gradient(120deg,#C9647A,#8B5CF6);color:#fff;border-radius:50px;padding:15px 38px;font-size:16px;font-weight:800;box-shadow:0 6px 24px rgba(201,100,122,0.3);border:none;cursor:pointer}
+.cta-sm{padding:11px 24px;font-size:14px}
+.divider{width:48px;height:2px;background:linear-gradient(90deg,#C9647A,#8B5CF6);border-radius:99px;margin:0 auto 22px}
+.sec-head{text-align:center;margin-bottom:28px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:2.5px;margin-bottom:10px;text-transform:uppercase}
+.sec-title{font-family:'EB Garamond',Georgia,serif;font-size:clamp(22px,5vw,34px);font-weight:700;line-height:1.2;max-width:480px;margin:0 auto}
+.sec-sub{font-size:15px;color:#7A6070;margin:10px auto 0;max-width:420px;line-height:1.75}
+.section{padding:48px 0}
+
+/* HERO */
+.hero{background:linear-gradient(165deg,#F2E4E1 0%,#FAF7F4 60%,#EDE8F5 100%);padding:64px 24px 52px;text-align:center;border-bottom:1px solid #E8C8C2}
+.hero-badge{display:inline-block;background:#fff;border-radius:20px;padding:7px 18px;font-size:11px;font-weight:800;color:#C9647A;letter-spacing:2.5px;margin-bottom:24px;border:1px solid #E8C8C2}
+.hero h1{font-family:'EB Garamond',Georgia,serif;font-size:clamp(30px,8vw,54px);font-weight:700;line-height:1.1;max-width:540px;margin:0 auto 18px}
+.hero h1 span{background:linear-gradient(120deg,#C9647A,#8B5CF6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:17px;color:#7A6070;line-height:1.8;max-width:420px;margin:0 auto 30px}
+.hero-note{font-size:13px;color:#7A6070;margin-top:12px}
+
+/* DREAM */
+.dream-box{background:#fff;border-radius:26px;padding:26px 28px 20px;max-width:360px;margin:0 auto 30px;box-shadow:0 6px 28px rgba(201,100,122,.1);border:1.5px solid #E8C8C2}
+.dream-emoji{font-size:38px;margin-bottom:12px}
+.dream-text{font-family:'EB Garamond',Georgia,serif;font-size:clamp(17px,4vw,21px);font-weight:700;line-height:1.45;max-width:280px;margin:0 auto 14px}
+.dream-dots{display:flex;gap:6px;justify-content:center}
+.ddot{width:7px;height:7px;border-radius:99px;background:rgba(201,100,122,.25);cursor:pointer;transition:all .3s;border:none;padding:0}
+.ddot.on{width:22px;background:#C9647A}
+
+/* STATS */
+.stats{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:600px;margin:32px auto 0}
+.stat{background:#fff;border-radius:18px;padding:16px 20px;text-align:center;flex:1 1 110px;min-width:100px;max-width:170px;box-shadow:0 3px 16px rgba(201,100,122,.08);border:1.5px solid #F2E4E1}
+.stat-n{font-family:'EB Garamond',Georgia,serif;font-size:28px;font-weight:700;color:#C9647A;line-height:1}
+.stat-l{font-size:11.5px;color:#7A6070;margin-top:5px;line-height:1.4}
+
+/* CARDS */
+.card{background:#fff;border-radius:22px;padding:22px 20px;border:1.5px solid #F2E4E1;box-shadow:0 3px 16px rgba(0,0,0,.05);margin-bottom:12px}
+.badge{display:inline-block;font-size:9.5px;font-weight:800;padding:3px 10px;border-radius:20px;letter-spacing:.8px;color:#fff;margin-bottom:6px}
+.card-title{font-weight:800;font-size:16px;color:#1E1218;line-height:1.3;margin-bottom:4px}
+.card-desc{font-size:13.5px;color:#7A6070;line-height:1.65}
+
+/* STEP */
+.step{background:#fff;border-radius:22px;padding:20px;border:1.5px solid #F2E4E1;margin-bottom:12px;cursor:pointer}
+.step.open{box-shadow:0 6px 24px rgba(0,0,0,.08);border-color:#E8C8C2}
+.step-hd{display:flex;align-items:center;gap:14px}
+.step-num{width:60px;height:60px;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+.step-n{font-size:9.5px;font-weight:800;letter-spacing:.5px}
+.step-emoji{font-size:28px;line-height:1.2}
+.step-arr{font-size:22px;margin-left:auto;transition:transform .25s;flex-shrink:0}
+.step.open .step-arr{transform:rotate(45deg)}
+.step-body{display:none;border-radius:12px;padding:14px 16px;margin-top:12px}
+.step.open .step-body{display:block}
+.si{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;font-size:14px;color:#1E1218;line-height:1.65}
+.si:last-child{margin-bottom:0}
+
+/* TESTIMONIAL */
+.tc{background:#fff;border-radius:20px;padding:20px;border:1.5px solid #F2E4E1;box-shadow:0 3px 14px rgba(201,100,122,.07);margin-bottom:12px}
+.tc-hd{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.tc-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;flex-shrink:0}
+.tc-name{font-weight:800;font-size:15px}
+.tc-role{font-size:11.5px;color:#7A6070}
+.tc-stars{margin-left:auto;color:#C8A96E;font-size:13px}
+.tc p{font-size:14.5px;color:#4A3040;line-height:1.7;font-style:italic}
+
+/* COSTS */
+.tab-row{display:flex;gap:8px;margin-bottom:20px}
+.tbtn{flex:1;padding:11px 8px;border-radius:14px;border:1.5px solid transparent;cursor:pointer;font-weight:700;font-size:13.5px;background:#F5F0FF;color:#7A6070;transition:all .2s;font-family:inherit}
+.tbtn.t0{background:#E6F0EC;color:#2D7A5A;border-color:#A7F3D0}
+.tbtn.t1{background:#EDE8F5;color:#8B5CF6;border-color:#DDD6FE}
+.cr{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #FAF7F4}
+.cr:last-child{border-bottom:none}
+.cp{font-size:13.5px;font-weight:700;padding:4px 12px;border-radius:20px}
+.cfree{color:#2D7A5A;background:#E6F0EC;border:1px solid #A7F3D0}
+.cpaid{color:#D97706;background:#FFFBF0;border:1px solid #FDE68A}
+
+/* DARK */
+.dark-wrap{background:#F2E4E1;border-radius:24px;padding:28px 22px;border:2px solid #E8C8C2}
+.dc{background:#fff;border-radius:16px;margin-bottom:8px;border:1.5px solid #F2E4E1}
+.dc-hd{display:flex;align-items:flex-start;gap:12px;padding:15px 18px;cursor:pointer}
+.dc-arr{font-size:20px;color:#C9647A;margin-left:auto;flex-shrink:0;margin-top:2px;transition:transform .25s}
+.dc.open .dc-arr{transform:rotate(45deg)}
+.dc-body{display:none;padding:0 18px 18px 52px}
+.dc.open .dc-body{display:block}
+.dc-inner{background:#F2E4E1;border-radius:12px;padding:14px 16px;border-left:3px solid #C9647A}
+.dc-inner p{font-size:14px;color:#5A3A4A;line-height:1.75;margin-bottom:10px}
+.dc-inner p:last-child{margin-bottom:0}
+
+/* AFF */
+.aff-wrap{background:#EDE8F5;border-radius:24px;padding:30px 24px;border:2px solid #DDD6FE}
+.ai{display:flex;align-items:flex-start;gap:12px;background:#fff;border-radius:14px;padding:13px 16px;border:1.5px solid #DDD6FE;margin-bottom:10px;font-size:14px;color:#3A2A5A;line-height:1.65}
+
+/* PRICING */
+.pc{border-radius:24px;padding:26px 24px;margin-bottom:14px;position:relative}
+.pc0{background:#EDE8F5;border:2px solid #DDD6FE}
+.pc1{background:#F2E4E1;border:2px solid #E8C8C2}
+.pc-badge{position:absolute;top:18px;right:18px;background:#C9647A;color:#fff;font-size:10px;font-weight:800;padding:3px 12px;border-radius:20px;letter-spacing:1px}
+.pc-n{font-family:'EB Garamond',Georgia,serif;font-size:48px;font-weight:700;line-height:1}
+.pc-name{font-family:'EB Garamond',Georgia,serif;font-size:22px;font-weight:700;margin-top:4px}
+.pc-desc{font-size:14px;color:#7A6070;margin:6px 0 20px;line-height:1.5}
+.perk{display:flex;align-items:flex-start;gap:10px;font-size:14.5px;margin-bottom:10px;color:#1E1218}
+.vbox{background:#fff;border-radius:14px;padding:13px 16px;margin-bottom:18px;border:1.5px solid #E8C8C2}
+.vbox-l{font-size:11.5px;font-weight:800;color:#C8A96E;letter-spacing:1px;margin-bottom:6px}
+.pc-cta{display:block;color:#fff;border:none;border-radius:50px;padding:14px;font-size:15.5px;font-weight:800;text-align:center;margin-bottom:8px;cursor:pointer}
+.pnote{text-align:center;font-size:12.5px;color:#7A6070}
+
+/* FAQ */
+.fi{border-radius:16px;overflow:hidden;margin-bottom:8px;border:1.5px solid #F2E4E1;background:#fff}
+.fi.open{border-color:#E8C8C2;background:#F2E4E1}
+.fq{width:100%;display:flex;justify-content:space-between;align-items:center;padding:15px 20px;background:none;border:none;cursor:pointer;text-align:left;gap:12px;font-family:inherit}
+.fq span{font-weight:700;font-size:15px;color:#1E1218;line-height:1.3}
+.farr{font-size:24px;color:#C9647A;flex-shrink:0;transition:transform .25s}
+.fa{display:none;padding:0 20px 16px;font-size:14.5px;color:#7A6070;line-height:1.75}
+.fi.open .fa{display:block}
+.fi.open .farr{transform:rotate(45deg)}
+
+/* FINAL */
+.final{background:linear-gradient(135deg,#F2E4E1,#EDE8F5);border-radius:28px;padding:48px 32px;text-align:center;margin-bottom:52px;border:2px solid #E8C8C2}
+.final h2{font-family:'EB Garamond',Georgia,serif;font-size:clamp(24px,6vw,36px);font-weight:700;margin-bottom:14px;line-height:1.2}
+.final p{font-size:16px;color:#7A6070;line-height:1.85;margin-bottom:32px}
+footer{text-align:center;padding-bottom:36px;color:#7A6070;font-size:12.5px}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">DCE · DIGITAL CREATOR EMPIRE</div>
+  <h1>Online pénzt keresni<br><span>ma már így megy.</span></h1>
+  <p class="hero-sub">Nem kell megmutatnod az arcodat.<br>Nem kell influencernek lenned.<br><strong style="color:#1E1218">Csak egy őszinte rendszer kell.</strong></p>
+
+  <div class="dream-box">
+    <div id="de" class="dream-emoji">☀️</div>
+    <div id="dt" class="dream-text">Reggel felébredsz — és már volt egy eladásod.</div>
+    <div class="dream-dots" id="dd"></div>
+  </div>
+
+  <a href="https://www.skool.com/digital-creatorempire-1735/about?ref=0f27e2a522a2417c938e24877aa053da" target="_blank" class="cta">Igen, ezt akarom — mutasd! ✨</a>
+  <div class="hero-note">7 napos ingyenes kipróbálás · 2 előfizetési szint, bármikor lemondható · Nincs szükség hitelkártyára</div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-n">140</div><div class="stat-l">eladott digitális termék</div></div>
+    <div class="stat"><div class="stat-n">100+</div><div class="stat-l">nőnek segített extra bevételt építeni</div></div>
+    <div class="stat"><div class="stat-n">100 fős</div><div class="stat-l">DCE közösség — és épül</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="section">
+  <div class="sec-head">
+    <div class="eyebrow" style="color:#C9647A">ISMERŐS?</div>
+    <div class="divider"></div>
+    <h2 class="sec-title">Rengeteg tartalom.<br>Mégsem történik semmi.</h2>
+  </div>
+  <div class="card">
+    <p style="font-size:15px;color:#4A3040;line-height:1.85">Több időt töltesz keresgéléssel, agyalással és ChatGPT-vel veszekedéssel, mint alkotással. Látod mások sikerét — de a te számodon semmi sem mozdul.<br><br>Mi is voltunk ott. Ezért hoztuk létre a Digital Creator Empire-t — belepakoltuk az elmúlt <strong style="color:#C9647A">2+ évünk összes tapasztalatát, bukását és sikerét.</strong> Mi helyetted figyeljük a trendeket. Amíg te tanulsz és pénzt keresel.</p>
+  </div>
+</div>
+
+<div class="section" style="padding-top:0">
+  <div class="sec-head">
+    <div class="eyebrow" style="color:#8B5CF6">A 3 LÉPÉSES RENDSZER</div>
+    <div class="divider"></div>
+    <h2 class="sec-title">Mindegy, hol tartasz most.</h2>
+    <p class="sec-sub">Van szinted, ami a te tempodat támogatja — és elvezet az első bevételig.</p>
+  </div>
+
+  <div class="step" onclick="toggleStep(this)">
+    <div class="step-hd">
+      <div class="step-num" style="background:#F2E4E1"><div class="step-n" style="color:#C9647A">01</div><div class="step-emoji">📦</div></div>
+      <div><span class="badge" style="background:#C9647A">PRÉMIUM TAGOKNAK</span><div class="card-title">Kész terméked van — azonnal.</div><div class="card-desc">Prémium tagként azonnal megkapod az első kész digitális terméket, affiliate linkkel ellátva.</div></div>
+      <div class="step-arr" style="color:#C9647A">+</div>
+    </div>
+    <div class="step-body" style="background:#F2E4E1">
+      <div class="si"><span>🎁</span><span>Kész első digitális termék — neked nincs más dolgod, csak eladni. Nincs írás, nincs szerkesztés.</span></div>
+      <div class="si"><span>🔗</span><span>A terméked már affiliate linkkel van ellátva: ha valaki mástól veszi meg, te is keresel. Időt spórolsz, bevételt szerzel.</span></div>
+      <div class="si"><span>⚡</span><span>Nincs várakozás. A termék kész — te elindulsz.</span></div>
+    </div>
+  </div>
+
+  <div class="step" onclick="toggleStep(this)">
+    <div class="step-hd">
+      <div class="step-num" style="background:#EDE8F5"><div class="step-n" style="color:#8B5CF6">02</div><div class="step-emoji">📣</div></div>
+      <div><span class="badge" style="background:#8B5CF6">BELÉPŐ + PRÉMIUM</span><div class="card-title">Tartalomstratégia — ha most még nem vagy szakértő.</div><div class="card-desc">Nem kell előre tudnod mindent. Megtanítjuk, hogyan adjon el a tartalmad.</div></div>
+      <div class="step-arr" style="color:#8B5CF6">+</div>
+    </div>
+    <div class="step-body" style="background:#EDE8F5">
+      <div class="si"><span>🌱</span><span>9 USD szinten: az alapok — Instagram logika, hook építés, első tartalmak. Már ezzel el tudsz indulni.</span></div>
+      <div class="si"><span>🚀</span><span>17 USD szinten: kész tartalomstratégia, napi gyorstalpaló, 75 vírusos hook — 3 hónapnyi tartalom egyszerre.</span></div>
+      <div class="si"><span>💡</span><span>Nem kell szakértőnek lenned. Mi 2+ éve csináljuk — átadjuk, amit tudunk. Te csak alkalmazod.</span></div>
+    </div>
+  </div>
+
+  <div class="step" onclick="toggleStep(this)">
+    <div class="step-hd">
+      <div class="step-num" style="background:#E6F0EC"><div class="step-n" style="color:#2D7A5A">03</div><div class="step-emoji">🤖</div></div>
+      <div><span class="badge" style="background:#2D7A5A">PRÉMIUM — 17 USD</span><div class="card-title">A félautomata rendszered termel — te közben élsz.</div><div class="card-desc">Percek alatt készítesz saját AI karaktert, fotókat és videókat. Nem kell arc, nem kell kamera.</div></div>
+      <div class="step-arr" style="color:#2D7A5A">+</div>
+    </div>
+    <div class="step-body" style="background:#E6F0EC">
+      <div class="si"><span>🎭</span><span>AI Gyorstalpaló: percek alatt készítesz saját AI karaktert, fotókat és videókat. Egyszer megcsinálod — örökké dolgozik.</span></div>
+      <div class="si"><span>⚙️</span><span>Félautomata rendszer: AI promptok, sablonok, automatizált bolt — a rendszer alszik helyetted is.</span></div>
+      <div class="si"><span>🌙</span><span>Este lefekszel. Reggel értesítő: +37 EUR. A rendszer elküldte a terméket. Te aludtál.</span></div>
+      <a href="https://www.skool.com/digital-creatorempire-1735/about?ref=0f27e2a522a2417c938e24877aa053da" target="_blank" class="cta cta-sm" style="display:inline-block;margin-top:14px" onclick="event.stopPropagation()">Ezt akarom — 17 USD/hó 💜</a>
+    </div>
+  </div>
+
+  <div style="background:#F2E4E1;border-radius:20px;padding:24px;text-align:center;border:1.5px solid #E8C8C2;margin-top:4px">
+    <div style="font-size:30px;margin-bottom:10px">🌙</div>
+    <div style="font-family:'EB Garamond',Georgia,serif;font-weight:700;font-size:19px;margin-bottom:10px">Este lefekszel, reggel egy értesítő vár.</div>
+    <div style="font-size:15px;color:#7A6070;line-height:1.8">Új rendelés érkezett: <strong style="color:#C9647A">+37 EUR</strong><br><span style="font-size:13px;color:#B0A0B0">Nem egyik napról a másikra — de egyszer eljön ez a pillanat.</span></div>
+  </div>
+</div>
+
+<div class="section" style="padding-top:0">
+  <div class="sec-head">
+    <div class="eyebrow" style="color:#C9647A">VALÓDI TAGOK, VALÓDI SZAVAK</div>
+    <div class="divider"></div>
+    <h2 class="sec-title">Akik már bent vannak — így írnak.</h2>
+    <p class="sec-sub">Nem reklámszöveg. Valódi Skool-kommentek, valódi emberektől.</p>
+  </div>
+
+  <div class="tc"><div class="tc-hd"><div class="tc-av" style="background:rgba(201,100,122,.2);color:#C9647A">E</div><div><div class="tc-name">Emma Digital Shop</div><div class="tc-role">Tag</div></div><div class="tc-stars">★★★★★</div></div><p>Szuperek vagytok csajok!!! 😍❤️</p></div>
+  <div class="tc"><div class="tc-hd"><div class="tc-av" style="background:rgba(200,169,110,.2);color:#C8A96E">B</div><div><div class="tc-name">Barbara Palkovits</div><div class="tc-role">Tag</div></div><div class="tc-stars">★★★★★</div></div><p>Csak bámulok és kapkodom a fejem 🥰 szuperek vagytok csajok ✨</p></div>
+  <div class="tc"><div class="tc-hd"><div class="tc-av" style="background:rgba(139,92,246,.2);color:#8B5CF6">N</div><div><div class="tc-name">Nyerluc Katalin</div><div class="tc-role">Tag</div></div><div class="tc-stars">★★★★★</div></div><p>Fantasztikusak vagytok, alig várom a továbbiakat 😍</p></div>
+  <div class="tc"><div class="tc-hd"><div class="tc-av" style="background:rgba(45,122,90,.2);color:#2D7A5A">R</div><div><div class="tc-name">Roder Monika</div><div class="tc-role">Tag</div></div><div class="tc-stars">★★★★★</div></div><p>Wooo de jóoo nagyon köszönjük, megyek is nemsokára csekkolom csinálom — imádom képeket gyártani!</p></div>
+  <div class="tc"><div class="tc-hd"><div class="tc-av" style="background:rgba(200,169,110,.2);color:#C8A96E">B</div><div><div class="tc-name">Bea</div><div class="tc-role">Új tag bemutatkozása</div></div><div class="tc-stars">★★★★★</div></div><p>Könyvtáros-rendezvényszervező vagyok, mellette virtuális asszisztens vállalkozást szeretnék felépíteni. A 2026-os év egyik fő célom, hogy a bevételeimet megduplázzam.</p></div>
+  <div class="tc"><div class="tc-hd"><div class="tc-av" style="background:rgba(139,92,246,.2);color:#8B5CF6">M</div><div><div class="tc-name">Mónika</div><div class="tc-role">Új tag bemutatkozása</div></div><div class="tc-stars">★★★★★</div></div><p>Jelenleg egy gyárban dolgozom két műszakban — szeretnék megszabadulni ettől az állástól. Én a digitális marketinggel képzelem el. Örülök, hogy itt lehetek, és tanulhatok tőletek.</p></div>
+
+  <div style="text-align:center;margin-top:20px"><a href="https://www.skool.com/digital-creatorempire-1735/about?ref=0f27e2a522a2417c938e24877aa053da" target="_blank" class="cta cta-sm">Én is szeretnék köztük lenni 💜</a></div>
+</div>
+
+<div class="section" style="padding-top:0">
+  <div class="sec-head">
+    <div class="eyebrow" style="color:#D97706">ŐSZINTE ÁRAZÁS</div>
+    <div class="divider"></div>
+    <h2 class="sec-title">Mennyibe kerül valójában?</h2>
+    <p class="sec-sub">Igen, 0 Ft-tal el lehet kezdeni. De legyünk őszinték abban is, mi kell a következő szinthez.</p>
+  </div>
+  <div class="card">
+    <div class="tab-row">
+      <button class="tbtn t0" id="tb0" onclick="switchTab(0)">🌱 Nulláról indulva</button>
+      <button class="tbtn" id="tb1" onclick="switchTab(1)">🚀 Komolyabban</button>
+    </div>
+    <div id="cc"></div>
+  </div>
+</div>
+
+<div class="section" style="padding-top:0">
+  <div class="sec-head">
+    <div class="eyebrow" style="color:#C9647A">NE DŐLJ BE</div>
+    <div class="divider"></div>
+    <h2 class="sec-title">Amit a drága kurzusok nem mutatnak meg.</h2>
+    <p class="sec-sub">Mielőtt bármit vásárolsz online — ezt olvasd el.</p>
+  </div>
+  <div class="dark-wrap">
+    <div style="font-size:14.5px;color:#5A3A4A;line-height:1.75;background:#fff;border-radius:14px;padding:16px 18px;margin-bottom:20px;border-left:3px solid #C9647A">Láttuk már a kriptóval, a dropshippinggel — most ugyanez történik a digitális kurzusiparban. Kinyitjuk a bűvészmutatványt.</div>
+    <div id="dcc"></div>
+    <div style="background:#fff;border-radius:18px;padding:22px;border:1.5px solid #E8C8C2;margin-top:8px">
+      <div style="font-weight:800;font-size:16px;color:#1E1218;margin-bottom:14px;font-family:'EB Garamond',Georgia,serif">💜 Hogyan néz ki egy legitim modell?</div>
+      <div style="font-size:14px;color:#5A3A4A;line-height:1.6;margin-bottom:8px">🎁 Ingyenes alapmodulok előbb — vásárlás csak ha értéket láttál</div>
+      <div style="font-size:14px;color:#5A3A4A;line-height:1.6;margin-bottom:8px">📊 Nyílt kommunikáció a bevételekről, költségekről és valódi időbefektetésről</div>
+      <div style="font-size:14px;color:#5A3A4A;line-height:1.6;margin-bottom:8px">🔓 A cél az önálló vállalkozó képzése — nem a rendszerfüggőség</div>
+      <div style="font-size:14px;color:#5A3A4A;line-height:1.6;margin-bottom:18px">💰 Két szint: 9 vagy 17 USD/hó — semmi más</div>
+      <div style="font-size:13px;color:#7A6070;font-style:italic;margin-bottom:14px;text-align:center">"A valódi siker nem titkokban, hanem a stabil alapokban és a saját márkád építésében rejlik."</div>
+      <div style="text-align:center"><a href="https://www.skool.com/digital-creatorempire-1735/about?ref=0f27e2a522a2417c938e24877aa053da" target="_blank" class="cta cta-sm">Belépek a tiszta rendszerbe 💜</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="padding-top:0">
+  <div class="sec-head">
+    <div class="eyebrow" style="color:#8B5CF6">AFFILIATE PROGRAM</div>
+    <div class="divider"></div>
+    <h2 class="sec-title">50% — ennél könnyebb pénz nincs.</h2>
+    <p class="sec-sub">Prémium tudást ajánlasz — és te keresel vele. Még mielőtt bármit eladsz.</p>
+  </div>
+  <div class="aff-wrap">
+    <div style="font-size:14.5px;color:#3A2A5A;line-height:1.75;background:#fff;border-radius:14px;padding:14px 16px;margin-bottom:16px;border:1.5px solid #DDD6FE">Ez is egy újdonság a magyar piacon. Nem kell terméket létrehoznod. Elég, ha megosztod a linked — és minden belépő után a bevétel 50%-a automatikusan a tiéd, havonta ismétlődve.</div>
+    <div class="ai"><span>🔗</span><span><strong style="color:#8B5CF6">50% jutalék</strong> — minden belépő után, aki a te linkedden csatlakozik. Automatikusan, havonta ismétlődve.</span></div>
+    <div class="ai"><span>👥</span><span><strong style="color:#8B5CF6">2 ember = te ingyen vagy</strong> — Ha 2 ember belép a te linked után, a saját tagságod nullás. Örökre.</span></div>
+    <div class="ai"><span>📦</span><span><strong style="color:#8B5CF6">További affiliate linkek is várnak</strong> — A közösségen belül eszközökre, termékekre is kapsz lehetőséget.</span></div>
+    <div style="background:#fff;border-radius:14px;padding:16px;margin:14px 0;border:1.5px solid #DDD6FE">
+      <div style="font-size:11.5px;font-weight:800;color:#8B5CF6;letter-spacing:1.5px;margin-bottom:10px">PÉLDA SZÁMÍTÁS</div>
+      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #FAF7F4"><span style="color:#7A6070;font-size:14px">2 ember csatlakozik</span><div style="text-align:right"><div style="font-size:16px;font-weight:800;color:#8B5CF6">Ingyen vagy</div><div style="font-size:11px;color:#B0A0C0">saját tagságod nullás</div></div></div>
+      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #FAF7F4"><span style="color:#7A6070;font-size:14px">10 ember csatlakozik</span><div style="text-align:right"><div style="font-size:16px;font-weight:800;color:#8B5CF6">45 USD/hó</div><div style="font-size:11px;color:#B0A0C0">kb. 17 000 Ft profit</div></div></div>
+      <div style="display:flex;justify-content:space-between;padding:8px 0"><span style="color:#7A6070;font-size:14px">30 ember csatlakozik</span><div style="text-align:right"><div style="font-size:16px;font-weight:800;color:#8B5CF6">135 USD/hó</div><div style="font-size:11px;color:#B0A0C0">kb. 50 000 Ft/hó</div></div></div>
+    </div>
+    <div style="text-align:center"><a href="https://www.skool.com/digital-creatorempire-1735/about?ref=0f27e2a522a2417c938e24877aa053da" target="_blank" class="cta" style="background:linear-gradient(120deg,#2D7A5A,#8B5CF6)">Belépek és elkezdem keresni 💸</a></div>
+  </div>
+</div>
+
+<div class="section" style="padding-top:0">
+  <div class="sec-head">
+    <div class="eyebrow" style="color:#C9647A">SZINTEK</div>
+    <div class="divider"></div>
+    <h2 class="sec-title">Két szint. Semmi más.</h2>
+    <p class="sec-sub">Belépő vagy Prémium — te döntöd el. Bármikor válthatsz, bármikor lemondható.</p>
+  </div>
+
+  <div class="pc pc0">
+    <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:6px"><span class="pc-n" style="color:#8B5CF6">9</span><span style="font-size:16px;color:#7A6070;font-weight:600">USD / hó</span></div>
+    <div class="pc-name">Belépő</div>
+    <div class="pc-desc">A lehetőség — tesztelj, mielőtt elkötelezed magad.</div>
+    <div class="perk">📚 Alapanyagok letölthetők</div>
+    <div class="perk">♻️ Továbbértékesítési jog megvásárolható</div>
+    <div class="perk">👀 Közösség napi életét látod</div>
+    <div class="perk">📰 Friss digitális hírek hetente</div>
+    <div class="perk">👥 100+ elkötelezett alkotó közössége</div>
+    <div class="perk">❓ Kérdezhetsz a csoportban</div>
+    <div class="perk">💸 50% affiliate jutalék</div>
+    <a href="https://www.skool.com/digital-creatorempire-1735/about?ref=0f27e2a522a2417c938e24877aa053da" target="_blank" class="pc-cta" style="background:#8B5CF6">Belépek — 9 USD/hó 💜</a>
+    <div class="pnote">7 napos ingyenes kipróbálás · Bármikor lemondható</div>
+  </div>
+
+  <div class="pc pc1">
+    <div class="pc-badge">AJÁNLOTT</div>
+    <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:6px"><span class="pc-n" style="color:#C9647A">17</span><span style="font-size:16px;color:#7A6070;font-weight:600">USD / hó</span></div>
+    <div class="pc-name">Prémium Alapító</div>
+    <div class="pc-desc">A teljes rendszer — tanulj, keress, fejlődj.</div>
+    <div class="perk">✅ Minden, ami a 9 USD-os szintben van</div>
+    <div class="perk">✍️ PromptBank — 100+ AI prompt, hetente frissül</div>
+    <div class="perk">🛑 75 vírusos hook — 3 hónapnyi tartalom</div>
+    <div class="perk">🤖 Saját AI stratéga chatbot</div>
+    <div class="perk">🚀 30 napos terv — nulláról 1000 dollárig</div>
+    <div class="perk">🎭 AI Gyorstalpaló — saját AI karakter percek alatt</div>
+    <div class="perk">⭐ VIP anyagok — akik tovább akarnak lépni</div>
+    <div class="perk">🌱 2 belépő = te ingyen vagy</div>
+    <div class="vbox">
+      <div class="vbox-l">VALÓDI PIACI ÉRTÉK</div>
+      <p style="font-size:13.5px;color:#5A3A4A;line-height:1.75">A tartalmak együttes piaci értéke <strong style="color:#C9647A">~500 USD · 150 000+ Ft</strong> — te havi 17 dollárért éred el. Folyamatosan frissül, mert a digitális világ hetente változik.</p>
+    </div>
+    <a href="https://www.skool.com/digital-creatorempire-1735/about?ref=0f27e2a522a2417c938e24877aa053da" target="_blank" class="pc-cta" style="background:linear-gradient(120deg,#C9647A,#8B5CF6)">Belépek — 17 USD/hó 💜</a>
+    <div class="pnote">7 napos ingyenes kipróbálás · Bármikor lemondható</div>
+  </div>
+
+  <div style="background:#fff;border-radius:18px;padding:16px 22px;border:1.5px solid #F2E4E1;text-align:center">
+    <p style="font-size:14.5px;color:#7A6070;line-height:1.75">Nem tudod, készen állsz-e? Kezdd a <strong style="color:#8B5CF6">9 USD-os szinttel</strong> — 7 napig ingyen kipróbálhatod. Ha tetszik, maradsz. Ha nem — egy fillér sem vész el.</p>
+  </div>
+</div>
+
+<div class="section" style="padding-top:0">
+  <div class="sec-head">
+    <div class="eyebrow" style="color:#C9647A">KÉRDÉSEK</div>
+    <div class="divider"></div>
+    <h2 class="sec-title">Ami biztosan felmerül benned.</h2>
+  </div>
+  <div id="faqc"></div>
+</div>
+
+<div class="final">
+  <div style="font-size:44px;margin-bottom:16px">💜</div>
+  <h2>Te is megcsinálhatod.<br>Pontosan így.</h2>
+  <p>Csatlakozz a Digital Creator Empire közösséghez.<br><strong style="color:#1E1218">9 USD vagy 17 USD/hó. Más szint nincs.</strong></p>
+  <a href="https://www.skool.com/digital-creatorempire-1735/about?ref=0f27e2a522a2417c938e24877aa053da" target="_blank" class="cta" style="display:inline-block;max-width:380px;width:100%">Belépek — szintet választok 💜</a>
+</div>
+
+</div>
+<footer>DigitaLady · Digital Creator Empire · DCE Skool Közösség</footer>
+
+<script>
+// DREAM
+var dr=[{e:"☀️",t:"Reggel felébredsz — és már volt egy eladásod."},{e:"✈️",t:"Nyaralsz, és a bevétel akkor is folyik."},{e:"🏠",t:"Dolgozol otthonról — a saját feltételeid szerint."},{e:"👶",t:"Ott vagy a gyerekkel — és mégis keresel."},{e:"💜",t:"Te döntöd el, mikor, mennyit, és hogyan."}];
+var di=0;
+var dd=document.getElementById('dd');
+dr.forEach(function(_,i){var b=document.createElement('button');b.className='ddot'+(i===0?' on':'');b.onclick=function(){go(i)};dd.appendChild(b);});
+function go(i){di=i;document.getElementById('de').textContent=dr[i].e;document.getElementById('dt').textContent=dr[i].t;document.querySelectorAll('.ddot').forEach(function(d,j){d.className='ddot'+(j===i?' on':'');});}
+setInterval(function(){go((di+1)%dr.length);},2800);
+
+// STEPS
+function toggleStep(el){el.classList.toggle('open');}
+
+// COSTS
+var costs=[
+  {rows:[{n:"Instagram fiók",p:"Ingyenes",ok:1},{n:"Canva alapverzió",p:"Ingyenes",ok:1},{n:"Beacons.ai bolt",p:"Ingyenes",ok:1},{n:"Alap DFY/PLR anyag",p:"0-5 000 Ft",ok:1},{n:"ChatGPT alap",p:"Ingyenes",ok:1}],note:null},
+  {rows:[{n:"Stan Store bolt",p:"kb. 11 000 Ft/hó",ok:0},{n:"Canva Pro",p:"kb. 5 000 Ft/hó",ok:0},{n:"AI twin (HeyGen)",p:"kb. 7 000 Ft/hó",ok:0},{n:"DCE Belépő szint",p:"9 USD/hó",ok:1},{n:"DCE Prémium szint",p:"17 USD/hó",ok:1}],note:"💡 Tanács: Kezdd ingyenesen. Az első bevételből fektess vissza — ne fordítva. Aki először fizet, aztán tanul, az lesz a vesztes."}
+];
+var ct=0;
+function switchTab(i){ct=i;document.getElementById('tb0').className='tbtn'+(i===0?' t0':'');document.getElementById('tb1').className='tbtn'+(i===1?' t1':'');renderC();}
+function renderC(){var d=costs[ct];var h=d.rows.map(function(r){return'<div class="cr"><span style="font-size:14.5px">'+r.n+'</span><span class="cp '+(r.ok?'cfree':'cpaid')+'">'+r.p+'</span></div>';}).join('');if(d.note)h+='<div style="background:#EDE8F5;border-radius:12px;padding:12px 14px;font-size:13.5px;color:#7A6070;line-height:1.65;margin-top:14px;border:1px solid #DDD6FE">'+d.note+'</div>';document.getElementById('cc').innerHTML=h;}
+renderC();
+
+// DARK
+var dk=[
+  {i:"📱",t:"Hány ezer dollárt keresett — de mit nem árul el",p:"Valaki kiposztolja, hogy X ezer dollárt keresett egy hónap alatt. De véletlenül kihagyja, hogy 200 órát dolgozott érte, és mellesleg 10 év marketinges tapasztalata van.",ps:["Ha utánaszámolsz: valójában 10 dolláros órabérért dolgozott. Csak a bevételi oldalt mutatja — a befektetett időt, a költségeket és a tapasztalatot nem.","Mielőtt bármit veszel, kérdezd meg: mennyi idő, mekkora tőke és hány év tapasztalat kellett ehhez valójában?"]},
+  {i:"💡",t:"Ez is egy újdonság — 50% csak azzal, hogy ajánlasz",p:"A digitális marketing egyik legjobban őrzött titka: nem kell terméket létrehoznod ahhoz, hogy pénzt keress. Elég, ha prémium tudást ajánlasz valakinek — és az eladás 50%-a a tiéd.",ps:["A DCE rendszer ezt beépítve kínálja: te csatlakozol, megosztod a linked, és minden belépő után havonta, automatikusan keresel.","Ez a modell valójában újdonság a magyar piacon. Aki most kezdi, az az elsők között lesz."]},
+  {i:"🪆",t:"Az orosz matrjoska baba modell",p:"Kezdesz egy alapkurzussal 97 dollárért. Aztán szükséged van a 249 dollárosra, majd az all-in 500 dollárosra. Minden szint azt ígéri, hogy ott van az igazi titok.",ps:["Ez a beágyazott MLM. Már nem egy tudást adsz el — hanem a rendszer terjesztésének jogát.","Teszt: ha egy program bevételének nagy része abból jön, hogy más emberek ugyanezt adják el tovább — az piramisjáték jogi keretek közt."]},
+  {i:"🧠",t:"A te hibád — a pszichológiai csapda",p:"Ha a rendszer nem hozza az ígért eredményt, ezeket fogod hallani: Nem implementáltad megfelelően. Nem vagy elég elkötelezett.",ps:["Ez egy tudatosan épített pszichológiai csapda. Célja: hogy soha ne a rendszert hibáztasd, mindig magadat — és ezért egyre többet vásárolj.","Egy külföldi mintán (2024) megvizsgálták: több tíz emberből, akik bevált rendszereket követtek, valójában csak 4-5 épített fel fenntartható bevételt nulláról."]}
+];
+var dc=document.getElementById('dcc');
+dk.forEach(function(d,i){
+  var ps=d.ps.map(function(p){return'<p>'+p+'</p>';}).join('');
+  dc.innerHTML+='<div class="dc" id="dk'+i+'"><div class="dc-hd" onclick="tdk('+i+')"><span style="font-size:22px;flex-shrink:0;margin-top:2px">'+d.i+'</span><div style="flex:1"><div style="font-weight:800;font-size:15px;color:#1E1218;margin-bottom:4px">'+d.t+'</div><div style="font-size:13.5px;color:#7A6070;line-height:1.6">'+d.p+'</div></div><div class="dc-arr" id="dka'+i+'">+</div></div><div class="dc-body" id="dkb'+i+'"><div class="dc-inner">'+ps+'</div></div></div>';
+});
+function tdk(i){var o=document.getElementById('dk'+i).classList.toggle('open');document.getElementById('dkb'+i).classList.toggle('open');document.getElementById('dka'+i).style.transform=document.getElementById('dk'+i).classList.contains('open')?'rotate(45deg)':'rotate(0)';}
+
+// FAQ
+var fqs=[
+  {q:"Ez is csak egy újabb gyors meggazdagodás program?",a:"Nem — és épp ezért mondtuk el az előző részben, hogyan néznek ki azok. A DCE: ingyenes alapok előbb, vásárlás csak ha értéket láttál, 7 napos próba, bármikor lemondható. Nincs 97→249→500 dolláros eszkaláció. A cél az önálló vállalkozó, nem a rendszerfüggő."},
+  {q:"Mennyi pénzt lehet ezzel keresni realisztikusan?",a:"Az első 1-3 hónapban sokan 20-80 000 Ft-ot keresnek, ha következetesek. Aki 6-12 hónapig komolyan csinálja, az rendszerint 150-400 000 Ft felé jut. Ez nem garantált — de rendszer, nem szerencse."},
+  {q:"Mi a különbség a 9 és a 17 USD között?",a:"9 USD/hó: alapanyagok, közösség, friss hírek, kérdezhetsz, 50% affiliate. 17 USD/hó: mindez + PromptBank, 75 vírusos hook, AI chatbot, 30 napos terv, AI Gyorstalpaló. Valódi piaci értéke ~500 USD / 150 000+ Ft."},
+  {q:"Tényleg nem kell megmutatnom az arcomat?",a:"Nem. Sem a faceless úthoz, sem az AI twin-hez, sem az AI influencer modellhez. A tartalmadon, a szövegeiden és az üzeneted erején múlik minden."},
+  {q:"Ha belépek, mennyi idő kell naponta?",a:"Az első hetekben 1-2 óra naponta elég az alapok megismeréséhez. Ahogy a rendszer épül, egyre több dolgot vesz át tőled az automatizálás — ez a passzív jövedelem lényege."}
+];
+var fc=document.getElementById('faqc');
+fqs.forEach(function(f,i){fc.innerHTML+='<div class="fi" id="fi'+i+'"><button class="fq" onclick="tfq('+i+')"><span>'+f.q+'</span><span class="farr" id="fa'+i+'">+</span></button><div class="fa" id="fb'+i+'">'+f.a+'</div></div>';});
+function tfq(i){document.getElementById('fi'+i).classList.toggle('open');}
+</script>
+</body>
+</html>
