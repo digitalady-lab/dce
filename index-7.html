@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DigitaLady — Digital Creator Empire</title>
+  <meta name="description" content="Nem kell megmutatnod az arcodat. Nem kell influencernek lenned. Csak egy őszinte rendszer kell." />
+  <meta property="og:title" content="DigitaLady — Digital Creator Empire" />
+  <meta property="og:description" content="Online pénzt keresni ma már így megy. 9 USD / 17 USD · 7 napos ingyenes kipróbálás." />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Arial,sans-serif;background:#FAF7F4}
+    button{font-family:inherit;cursor:pointer}
+    input{font-family:inherit}
+    a{text-decoration:none}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-thumb{background:#E8C8C2;border-radius:3px}
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
+var useState = React.useState, useRef = React.useRef, useEffect = React.useEffect, createElement = React.createElement;
+var SKOOL_LINK = "https://www.skool.com/digital-creatorempire-1735/about?ref=0f27e2a522a2417c938e24877aa053da";
+var SYSTEM_PROMPT = "Te a DigitaLady Mentor AI mentora vagy a DCE Skool kozossegnek. Magyarazz ugy, ahogy egy 15 evesnek is ertheto, de legyen oszinte es kozvetetlen. CSAK ezekrol beszelj: digitalis termekek, passziv jovedelem, a 3 ut (faceless/AI twin/AI influencer), Stan Store, Beacons, DFY/PLR/MRR alapjai, online atveresek felismerese, realis idorangu varakozasok, DCE kozosseg elonyei. Max 3-4 mondat, baratsagos hangon.";
+var FREE_LIMIT = 3;
+// ─── DESIGN TOKENS ────────────────────────────────────────────────────────────
+var T = {
+    cream: "#FAF7F4",
+    rose: "#F2E4E1",
+    blush: "#E8C8C2",
+    mauve: "#C9647A",
+    gold: "#C8A96E",
+    lav: "#EDE8F5",
+    lavDark: "#8B5CF6",
+    sage: "#E6F0EC",
+    sageDark: "#2D7A5A",
+    ink: "#1E1218",
+    muted: "#7A6070",
+    white: "#FFFFFF",
+};
+// ─── TESTIMONIALS (from screenshot) ──────────────────────────────────────────
+var testimonials = [
+    { name: "Emma Digital Shop", avatar: "E", color: T.mauve, text: "Szuperek vagytok csajok!!! 😍❤️", role: "Tag" },
+    { name: "Barbara Palkovits", avatar: "B", color: T.gold, text: "Csak bámulok és kapkodom a fejem 🥰 szuperek vagytok csajok ✨", role: "Tag" },
+    { name: "Nyerluc Katalin", avatar: "N", color: T.lavDark, text: "Fantasztikusak vagytok, alig várom a továbbiakat 😍", role: "Tag" },
+    { name: "Roder Monika", avatar: "R", color: T.sageDark, text: "Wooo de jóoo nagyon köszönjük, megyek is nemsokára csekkolom csinálom — imádom képeket gyártani!", role: "Tag" },
+    { name: "Flóra Szádoczki", avatar: "F", color: T.mauve, text: "Huuu, de szuper képek! 😍 Köszi szépen csajok! 😍", role: "Tag" },
+    { name: "Bea", avatar: "B", color: T.gold, text: "Könyvtáros-rendezvényszervező vagyok, mellette virtuális asszisztens vállalkozást szeretnék felépíteni. A 2026-os év egyik fő célom, hogy a bevételeimet megduplázzam.", role: "Új tag bemutatkozása" },
+    { name: "Mónika", avatar: "M", color: T.lavDark, text: "Jelenleg egy gyárban dolgozom két műszakban — szeretnék megszabadulni ettől az állástól. Én a digitális marketinggel képzelem el. Örülök, hogy itt lehetek, és tanulhatok tőletek.", role: "Új tag bemutatkozása" },
+];
+// ─── DATA ─────────────────────────────────────────────────────────────────────
+var dreams = [
+    { emoji: "☀️", text: "Reggel felébredsz — és már volt egy eladásod." },
+    { emoji: "✈️", text: "Nyaralsz, és a bevétel akkor is folyik." },
+    { emoji: "🏠", text: "Dolgozol otthonról — a saját feltételeid szerint." },
+    { emoji: "👶", text: "Ott vagy a gyerekkel — és mégis keresel." },
+    { emoji: "💜", text: "Te döntöd el, mikor, mennyit, és hogyan." },
+];
+var faqs = [
+    { q: "Ez is csak egy újabb gyors meggazdagodás program?", a: "Nem — és ezért mondtuk el, hogyan néznek ki azok. A DCE: ingyenes alapok előbb, vásárlás csak ha értéket láttál, 9 vagy 17 USD/hó. Nincs 97→249→500 dolláros eszkaláció. A cél az önálló vállalkozó, nem a rendszerfüggő." },
+    { q: "Mennyit lehet ezzel keresni realisztikusan?", a: "Az első 1-3 hónapban sokan 20-80 000 Ft-ot keresnek, ha következetesek. Aki 6-12 hónapig komolyan csinálja, az rendszerint 150-400 000 Ft felé jut. Ez nem garantált — de rendszer, nem szerencse, és nem egy hetes sprint." },
+    { q: "Mi a különbség a 9 és a 17 USD között?", a: "A 9 USD-os szinten letöltheted az alapanyagokat, látod a közösség életét, kérdezhetsz, és benne vagy az affiliate programban. A 17 USD-os Prémium adja: a PromptBankot, a 75 vírusos hookot, az AI chatbotot, a 30 napos tervet, az AI gyorstalpalót és a VIP anyagokat. Piaci értéke ~500 USD / 150 000+ Ft — te havi 17 dollárért kapod, és folyamatosan frissül." },
+    { q: "Tényleg nem kell megmutatnom az arcomat?", a: "Nem. Sem a faceless úthoz, sem az AI twin-hez, sem az AI influencer modellhez. A tartalmadon, a szövegeiden és az üzeneted erején múlik minden." },
+    { q: "Ha belépek, mennyi idő kell naponta?", a: "Az első hetekben 1-2 óra naponta elég az alapok megismeréséhez. Ahogy a rendszer épül, egyre több dolgot vesz át tőled — ez az automatizálás lényege. Nem sprint, hanem maraton." },
+];
+// ─── HELPERS ──────────────────────────────────────────────────────────────────
+function Pill(_a) {
+    var color = _a.color, bg = _a.bg, children = _a.children;
+    return React.createElement("span", { style: { background: bg || color + "18", color: color, fontSize: 10.5, fontWeight: 800, padding: "3px 11px", borderRadius: 20, letterSpacing: 1, display: "inline-block" } }, children);
+}
+function CTABtn(_a) {
+    var children = _a.children, _b = _a.href, href = _b === void 0 ? SKOOL_LINK : _b, _c = _a.small, small = _c === void 0 ? false : _c;
+    return (React.createElement("a", { href: href, target: "_blank", rel: "noopener noreferrer", style: { display: "inline-block", background: "linear-gradient(120deg, ".concat(T.mauve, ", ").concat(T.lavDark, ")"), color: "#fff", borderRadius: 50, padding: small ? "11px 26px" : "16px 40px", fontSize: small ? 14 : 16.5, fontWeight: 800, cursor: "pointer", boxShadow: "0 8px 28px rgba(201,100,122,0.3)", textDecoration: "none", letterSpacing: 0.3 } }, children));
+}
+function Divider() {
+    return React.createElement("div", { style: { width: 48, height: 2, background: "linear-gradient(90deg,".concat(T.mauve, ",").concat(T.lavDark, ")"), borderRadius: 99, margin: "0 auto 24px" } });
+}
+function SectionHead(_a) {
+    var eyebrow = _a.eyebrow, title = _a.title, sub = _a.sub, _b = _a.eyebrowColor, eyebrowColor = _b === void 0 ? T.mauve : _b;
+    return (React.createElement("div", { style: { textAlign: "center", marginBottom: 32 } },
+        React.createElement("div", { style: { fontSize: 11, fontWeight: 800, color: eyebrowColor, letterSpacing: 2.5, marginBottom: 10, textTransform: "uppercase" } }, eyebrow),
+        React.createElement(Divider, null),
+        React.createElement("h2", { style: { fontFamily: "Georgia,serif", fontSize: "clamp(24px,5.5vw,36px)", fontWeight: 700, color: T.ink, lineHeight: 1.2, maxWidth: 520, margin: "0 auto" } }, title),
+        sub && React.createElement("p", { style: { fontSize: 15.5, color: T.muted, marginTop: 12, maxWidth: 440, margin: "12px auto 0", lineHeight: 1.75 } }, sub)));
+}
+// ─── DREAM SLIDER ─────────────────────────────────────────────────────────────
+function DreamSlider() {
+    var _a = useState(0), idx = _a[0], setIdx = _a[1];
+    useEffect(function () {
+        var t = setInterval(function () { return setIdx(function (i) { return (i + 1) % dreams.length; }); }, 2800);
+        return function () { return clearInterval(t); };
+    }, []);
+    return (React.createElement("div", { style: { textAlign: "center" } },
+        React.createElement("div", { style: { fontSize: 38, marginBottom: 12, animation: "fadeUp 0.5s ease" }, key: "e" + idx }, dreams[idx].emoji),
+        React.createElement("div", { style: { fontFamily: "Georgia,serif", fontSize: "clamp(17px,4vw,22px)", fontWeight: 700, color: T.ink, lineHeight: 1.45, animation: "fadeUp 0.5s ease", maxWidth: 300, margin: "0 auto 16px" }, key: "t" + idx }, dreams[idx].text),
+        React.createElement("div", { style: { display: "flex", gap: 6, justifyContent: "center" } }, dreams.map(function (_, i) { return React.createElement("div", { key: i, onClick: function () { return setIdx(i); }, style: { width: i === idx ? 24 : 7, height: 7, borderRadius: 99, background: i === idx ? T.mauve : T.blush, cursor: "pointer", transition: "all 0.3s" } }); }))));
+}
+// ─── TESTIMONIALS ─────────────────────────────────────────────────────────────
+function TestimonialCard(_a) {
+    var t = _a.t;
+    return (React.createElement("div", { style: { background: T.white, borderRadius: 20, padding: "20px 20px", border: "1.5px solid ".concat(T.rose), boxShadow: "0 3px 16px rgba(201,100,122,0.07)", display: "flex", flexDirection: "column", gap: 14 } },
+        React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } },
+            React.createElement("div", { style: { width: 44, height: 44, borderRadius: "50%", background: "linear-gradient(135deg,".concat(t.color, "33,").concat(t.color, "66)"), display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 17, color: t.color, flexShrink: 0, border: "2px solid ".concat(t.color, "44") } }, t.avatar),
+            React.createElement("div", null,
+                React.createElement("div", { style: { fontWeight: 800, fontSize: 15, color: T.ink } }, t.name),
+                React.createElement("div", { style: { fontSize: 11.5, color: T.muted } }, t.role)),
+            React.createElement("div", { style: { marginLeft: "auto", color: T.gold, fontSize: 13 } }, "\u2605\u2605\u2605\u2605\u2605")),
+        React.createElement("p", { style: { fontSize: 14.5, color: "#4A3040", lineHeight: 1.7, margin: 0, fontStyle: "italic" } },
+            "\"",
+            t.text,
+            "\"")));
+}
+// ─── 3 STEPS ──────────────────────────────────────────────────────────────────
+function ThreeSteps() {
+    var _a = useState(null), open = _a[0], setOpen = _a[1];
+    var steps = [
+        {
+            n: "01", icon: "📦", tierColor: T.mauve, tierBg: T.rose, tier: "PRÉMIUM TAGOKNAK",
+            title: "Kész terméked van — azonnal.",
+            short: "Nem kell hónapokig alkotnod. Prémium tagként azonnal megkapod az első kész digitális terméket, affiliate linkkel ellátva.",
+            detail: [
+                { icon: "🎁", text: "Kész első digitális termék — neked nincs más dolgod, csak eladni. Nincs írás, nincs szerkesztés." },
+                { icon: "🔗", text: "A terméked már affiliate linkkel van ellátva: ha valaki mástól veszi meg, te is keresel. Időt spórolsz, bevételt szerzel." },
+                { icon: "⚡", text: "Nincs várakozás. A termék kész — te elindulsz." },
+            ],
+            cta: null,
+        },
+        {
+            n: "02", icon: "📣", tierColor: T.lavDark, tierBg: T.lav, tier: "BELÉPŐ + PRÉMIUM",
+            title: "Tartalomstratégia — ha most még nem vagy szakértő.",
+            short: "Nem kell előre tudnod mindent. Megtanítjuk, hogyan szólítsd meg a közönséged — és hogyan adjon el a tartalmad.",
+            detail: [
+                { icon: "🌱", text: "9 USD szinten: az alapok — Instagram logika, hook építés, első tartalmak. Már ezzel el tudsz indulni." },
+                { icon: "🚀", text: "17 USD szinten: kész tartalomstratégia, napi gyorstalpaló, eladási modul és 75 vírusos hook — 3 hónapnyi tartalom egyszerre." },
+                { icon: "💡", text: "Nem kell szakértőnek lenned. Mi 2+ éve csináljuk — átadjuk, amit tudunk. Te csak alkalmazod." },
+            ],
+            cta: null,
+        },
+        {
+            n: "03", icon: "🤖", tierColor: T.sageDark, tierBg: T.sage, tier: "PRÉMIUM — 17 USD",
+            title: "A félautomata rendszered termel — te közben élsz.",
+            short: "Ez a legjobb rész. Percek alatt készítesz saját AI karaktert, fotókat és videókat. Nem kell arc, nem kell kamera.",
+            detail: [
+                { icon: "🎭", text: "AI Gyorstalpaló (csak 17 USD-ban): percek alatt készítesz saját AI karaktert, AI fotókat és AI videókat. Egyszer megcsinálod — örökké dolgozik." },
+                { icon: "⚙️", text: "Félautomata rendszer: AI promptok, sablonok, automatizált bolt — a rendszer alszik helyetted is." },
+                { icon: "🌙", text: "Este lefekszel. Reggel értesítő: +37 EUR. A rendszer elküldte a terméket. Te aludtál." },
+            ],
+            cta: "Ezt akarom — 17 USD/hó",
+        },
+    ];
+    return (React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 12 } }, steps.map(function (s, i) {
+        var isOpen = open === i;
+        return (React.createElement("div", { key: i, style: { background: T.white, borderRadius: 22, border: "1.5px solid ".concat(isOpen ? s.tierColor + "55" : T.rose), overflow: "hidden", boxShadow: isOpen ? "0 8px 32px rgba(0,0,0,0.08)" : "0 2px 10px rgba(0,0,0,0.04)", transition: "all 0.3s" } },
+            React.createElement("button", { onClick: function () { return setOpen(isOpen ? null : i); }, style: { width: "100%", background: "none", border: "none", cursor: "pointer", padding: "22px 22px", textAlign: "left", display: "flex", alignItems: "center", gap: 16 } },
+                React.createElement("div", { style: { flexShrink: 0, width: 62, height: 62, borderRadius: 18, background: s.tierBg, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 0 } },
+                    React.createElement("span", { style: { fontSize: 10, fontWeight: 800, color: s.tierColor, letterSpacing: 0.5 } }, s.n),
+                    React.createElement("span", { style: { fontSize: 28, lineHeight: 1.2 } }, s.icon)),
+                React.createElement("div", { style: { flex: 1 } },
+                    React.createElement(Pill, { color: s.tierColor, bg: s.tierBg }, s.tier),
+                    React.createElement("div", { style: { fontWeight: 800, fontSize: 17, color: T.ink, lineHeight: 1.3, marginTop: 7, marginBottom: 4 } }, s.title),
+                    React.createElement("div", { style: { fontSize: 13.5, color: T.muted, lineHeight: 1.6 } }, s.short)),
+                React.createElement("span", { style: { fontSize: 24, color: s.tierColor, flexShrink: 0, display: "inline-block", transform: isOpen ? "rotate(45deg)" : "rotate(0)", transition: "transform 0.25s" } }, "+")),
+            isOpen && (React.createElement("div", { style: { padding: "0 22px 22px" } },
+                React.createElement("div", { style: { background: s.tierBg, borderRadius: 16, padding: "16px 18px", marginBottom: s.cta ? 14 : 0 } }, s.detail.map(function (d, j) { return (React.createElement("div", { key: j, style: { display: "flex", alignItems: "flex-start", gap: 12, marginBottom: j < s.detail.length - 1 ? 12 : 0 } },
+                    React.createElement("span", { style: { fontSize: 18, flexShrink: 0, marginTop: 2 } }, d.icon),
+                    React.createElement("span", { style: { fontSize: 14.5, color: T.ink, lineHeight: 1.7 } }, d.text))); })),
+                s.cta && React.createElement(CTABtn, { small: true },
+                    s.cta,
+                    " \uD83D\uDC9C")))));
+    })));
+}
+// ─── HONEST COSTS ─────────────────────────────────────────────────────────────
+function HonestCosts() {
+    var _a = useState(0), tab = _a[0], setTab = _a[1];
+    var phases = [
+        {
+            label: "🌱 Nulláról indulva",
+            items: [
+                { name: "Instagram fiók", price: "Ingyenes", ok: true },
+                { name: "Canva alapverzió", price: "Ingyenes", ok: true },
+                { name: "Beacons.ai bolt", price: "Ingyenes", ok: true },
+                { name: "Alap DFY/PLR anyag", price: "0-5 000 Ft", ok: true },
+                { name: "ChatGPT alap", price: "Ingyenes", ok: true },
+            ],
+            note: null,
+        },
+        {
+            label: "🚀 Komolyabban",
+            items: [
+                { name: "Stan Store bolt", price: "kb. 11 000 Ft/hó", ok: false },
+                { name: "Canva Pro", price: "kb. 5 000 Ft/hó", ok: false },
+                { name: "AI twin (HeyGen)", price: "kb. 7 000 Ft/hó", ok: false },
+                { name: "DCE Belépő szint", price: "9 USD/hó", ok: true },
+                { name: "DCE Prémium szint", price: "17 USD/hó", ok: true },
+            ],
+            note: "Tanács: kezdd ingyenesen. Az első bevételből fektess vissza — ne fordítva. Aki először fizet, aztán tanul, az lesz a vesztes.",
+        },
+    ];
+    var ph = phases[tab];
+    return (React.createElement("div", { style: { background: T.white, borderRadius: 22, padding: "24px 22px", border: "1.5px solid ".concat(T.rose), boxShadow: "0 3px 16px rgba(0,0,0,0.05)" } },
+        React.createElement("div", { style: { display: "flex", gap: 8, marginBottom: 22 } }, phases.map(function (p, i) { return (React.createElement("button", { key: i, onClick: function () { return setTab(i); }, style: { flex: 1, padding: "11px 8px", borderRadius: 14, border: "none", cursor: "pointer", fontWeight: 700, fontSize: 13.5, background: tab === i ? T.rose : T.cream, color: tab === i ? T.mauve : T.muted, transition: "all 0.2s", boxShadow: tab === i ? "0 2px 10px rgba(201,100,122,0.12)" : "none", border: tab === i ? "1.5px solid ".concat(T.blush) : "1.5px solid transparent" } }, p.label)); })),
+        ph.items.map(function (item, i) { return (React.createElement("div", { key: i, style: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "11px 0", borderBottom: i < ph.items.length - 1 ? "1px solid ".concat(T.cream) : "none" } },
+            React.createElement("span", { style: { fontSize: 14.5, color: T.ink } }, item.name),
+            React.createElement("span", { style: { fontSize: 13.5, fontWeight: 700, color: item.ok ? T.sageDark : T.gold, background: item.ok ? T.sage : "#FFF8EC", padding: "4px 13px", borderRadius: 20, border: item.ok ? "1px solid #A7F3D0" : "1px solid #F0D090" } }, item.price))); }),
+        ph.note && React.createElement("div", { style: { marginTop: 16, background: T.lav, borderRadius: 12, padding: "13px 16px", fontSize: 13.5, color: T.muted, lineHeight: 1.65, border: "1px solid #DDD6FE" } },
+            "\uD83D\uDCA1 ",
+            ph.note)));
+}
+// ─── DARK EXPOSE ──────────────────────────────────────────────────────────────
+var darkItems = [
+    {
+        icon: "📱",
+        title: "Hány ezer dollárt keresett — de mit nem árul el",
+        preview: "Minden nap látod: X ezer dollárt kerestem ezzel a módszerrel! De a poszt nem mondja el a teljes történetet.",
+        paras: [
+            "Valaki kiposztolja, hogy X ezer dollárt keresett egy hónap alatt. A bejegyzés 5 percig tart olvasni. A valóság: 200 óra munka, 10 év marketinges tapasztalat, és 3-4 ezer dolláros hirdetési büdzsé — ebből egy szó sem szerepel a posztban.",
+            "Ha utánaszámolsz: valójában 10 dolláros órabérért dolgozott. Csak a bevételi oldalt mutatja — a befektetett időt, a költségeket és a tapasztalatot nem.",
+            "Mielőtt bármit veszel, kérdezd meg: mennyi idő, mekkora tőke és hány év tapasztalat kellett ehhez valójában?",
+        ],
+    },
+    {
+        icon: "💡",
+        title: "Ez is egy újdonság — és benne van 50% csak azzal, hogy ajánlasz",
+        preview: "A legnagyobb lehetőség, amiről senki nem beszél: prémium tudást ajánlasz — és 50% a tiéd. Ennél könnyebb pénz nincs.",
+        paras: [
+            "A digitális marketing egyik legjobban őrzött titka: nem kell terméket létrehoznod ahhoz, hogy pénzt keress. Elég, ha prémium tudást ajánlasz valakinek — és az eladás 50%-a a tiéd.",
+            "A DCE rendszer ezt beépítve kínálja: te csatlakozol, megosztod a linked, és minden belépő után havonta, automatikusan keresel. Nincs teendő, nincs ügyfélszolgálat, nincs postaköltség.",
+            "Ez a modell valójában újdonság a magyar piacon. Aki most kezdi, az az elsők között lesz — mielőtt mindenki más rájön.",
+        ],
+    },
+    {
+        icon: "🪆",
+        title: "Az orosz matrjoska baba modell",
+        preview: "Nem csak egy kurzust veszel meg — hanem a jogot is, hogy eladhasd a kurzust arról, hogyan kell kurzusokat eladni.",
+        paras: [
+            "Kezdesz egy alapkurzussal 97 dollárért. Aztán szükséged van a 249 dollárosra, majd az all-in 500 dollárosra. Minden szint azt ígéri, hogy ott van az igazi titok.",
+            "Ez a beágyazott MLM. Már nem egy tudást adsz el — hanem a rendszer terjesztésének jogát. Olyan, mint az orosz matrjoska baba: minden belső baba többe kerül, mint az előző.",
+            "Teszt: ha egy program bevételének nagy része abból jön, hogy más emberek ugyanezt adják el tovább — az piramisjáték jogi keretek közt.",
+        ],
+    },
+    {
+        icon: "🧠",
+        title: "A te hibád — a pszichológiai csapda",
+        preview: "Ha a rendszer nem működik nálad, ezeket fogják mondani.",
+        paras: [
+            "Ha a rendszer nem hozza az ígért eredményt, ezeket fogod hallani: Nem implementáltad megfelelően. Nem vagy elég elkötelezett. Valószínűleg nem csináltad azt, amit mondtunk.",
+            "Ez egy tudatosan épített pszichológiai csapda. Célja: hogy soha ne a rendszert hibáztasd, mindig magadat — és ezért egyre többet és többet vásárolj.",
+            "Egy külföldi mintán (2024) megvizsgálták: több tíz emberből, akik bevált rendszereket követtek, valójában csak 4-5 épített fel fenntartható bevételt nulláról. A többieknél a bevétel nem növekedett.",
+        ],
+    },
+];
+function DarkCard(_a) {
+    var item = _a.item;
+    var _b = useState(false), open = _b[0], setOpen = _b[1];
+    return (React.createElement("div", { style: { background: open ? T.rose : T.cream, borderRadius: 18, border: "1.5px solid ".concat(open ? T.blush : T.rose), overflow: "hidden", transition: "all 0.25s" } },
+        React.createElement("button", { onClick: function () { return setOpen(function (v) { return !v; }); }, style: { width: "100%", background: "none", border: "none", cursor: "pointer", padding: "16px 20px", textAlign: "left", display: "flex", alignItems: "flex-start", gap: 14 } },
+            React.createElement("span", { style: { fontSize: 22, flexShrink: 0, marginTop: 2 } }, item.icon),
+            React.createElement("div", { style: { flex: 1 } },
+                React.createElement("div", { style: { fontWeight: 800, fontSize: 15.5, color: T.ink, marginBottom: 5 } }, item.title),
+                React.createElement("div", { style: { fontSize: 13.5, color: T.muted, lineHeight: 1.6 } }, item.preview)),
+            React.createElement("span", { style: { color: T.mauve, fontSize: 22, flexShrink: 0, marginTop: 2, display: "inline-block", transform: open ? "rotate(45deg)" : "rotate(0)", transition: "transform 0.25s" } }, "+")),
+        open && (React.createElement("div", { style: { padding: "0 20px 20px 56px" } },
+            React.createElement("div", { style: { background: T.white, borderRadius: 12, padding: "14px 16px", borderLeft: "3px solid ".concat(T.mauve) } }, item.paras.map(function (p, i) { return React.createElement("p", { key: i, style: { fontSize: 14, color: "#5A3A4A", lineHeight: 1.75, margin: i < item.paras.length - 1 ? "0 0 12px" : 0 } }, p); }))))));
+}
+// ─── AFFILIATE ────────────────────────────────────────────────────────────────
+function AffiliateSection() {
+    var _a = useState(false), copied = _a[0], setCopied = _a[1];
+    var copy = function () { navigator.clipboard.writeText(SKOOL_LINK).then(function () { setCopied(true); setTimeout(function () { return setCopied(false); }, 2000); }).catch(function () { }); };
+    var rows = [
+        { n: "2 ember", earn: "Neked ingyen van", note: "a saját tagságod" },
+        { n: "10 ember", earn: "45 USD/hó", note: "kb. 17 000 Ft profit" },
+        { n: "30 ember", earn: "135 USD/hó", note: "kb. 50 000 Ft/hó" },
+    ];
+    return (React.createElement("div", { style: { background: T.lav, borderRadius: 24, padding: "30px 24px", border: "2px solid #DDD6FE", boxShadow: "0 4px 24px rgba(139,92,246,0.08)" } },
+        React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 10, marginBottom: 10 } },
+            React.createElement("span", { style: { fontSize: 26 } }, "\uD83D\uDCB8"),
+            React.createElement(Pill, { color: T.lavDark }, "AFFILIATE PROGRAM")),
+        React.createElement("h3", { style: { fontFamily: "Georgia,serif", fontSize: "clamp(20px,4.5vw,26px)", fontWeight: 700, color: T.ink, marginBottom: 10, lineHeight: 1.3 } },
+            "50% \u2014 enn\u00E9l k\u00F6nnyebb p\u00E9nz nincs.",
+            React.createElement("br", null),
+            React.createElement("span", { style: { color: T.lavDark } }, "Pr\u00E9mium tud\u00E1st aj\u00E1nlasz \u2014 \u00E9s te keresel vele.")),
+        React.createElement("p", { style: { fontSize: 14.5, color: T.muted, lineHeight: 1.75, marginBottom: 16 } }, "Ez is egy \u00FAjdons\u00E1g a magyar piacon. Nem kell term\u00E9ket l\u00E9trehoznod, nem kell webshopot fel\u00E1ll\u00EDtanod. El\u00E9g, ha megosztod a linkedet \u2014 \u00E9s minden bel\u00E9p\u0151 ut\u00E1n a bev\u00E9tel 50%-a automatikusan a ti\u00E9d, havonta ism\u00E9tl\u0151dve."),
+        React.createElement("div", { style: { background: T.white, borderRadius: 14, padding: "13px 16px", marginBottom: 22, border: "1.5px solid #DDD6FE" } },
+            React.createElement("p", { style: { fontSize: 14, color: "#3A2A5A", lineHeight: 1.7, margin: 0 } }, "A mi tud\u00E1sunkkal te keresel \u2014 ez a modell. 2+ \u00E9v tapasztalat, hetente friss\u00FCl\u0151 anyagok, AI eszk\u00F6z\u00F6k \u00E9s k\u00F6z\u00F6ss\u00E9g: ezt aj\u00E1nlod tov\u00E1bb. Az emberek megveszik, mert val\u00F3di \u00E9rt\u00E9ket l\u00E1tnak. Te pedig automatikusan keresel rajta.")),
+        React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10, marginBottom: 22 } }, [
+            { icon: "🔗", bold: "50% jutalék", text: "minden belépő után, havonta ismétlődve." },
+            { icon: "👥", bold: "2 ember = te ingyen vagy", text: "Ha 2 ember belép a te linked után, a saját tagságod nullás. Örökre." },
+            { icon: "📦", bold: "További affiliate linkek is várnak", text: "A közösségen belül eszközökre, termékekre is kapsz lehetőséget." },
+        ].map(function (p, i) { return (React.createElement("div", { key: i, style: { display: "flex", alignItems: "flex-start", gap: 12, background: T.white, borderRadius: 14, padding: "13px 16px", border: "1.5px solid #DDD6FE" } },
+            React.createElement("span", { style: { fontSize: 20, flexShrink: 0 } }, p.icon),
+            React.createElement("span", { style: { fontSize: 14, color: "#3A2A5A", lineHeight: 1.65 } },
+                React.createElement("strong", { style: { color: T.lavDark } }, p.bold),
+                " \u2014 ",
+                p.text))); })),
+        React.createElement("div", { style: { background: T.white, borderRadius: 16, padding: "18px 20px", marginBottom: 22, border: "1.5px solid #DDD6FE" } },
+            React.createElement("div", { style: { fontSize: 11.5, fontWeight: 800, color: T.lavDark, letterSpacing: 1.5, marginBottom: 12 } }, "P\u00C9LDA SZ\u00C1M\u00CDT\u00C1S"),
+            rows.map(function (r, i) { return (React.createElement("div", { key: i, style: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "9px 0", borderBottom: i < rows.length - 1 ? "1px solid ".concat(T.cream) : "none" } },
+                React.createElement("span", { style: { fontSize: 14, color: T.muted } },
+                    r.n,
+                    " csatlakozik"),
+                React.createElement("div", { style: { textAlign: "right" } },
+                    React.createElement("div", { style: { fontSize: 16, fontWeight: 800, color: T.lavDark } }, r.earn),
+                    React.createElement("div", { style: { fontSize: 11.5, color: "#B0A0C0" } }, r.note)))); })),
+        React.createElement("div", { style: { textAlign: "center" } },
+            React.createElement(CTABtn, { small: true }, "Bel\u00E9pek \u00E9s elkezdem keresni \uD83D\uDCB8"),
+            React.createElement("div", { style: { marginTop: 12 } },
+                React.createElement("button", { onClick: copy, style: { background: T.white, border: "1.5px solid #DDD6FE", borderRadius: 50, padding: "9px 20px", fontSize: 13, color: T.lavDark, cursor: "pointer", fontWeight: 700 } }, copied ? "✅ Link másolva!" : "🔗 Affiliate link másolása")))));
+}
+// ─── PRICING ──────────────────────────────────────────────────────────────────
+function PricingTiers() {
+    var tiers = [
+        {
+            name: "Belépő", price: "9", color: T.lavDark, bg: T.lav, border: "#DDD6FE", badge: null,
+            desc: "A lehetőség — tesztelj, mielőtt elkötelezed magad.",
+            perks: ["📚 Alapanyagok letölthetők", "♻️ Továbbértékesítési jog megvásárolható", "👀 Közösség napi életét látod", "📰 Friss digitális hírek hetente", "👥 100+ elkötelezett alkotó közössége", "❓ Kérdezhetsz a csoportban", "💸 50% affiliate jutalék"],
+            ctaBg: T.lavDark,
+        },
+        {
+            name: "Prémium Alapító", price: "17", color: T.mauve, bg: T.rose, border: T.blush, badge: "AJÁNLOTT",
+            desc: "A teljes rendszer. Valódi piaci értéke: ~500 USD / 150 000+ Ft — te havi 17 dollárért kapod, és folyamatosan frissül.",
+            perks: [
+                "✅ Minden, ami a 9 USD-os szintben van",
+                "✍️ PromptBank — 100+ AI prompt, hetente frissül",
+                "🛑 75 vírusos hook — 3 hónapnyi tartalom egyszerre",
+                "🤖 Saját AI stratéga chatbot",
+                "🚀 30 napos terv — nulláról 1000 dollárig",
+                "🎭 AI Gyorstalpaló — saját AI karakter, fotók és videók percek alatt",
+                "⭐ VIP anyagok — akik tovább akarnak lépni",
+                "📚 Önfejlesztő anyagok — saját szintedhez, idődhez, büdzséhez igazítva",
+                "🌱 2 belépő = te ingyen vagy",
+            ],
+            ctaBg: "linear-gradient(120deg,".concat(T.mauve, ",").concat(T.lavDark, ")"),
+            valueNote: true,
+        },
+    ];
+    return (React.createElement("div", null,
+        React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 16, marginBottom: 16 } }, tiers.map(function (t, i) { return (React.createElement("div", { key: i, style: { background: t.bg, borderRadius: 24, padding: "28px 24px", boxShadow: "0 4px 24px rgba(0,0,0,0.07)", border: "2px solid ".concat(t.border), position: "relative" } },
+            t.badge && React.createElement("div", { style: { position: "absolute", top: 18, right: 18, background: T.mauve, color: "#fff", fontSize: 10, fontWeight: 800, padding: "3px 12px", borderRadius: 20, letterSpacing: 1 } }, t.badge),
+            React.createElement("div", { style: { display: "flex", alignItems: "baseline", gap: 4, marginBottom: 6 } },
+                React.createElement("span", { style: { fontFamily: "Georgia,serif", fontSize: 46, fontWeight: 700, color: t.color, lineHeight: 1 } }, t.price),
+                React.createElement("span", { style: { fontSize: 16, color: T.muted, fontWeight: 600 } }, "USD / h\u00F3")),
+            React.createElement("div", { style: { fontFamily: "Georgia,serif", fontWeight: 700, fontSize: 21, color: T.ink, marginBottom: 4 } }, t.name),
+            React.createElement("div", { style: { fontSize: 14, color: T.muted, marginBottom: 22, lineHeight: 1.5 } }, t.desc),
+            React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10, marginBottom: 24 } }, t.perks.map(function (p, j) { return React.createElement("div", { key: j, style: { display: "flex", alignItems: "center", gap: 10, fontSize: 14.5, color: T.ink } }, p); })),
+            t.valueNote && (React.createElement("div", { style: { background: T.white, borderRadius: 14, padding: "13px 16px", marginBottom: 18, border: "1.5px solid ".concat(T.blush) } },
+                React.createElement("div", { style: { fontSize: 11.5, fontWeight: 800, color: T.gold, letterSpacing: 1, marginBottom: 6 } }, "VAL\u00D3DI PIACI \u00C9RT\u00C9K"),
+                React.createElement("p", { style: { fontSize: 13.5, color: "#5A3A4A", lineHeight: 1.75, margin: 0 } },
+                    "A tartalmak egy\u00FCttes piaci \u00E9rt\u00E9ke ",
+                    React.createElement("strong", { style: { color: T.mauve } }, "~500 USD \u00B7 150 000+ Ft"),
+                    " \u2014 te havi 17 doll\u00E1r\u00E9rt \u00E9red el. Folyamatosan friss\u00FCl, mert a digit\u00E1lis vil\u00E1g hetente v\u00E1ltozik, \u00E9s mi k\u00F6vetj\u00FCk helyetted. \u2B50 VIP anyagok is \u00E9rkeznek azoknak, akik tov\u00E1bb akarnak l\u00E9pni \u2014 saj\u00E1t szintedhez, id\u0151dhez \u00E9s b\u00FCdzs\u00E9hez igaz\u00EDtva."))),
+            React.createElement("a", { href: SKOOL_LINK, target: "_blank", rel: "noopener noreferrer", style: { display: "block", background: t.ctaBg, color: "#fff", borderRadius: 50, padding: "15px", fontSize: 16, fontWeight: 800, cursor: "pointer", boxShadow: "0 4px 18px rgba(0,0,0,0.12)", textDecoration: "none", textAlign: "center" } },
+                "Bel\u00E9pek \u2014 ",
+                t.price,
+                " USD/h\u00F3 \uD83D\uDC9C"),
+            React.createElement("div", { style: { textAlign: "center", fontSize: 12.5, color: T.muted, marginTop: 10 } }, "7 napos ingyenes kipr\u00F3b\u00E1l\u00E1s \u00B7 B\u00E1rmikor lemondhat\u00F3"))); })),
+        React.createElement("div", { style: { background: T.white, borderRadius: 18, padding: "16px 22px", border: "1.5px solid ".concat(T.rose), textAlign: "center" } },
+            React.createElement("p", { style: { fontSize: 14.5, color: T.muted, lineHeight: 1.75, margin: 0 } },
+                "Nem tudod, k\u00E9szen \u00E1llsz-e? Kezdd a ",
+                React.createElement("strong", { style: { color: T.lavDark } }, "9 USD-os szinttel"),
+                " \u2014 7 napig ingyen kipr\u00F3b\u00E1lhatod. Ha tetszik, maradsz. Ha nem \u2014 egy fill\u00E9r sem v\u00E9sz el. 9 doll\u00E1rral lett\u00E9l okosabb, nem 500-zal."))));
+}
+// ─── FAQ ──────────────────────────────────────────────────────────────────────
+function FaqItem(_a) {
+    var item = _a.item;
+    var _b = useState(false), open = _b[0], setOpen = _b[1];
+    return (React.createElement("div", { style: { borderRadius: 16, overflow: "hidden", marginBottom: 8, border: "1.5px solid ".concat(open ? T.blush : T.rose), background: open ? T.rose : T.white } },
+        React.createElement("button", { onClick: function () { return setOpen(function (v) { return !v; }); }, style: { width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 20px", background: "none", border: "none", cursor: "pointer", textAlign: "left", gap: 12 } },
+            React.createElement("span", { style: { fontWeight: 700, fontSize: 15.5, color: T.ink, lineHeight: 1.3 } }, item.q),
+            React.createElement("span", { style: { fontSize: 24, color: T.mauve, flexShrink: 0, display: "inline-block", transform: open ? "rotate(45deg)" : "rotate(0)", transition: "transform 0.25s" } }, "+")),
+        open && React.createElement("div", { style: { padding: "0 20px 18px", fontSize: 14.5, color: T.muted, lineHeight: 1.75 } }, item.a)));
+}
+// ─── CHAT ─────────────────────────────────────────────────────────────────────
+function MentorChat() {
+    var ANSWERS = [
+        { keys: ["átverés","átver","hamis","biztos","megbízhat","legitim","valódi","igaz"],
+          ans: "Jó kérdés! 💜 A DCE-t azért hoztuk létre, mert mi is láttuk a hamis ígéreteket. Nálunk: ingyenes alapok előbb, vásárlás csak ha értéket láttál, 7 napos próba, bármikor lemondható. Nincs 97→249→500 dolláros lépcsőzés — csak 9 vagy 17 USD. Ha 2 embert hozol be, a tagságod ingyen van." },
+        { keys: ["melyik","út","faceless","ai twin","influencer","arc","kamera"],
+          ans: "Mindhárom út arc nélkül működik! 🎭 Ha most kezded: a Faceless (arc nélküli) a legegyszerűbb — kávé, laptop, trendi zene, erős hook. Az AI Twin (HeyGen, Synthesia) a következő szint — te írod, az AI mondja. Az AI Influencer a legautomatizáltabb, de a legdrágább eszközök kellenek hozzá. Kezdd a Faceless úttal!" },
+        { keys: ["pénz","kerese","bevétel","mennyi","realisztikus","fizetés","profit"],
+          ans: "Őszintén: az első 1-3 hónapban sokan 20-80 000 Ft-ot keresnek ha következetesek. 6-12 hónap komoly munka után jellemzően 150-400 000 Ft/hó. Ez nem garantált — de rendszer, nem szerencse. A legtöbben a 2. hónapban látják az első eladást. 💰" },
+        { keys: ["ai twin","heygen","synthesia","d-id","mesterséges","karakter"],
+          ans: "Az AI Twin egy digitális éned — te írod a szöveget, az AI mondja el videóban. 🤖 Eszközök: HeyGen (legjobb), Synthesia, D-ID. A 17 USD-os Prémium tagságban van egy AI Gyorstalpaló — percek alatt készítesz saját AI karaktert, fotókat és videókat. Egyszer megcsinálod, örökké dolgozik helyetted." },
+        { keys: ["belépő","9","9 usd","különbség","prémium","17","17 usd"],
+          ans: "9 USD/hó: alapanyagok letölthetők, közösség napi élete, friss hírek, kérdezhetsz, 50% affiliate jutalék. 💜 17 USD/hó: mindez + PromptBank (100+ AI prompt), 75 vírusos hook, AI chatbot, 30 napos terv, AI Gyorstalpaló. Valódi piaci értéke ~500 USD / 150 000+ Ft — te töredékáron kapod. 2 belépő után a tagságod ingyen van!" },
+        { keys: ["affiliate","jutalék","link","keress","ajánl","megosztás"],
+          ans: "A DCE affiliate program egyszerű: megosztod a linked, valaki belép — te keresel 50%-ot havonta, automatikusan. 💸 2 ember belép → a te tagságod nullás, örökre. 10 ember → 45 USD/hó. 30 ember → 135 USD/hó (~50 000 Ft). Nem kell terméket csinálnod, nem kell ügyfélszolgálat. Csak egy link." },
+        { keys: ["idő","naponta","mennyi idő","hány óra","elfoglalt","gyerek","munka"],
+          ans: "Az első hetekben 1-2 óra naponta elég az alapok megismeréséhez. ⏱️ Ahogy a rendszer épül, egyre több dolgot vesz át tőled az automatizálás. A cél pontosan ez: te egyre kevesebbet dolgozol, a rendszer egyre többet. Ez a passzív jövedelem lényege." },
+        { keys: ["stan store","beacons","bolt","webshop","termék","feltölt"],
+          ans: "Stan Store: erős értékesítési funnel, beépített e-mail automatizáció (14 napos ingyenes próba, utána ~11 000 Ft/hó). Beacons.ai: 500 e-mailig INGYENES — tökéletes kezdéshez. 🏪 Prémium tagként kapsz egy kész első digitális terméket, amit azonnal feltölthetsz és elkezdhetsz eladni." },
+        { keys: ["skool","közösség","tag","csoport","belép"],
+          ans: "A DCE Skool közösségben jelenleg 100+ elkötelezett alkotó van — mind ugyanazért a célért dolgozik. 👥 Napi tartalom, friss hírek, kérdések, egymás segítése. Nem vagy egyedül. A belépési link: skool.com/digital-creatorempire — 7 napos ingyenes próbával." },
+        { keys: ["prompt","hook","tartalom","poszt","instagram","reels"],
+          ans: "A Prémium tagságban van 100+ AI prompt (PromptBank, hetente frissül) és 75 vírusos hook — ez 3 hónapnyi tartalom egyszerre! ✍️ Nem kell kitalálnod semmit: kimásolod, beilleszted, és nézed ahogy megáll az emberek ujja a képernyőn. Az Instagram ingyen tereli feléd a vevőket." },
+    ];
+    var DEFAULT_ANS = "Köszönöm a kérdést! 💜 Ezt a témát részletesen megbeszéljük a DCE közösségben. Csatlakozz 7 napos ingyenes próbával — ott minden kérdésedre választ kapsz a közösségtől és a mentoroktól!";
+    var _a = useState([{ role: "assistant", content: "Szia! 💜 Én vagyok a DigitaLady Mentor. Kérdezz bátran — az indulásról, az átverésekről, az AI eszközökről, az affiliate programról. Kattints egy gyors kérdésre, vagy írd be a sajátodat!" }]), msgs = _a[0], setMsgs = _a[1];
+    var _b = useState(""), input = _b[0], setInput = _b[1];
+    var _c = useState(0), msgCount = _c[0], setMsgCount = _c[1];
+    var _d = useState(false), premium = _d[0], setPremium = _d[1];
+    var endRef = useRef(null);
+    useEffect(function () { var _a; (_a = endRef.current) === null || _a === void 0 ? void 0 : _a.scrollIntoView({ behavior: "smooth" }); }, [msgs]);
+    var getAnswer = function(q) {
+        var lower = q.toLowerCase();
+        for (var i = 0; i < ANSWERS.length; i++) {
+            for (var j = 0; j < ANSWERS[i].keys.length; j++) {
+                if (lower.indexOf(ANSWERS[i].keys[j]) !== -1) return ANSWERS[i].ans;
+            }
+        }
+        return DEFAULT_ANS;
+    };
+    var send = function() {
+        var text = input.trim();
+        if (!text) return;
+        var newCount = msgCount + 1;
+        setMsgCount(newCount);
+        var userMsg = { role: "user", content: text };
+        setMsgs(function(p) { return p.concat([userMsg]); });
+        setInput("");
+        if (newCount > 5) { setPremium(true); return; }
+        setTimeout(function() {
+            var reply = getAnswer(text);
+            setMsgs(function(p) { return p.concat([{ role: "assistant", content: reply }]); });
+        }, 600);
+    };
+    var remaining = Math.max(0, 5 - msgCount);
+    var quickQs = ["Honnan tudom, hogy ez nem átverés?", "Melyik utat válasszam?", "Mennyi pénzt lehet keresni?", "Mi az affiliate program?"];
+    return (React.createElement("div", { style: { background: T.lav, borderRadius: 24, padding: "26px 22px", boxShadow: "0 4px 20px rgba(139,92,246,0.1)", border: "2px solid #DDD6FE" } },
+        React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12, marginBottom: 16 } },
+            React.createElement("div", { style: { width: 48, height: 48, borderRadius: "50%", background: "linear-gradient(135deg,".concat(T.mauve, ",").concat(T.lavDark, ")"), display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, boxShadow: "0 3px 14px rgba(201,100,122,0.3)", animation: "pulse-av 2.5s ease-in-out infinite" } }, "\uD83D\uDC9C"),
+            React.createElement("div", null,
+                React.createElement("div", { style: { fontWeight: 800, fontSize: 16, color: T.ink } }, "DigitaLady Mentor"),
+                React.createElement("div", { style: { fontSize: 12, color: T.sageDark, fontWeight: 700, display: "flex", alignItems: "center", gap: 5 } },
+                    React.createElement("span", { style: { width: 6, height: 6, borderRadius: "50%", background: T.sageDark, display: "inline-block" } }),
+                    " Online \u2014 k\u00E9rdezz b\u00E1tran")),
+            !premium && React.createElement("div", { style: { marginLeft: "auto", background: T.white, borderRadius: 20, padding: "5px 14px", fontSize: 12, fontWeight: 700, color: remaining > 1 ? T.lavDark : T.mauve, border: "1px solid ".concat(remaining > 1 ? "#DDD6FE" : T.blush) } }, remaining + " ingyenes k\u00E9rd\u00E9s")),
+        React.createElement("div", { style: { background: T.white, borderRadius: 16, padding: "14px", maxHeight: 300, overflowY: "auto", marginBottom: 12, border: "1.5px solid #EDE8F5" } },
+            msgs.map(function(m, i) { return (React.createElement("div", { key: i, style: { display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start", marginBottom: 10 } },
+                m.role === "assistant" && React.createElement("div", { style: { width: 28, height: 28, borderRadius: "50%", background: "linear-gradient(135deg,".concat(T.mauve, ",").concat(T.lavDark, ")"), flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, marginRight: 8, marginTop: 2 } }, "\uD83D\uDC9C"),
+                React.createElement("div", { style: { maxWidth: "82%", background: m.role === "user" ? "linear-gradient(135deg,".concat(T.mauve, ",").concat(T.lavDark, ")") : T.lav, color: m.role === "user" ? "#fff" : T.ink, borderRadius: m.role === "user" ? "18px 18px 4px 18px" : "18px 18px 18px 4px", padding: "11px 15px", fontSize: 14, lineHeight: 1.65, boxShadow: "0 2px 8px rgba(0,0,0,0.06)", whiteSpace: "pre-wrap" } }, m.content))); }),
+            React.createElement("div", { ref: endRef })),
+        !premium && msgCount === 0 && React.createElement("div", { style: { display: "flex", gap: 7, flexWrap: "wrap", marginBottom: 10 } },
+            quickQs.map(function(q, i) { return React.createElement("button", { key: i, onClick: function() { var text = q; if (!text) return; var newCount = msgCount + 1; setMsgCount(newCount); setMsgs(function(p) { return p.concat([{ role: "user", content: text }]); }); if (newCount > 5) { setPremium(true); return; } setTimeout(function() { var reply = getAnswer(text); setMsgs(function(p) { return p.concat([{ role: "assistant", content: reply }]); }); }, 600); }, style: { fontSize: 12.5, color: T.lavDark, background: T.white, border: "1.5px solid #DDD6FE", borderRadius: 20, padding: "7px 14px", cursor: "pointer", fontWeight: 600 } }, q); })),
+        premium ? React.createElement("div", { style: { background: T.rose, borderRadius: 18, padding: "22px", textAlign: "center", border: "2px solid ".concat(T.blush) } },
+            React.createElement("div", { style: { fontSize: 32, marginBottom: 10 } }, "\uD83D\uDD12"),
+            React.createElement("div", { style: { fontWeight: 800, fontSize: 17, color: T.ink, marginBottom: 8, fontFamily: "Georgia,serif" } }, "A m\u00E9ly mentoringhoz tags\u00E1g kell"),
+            React.createElement("p", { style: { fontSize: 14, color: T.muted, lineHeight: 1.65, marginBottom: 18 } }, "Korl\u00E1tlan mentor, teljes anyagk\u00F6nyvt\u00E1r, heti update \u2014 9 vagy 17 USD/h\u00F3. Nincs eszkal\u00E1ci\u00F3."),
+            React.createElement(CTABtn, null, "Szintet v\u00E1lasztok \u2014 bel\u00E9pek \uD83D\uDC9C"),
+            React.createElement("div", null, React.createElement("button", { onClick: function() { setPremium(false); setMsgCount(0); setMsgs([{ role: "assistant", content: "Szia! \uD83D\uDC9C K\u00E9rdezz b\u00E1tran!" }]); }, style: { marginTop: 12, background: "transparent", border: "none", color: T.muted, fontSize: 12.5, cursor: "pointer", textDecoration: "underline" } }, "\u00DAjraind\u00EDt\u00E1s")))
+        : React.createElement("div", { style: { display: "flex", gap: 10 } },
+            React.createElement("input", { value: input, onChange: function(e) { return setInput(e.target.value); }, onKeyDown: function(e) { return e.key === "Enter" && !e.shiftKey && send(); }, placeholder: "\u00CDrd ide a k\u00E9rd\u00E9sed...", style: { flex: 1, borderRadius: 50, border: "1.5px solid #DDD6FE", padding: "13px 20px", fontSize: 14.5, color: T.ink, background: T.white, outline: "none", fontFamily: "inherit" } }),
+            React.createElement("button", { onClick: send, disabled: !input.trim(), style: { background: input.trim() ? "linear-gradient(120deg,".concat(T.mauve, ",").concat(T.lavDark, ")") : "#E0D8E8", color: input.trim() ? "#fff" : "#C0B0C0", border: "none", borderRadius: 50, padding: "13px 22px", fontSize: 18, cursor: input.trim() ? "pointer" : "default", fontWeight: 700, transition: "all 0.2s" } }, "\u27A4"))));
+}
+// ─── APP ──────────────────────────────────────────────────────────────────────
+function DigitaLadyApp() {
+    return (React.createElement("div", { style: { minHeight: "100vh", background: T.cream, fontFamily: "Arial,sans-serif" } },
+        React.createElement("div", { style: { background: "linear-gradient(165deg, ".concat(T.rose, " 0%, ").concat(T.cream, " 60%, ").concat(T.lav, " 100%)"), padding: "64px 24px 56px", textAlign: "center", borderBottom: "1px solid ".concat(T.blush) } },
+            React.createElement("div", { style: { display: "inline-block", background: T.white, borderRadius: 20, padding: "7px 18px", fontSize: 11, fontWeight: 800, color: T.mauve, letterSpacing: 2.5, marginBottom: 24, border: "1px solid ".concat(T.blush), boxShadow: "0 2px 10px rgba(201,100,122,0.1)" } }, "DCE \u00B7 DIGITAL CREATOR EMPIRE"),
+            React.createElement("h1", { style: { fontFamily: "Georgia,serif", fontSize: "clamp(32px,8vw,58px)", fontWeight: 700, color: T.ink, lineHeight: 1.1, maxWidth: 560, margin: "0 auto 20px", letterSpacing: -0.5 } },
+                "Online p\u00E9nzt keresni",
+                React.createElement("br", null),
+                React.createElement("span", { style: { background: "linear-gradient(120deg,".concat(T.mauve, ",").concat(T.lavDark, ")"), WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" } }, "ma m\u00E1r \u00EDgy megy.")),
+            React.createElement("p", { style: { fontFamily: "Georgia,serif", fontSize: "clamp(16px,3.5vw,20px)", color: T.muted, lineHeight: 1.8, maxWidth: 460, margin: "0 auto 36px", fontStyle: "italic" } },
+                "Nem kell megmutatnod az arcodat.",
+                React.createElement("br", null),
+                "Nem kell influencernek lenned.",
+                React.createElement("br", null),
+                React.createElement("strong", { style: { color: T.ink, fontStyle: "normal" } }, "Csak egy j\u00F3 rendszer kell.")),
+            React.createElement("div", { style: { background: T.white, borderRadius: 28, padding: "28px 28px 22px", maxWidth: 380, margin: "0 auto 36px", boxShadow: "0 8px 40px rgba(201,100,122,0.12)", border: "1.5px solid ".concat(T.rose) } },
+                React.createElement(DreamSlider, null)),
+            React.createElement(CTABtn, null, "Igen, ezt akarom \u2014 mutasd! \u2728"),
+            React.createElement("div", { style: { fontSize: 13, color: T.muted, marginTop: 13, letterSpacing: 0.3 } }, "7 napos ingyenes kipr\u00F3b\u00E1l\u00E1s \u00B7 2 el\u0151fizet\u00E9si szint, b\u00E1rmikor lemondhat\u00F3 \u00B7 Nincs sz\u00FCks\u00E9g hitelk\u00E1rty\u00E1ra"),
+            React.createElement("div", { style: { display: "flex", gap: 10, justifyContent: "center", marginTop: 36, flexWrap: "wrap" } }, [
+                { n: "140", label: "eladott digitális termék" },
+                { n: "100+", label: "nőnek segített extra bevételt építeni" },
+                { n: "100 fős", label: "DCE közösség — és épül" },
+            ].map(function (s, i) { return (React.createElement("div", { key: i, style: { background: T.white, borderRadius: 18, padding: "14px 20px", textAlign: "center", boxShadow: "0 3px 16px rgba(201,100,122,0.1)", border: "1.5px solid ".concat(T.rose), minWidth: 110, flex: "1 1 110px", maxWidth: 160 } },
+                React.createElement("div", { style: { fontFamily: "Georgia,serif", fontSize: 26, fontWeight: 700, color: T.mauve, lineHeight: 1 } }, s.n),
+                React.createElement("div", { style: { fontSize: 11.5, color: T.muted, marginTop: 4, lineHeight: 1.4 } }, s.label))); }))),
+        React.createElement("div", { style: { maxWidth: 640, margin: "0 auto", padding: "0 20px" } },
+            React.createElement("div", { style: { padding: "52px 0 44px", textAlign: "center" } },
+                React.createElement("div", { style: { fontSize: 11, fontWeight: 800, color: T.mauve, letterSpacing: 2.5, marginBottom: 10 } }, "ISMER\u0150S?"),
+                React.createElement(Divider, null),
+                React.createElement("h2", { style: { fontFamily: "Georgia,serif", fontSize: "clamp(22px,5vw,32px)", fontWeight: 700, color: T.ink, lineHeight: 1.25, marginBottom: 16 } },
+                    "Rengeteg tartalom.",
+                    React.createElement("br", null),
+                    "\u00C9s m\u00E9gsem t\u00F6rt\u00E9nik semmi."),
+                React.createElement("p", { style: { fontSize: 16, color: T.muted, lineHeight: 1.85, maxWidth: 440, margin: "0 auto 28px" } }, "T\u00F6bb id\u0151t t\u00F6ltesz keresg\u00E9l\u00E9ssel, agyal\u00E1ssal \u00E9s ChatGPT-vel veszeked\u00E9ssel, mint alkot\u00E1ssal. L\u00E1tod m\u00E1sok siker\u00E9t \u2014 de a te sz\u00E1modon semmi sem mozdul."),
+                React.createElement("div", { style: { background: T.white, borderRadius: 20, padding: "22px 24px", border: "1.5px solid ".concat(T.rose), textAlign: "left", boxShadow: "0 3px 16px rgba(0,0,0,0.05)" } },
+                    React.createElement("p", { style: { fontSize: 15, color: "#4A3040", lineHeight: 1.85, margin: 0 } },
+                        "Mi is voltunk ott. Ez\u00E9rt hoztuk l\u00E9tre a Digital Creator Empire-t \u2014 belepakoltuk az elm\u00FAlt ",
+                        React.createElement("strong", { style: { color: T.mauve } }, "2+ \u00E9v\u00FCnk \u00F6sszes tapasztalat\u00E1t, buk\u00E1s\u00E1t \u00E9s siker\u00E9t."),
+                        " Mi helyetted figyelj\u00FCk a trendeket. Mi v\u00E9gezz\u00FCk el a neh\u00E9z munk\u00E1t. Am\u00EDg te tanulsz \u00E9s p\u00E9nzt keresel."))),
+            React.createElement("div", { style: { paddingBottom: 52 } },
+                React.createElement(SectionHead, { eyebrow: "A 3 L\u00C9P\u00C9SES RENDSZER", title: "Mindegy, hol tartasz most.", sub: "Van szinted, ami a te tempodat t\u00E1mogatja \u2014 \u00E9s elvezet az els\u0151 bev\u00E9telig." }),
+                React.createElement(ThreeSteps, null)),
+            React.createElement("div", { style: { paddingBottom: 52 } },
+                React.createElement(SectionHead, { eyebrow: "VAL\u00D3DI TAGOK, VAL\u00D3DI SZAVAK", title: "Akik m\u00E1r bent vannak \u2014 \u00EDgy \u00EDrnak.", sub: "Nem rekl\u00E1msz\u00F6veg. Val\u00F3di Skool-kommentek, val\u00F3di emberekt\u0151l." }),
+                React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 12 } }, testimonials.map(function (t, i) { return React.createElement(TestimonialCard, { key: i, t: t }); })),
+                React.createElement("div", { style: { marginTop: 20, textAlign: "center" } },
+                    React.createElement(CTABtn, { small: true }, "\u00C9n is szeretn\u00E9k k\u00F6zt\u00FCk lenni \uD83D\uDC9C"))),
+            React.createElement("div", { style: { paddingBottom: 52 } },
+                React.createElement(SectionHead, { eyebrow: "\u0150SZINTE \u00C1RAZ\u00C1S", title: "Mennyibe ker\u00FCl val\u00F3j\u00E1ban?", eyebrowColor: T.gold, sub: "Igen, 0 Ft-tal el lehet kezdeni. De legy\u00FCnk \u0151szint\u00E9k abban is, mi kell a k\u00F6vetkez\u0151 szinthez." }),
+                React.createElement(HonestCosts, null)),
+            React.createElement("div", { style: { paddingBottom: 52 } },
+                React.createElement(SectionHead, { eyebrow: "NE D\u0150LJ BE", title: "Amit a dr\u00E1ga kurzusok nem mutatnak meg.", sub: "Miel\u0151tt b\u00E1rmit v\u00E1s\u00E1rolsz online \u2014 ezt olvasd el.", eyebrowColor: T.mauve }),
+                React.createElement("div", { style: { background: T.white, borderRadius: 24, padding: "24px 22px", border: "1.5px solid ".concat(T.rose), boxShadow: "0 3px 16px rgba(0,0,0,0.05)", display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 } }, darkItems.map(function (item, i) { return React.createElement(DarkCard, { key: i, item: item }); })),
+                React.createElement("div", { style: { background: T.rose, borderRadius: 20, padding: "22px 24px", border: "1.5px solid ".concat(T.blush), textAlign: "center" } },
+                    React.createElement("p", { style: { fontFamily: "Georgia,serif", fontSize: 16, color: T.ink, lineHeight: 1.75, margin: "0 0 16px", fontStyle: "italic" } }, "\"A val\u00F3di siker nem titkokban, hanem a stabil alapokban \u00E9s a saj\u00E1t m\u00E1rk\u00E1d \u00E9p\u00EDt\u00E9s\u00E9ben rejlik.\""),
+                    React.createElement(CTABtn, { small: true }, "Bel\u00E9pek a tiszta rendszerbe \uD83D\uDC9C"))),
+            React.createElement("div", { style: { paddingBottom: 52 } },
+                React.createElement(SectionHead, { eyebrow: "AFFILIATE PROGRAM", title: "Addig is p\u00E9nzt kereshetsz.", eyebrowColor: T.lavDark, sub: "Ossz meg egy linket. Ha valaki bel\u00E9p \u2014 te keresel. Azonnal, automatikusan." }),
+                React.createElement(AffiliateSection, null)),
+            React.createElement("div", { style: { paddingBottom: 52 } },
+                React.createElement(SectionHead, { eyebrow: "SZINTEK", title: "K\u00E9t szint. Semmi m\u00E1s.", sub: "Bel\u00E9p\u0151 vagy Pr\u00E9mium \u2014 te d\u00F6nt\u00F6d el, mi illik most hozz\u00E1d. B\u00E1rmikor v\u00E1lthatsz, b\u00E1rmikor lemondhat\u00F3." }),
+                React.createElement(PricingTiers, null)),
+            React.createElement("div", { style: { paddingBottom: 52 } },
+                React.createElement(SectionHead, { eyebrow: "K\u00C9RD\u00C9SEK", title: "Ami biztosan felmer\u00FCl benned." }),
+                faqs.map(function (f, i) { return React.createElement(FaqItem, { key: i, item: f }); })),
+            React.createElement("div", { style: { paddingBottom: 52 } },
+                
+            React.createElement("div", { style: { background: "linear-gradient(135deg,".concat(T.rose, ",").concat(T.lav, ")"), borderRadius: 28, padding: "48px 32px", textAlign: "center", marginBottom: 52, boxShadow: "0 8px 40px rgba(201,100,122,0.14)", border: "2px solid ".concat(T.blush) } },
+                React.createElement("div", { style: { fontSize: 44, marginBottom: 16 } }, "\uD83D\uDC9C"),
+                React.createElement("h2", { style: { fontFamily: "Georgia,serif", fontSize: "clamp(24px,6vw,36px)", fontWeight: 700, color: T.ink, marginBottom: 14, lineHeight: 1.2 } },
+                    "Te is megcsin\u00E1lhatod.",
+                    React.createElement("br", null),
+                    "Pontosan \u00EDgy."),
+                React.createElement("p", { style: { fontSize: 16, color: T.muted, lineHeight: 1.85, marginBottom: 32, maxWidth: 400, margin: "0 auto 32px" } },
+                    "Csatlakozz a Digital Creator Empire k\u00F6z\u00F6ss\u00E9ghez.",
+                    React.createElement("br", null),
+                    React.createElement("strong", { style: { color: T.ink } }, "9 USD vagy 17 USD/h\u00F3. M\u00E1s szint nincs.")),
+                React.createElement(CTABtn, null, "Bel\u00E9pek \u2014 szintet v\u00E1lasztok \uD83D\uDC9C"),
+                
+        React.createElement("div", { style: { textAlign: "center", paddingBottom: 36, color: T.muted, fontSize: 12.5, letterSpacing: 0.3 } }, "DigitaLady \u00B7 Digital Creator Empire \u00B7 DCE Skool K\u00F6z\u00F6ss\u00E9g"),
+        React.createElement("style", null, "\n        @keyframes fadeUp { from { transform: translateY(14px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }\n        @keyframes pulse-av { 0%, 100% { box-shadow: 0 3px 14px rgba(201,100,122,0.3); } 50% { box-shadow: 0 3px 24px rgba(139,92,246,0.5); } }\n        @keyframes bounce { 0%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }\n      ")));
+}
+// Mount the app
+var root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(React.createElement(DigitaLadyApp));
+const domRoot = ReactDOM.createRoot(document.getElementById('root'));
+domRoot.render(React.createElement(DigitaLadyApp));
+  </script>
+</body>
+</html>
