@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚡ Gyorsítósáv — DCE Digital Creator Empire</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAF8F5;--card:#FFFFFF;--card2:#F5F1EC;--border:#E8E2D8;--warm:#C9A96E;--warm2:#A8873F;--warmBg:#FBF6EE;--warmBd:#F0E6D4;--rose:#C27070;--roseBg:#FCF0EE;--sage:#7BA87B;--sageBg:#F0F5F0;--lav:#9B7BC8;--lavBg:#F5F0FA;--text:#2A2420;--text2:#5C5248;--text3:#9A8E82;--gold:linear-gradient(135deg,#C9A96E,#A8873F)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text2);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased}
+::selection{background:var(--warmBg);color:var(--text)}
+::-webkit-scrollbar{width:7px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+strong{color:var(--text);font-weight:700}
+.serif{font-family:'Cormorant Garamond',serif}
+
+/* LAYOUT */
+.app{display:flex;min-height:100vh}
+
+/* SIDEBAR */
+.sb{position:fixed;top:0;left:0;width:290px;height:100vh;background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:99;transition:transform .3s}
+.sb-top{padding:28px 24px 20px;border-bottom:1px solid var(--border)}
+.sb-brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:10px}
+.sb-brand span{font-size:24px}
+.sb-sub{font-size:11px;color:var(--text3);margin-top:4px;font-weight:600;letter-spacing:.04em}
+.sb-nav{flex:1;overflow-y:auto;padding:16px 12px}
+.sb-mod{margin-bottom:6px}
+.sb-mod-btn{width:100%;background:none;border:none;padding:12px 14px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:var(--text2);text-align:left;transition:all .15s;border-left:3px solid transparent}
+.sb-mod-btn:hover{background:var(--warmBg)}
+.sb-mod-btn.active{background:var(--warmBg);color:var(--warm2);border-left-color:var(--warm);font-weight:700}
+.sb-mod-btn .sb-emoji{font-size:18px;min-width:24px}
+.sb-mod-btn .sb-num{font-size:10px;font-weight:800;color:var(--text3);font-family:'Plus Jakarta Sans',sans-serif;min-width:20px}
+.sb-foot{padding:18px 24px;border-top:1px solid var(--border)}
+.prog-row{display:flex;justify-content:space-between;margin-bottom:8px}
+.prog-lbl{font-size:11px;color:var(--text3);font-weight:600}
+.prog-pct{font-size:11px;color:var(--warm);font-weight:700}
+.prog-bar{height:5px;background:var(--card2);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--gold);border-radius:3px;transition:width .4s}
+
+/* MAIN */
+.main{margin-left:290px;min-height:100vh}
+.mob-btn{position:fixed;top:16px;left:16px;z-index:200;background:var(--card);border:1px solid var(--border);border-radius:10px;width:44px;height:44px;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:20px;color:var(--text)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:98}.overlay.show{display:block}
+
+/* CONTENT */
+.page{display:none;animation:fadeIn .4s ease}.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.sec{max-width:780px;margin:0 auto;padding:56px 32px}
+
+/* HERO MODULE */
+.mod-hero{padding:56px 32px;max-width:780px;margin:0 auto}
+.mod-tag{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--warm);margin-bottom:12px}
+.mod-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,5vw,44px);font-weight:700;color:var(--text);line-height:1.12;margin-bottom:16px}
+.mod-desc{font-size:17px;color:var(--text2);line-height:1.8;max-width:560px}
+.mod-divider{width:60px;height:3px;background:var(--gold);border-radius:2px;margin:24px 0}
+
+/* CARDS / ACCORDION */
+.acc{background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.acc:hover{border-color:rgba(201,169,110,.4)}
+.acc-head{padding:20px 24px;cursor:pointer;display:flex;align-items:center;gap:14px;user-select:none}
+.acc-icon{font-size:24px;min-width:32px;text-align:center}
+.acc-info{flex:1}
+.acc-title{font-size:16px;font-weight:700;color:var(--text)}
+.acc-sub{font-size:13px;color:var(--text3);margin-top:2px}
+.acc-chev{color:var(--text3);font-size:16px;transition:transform .2s}
+.acc.open .acc-chev{transform:rotate(180deg)}
+.acc-body{padding:0 24px 24px;display:none;border-top:1px solid var(--border)}
+.acc.open .acc-body{display:block}
+.acc-body p{font-size:15px;line-height:1.8;margin:14px 0;color:var(--text2)}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+.tbl th{text-align:left;padding:10px 14px;background:var(--card2);color:var(--text);font-weight:700;font-size:12px;letter-spacing:.04em;border-bottom:2px solid var(--border)}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+.tbl tr:last-child td{border:none}
+
+/* BOXES */
+.bx{border-radius:12px;padding:22px 24px;margin:20px 0;border:1px solid;font-size:14px;line-height:1.75}
+.bx-lbl{font-size:12px;font-weight:700;letter-spacing:.06em;margin-bottom:8px}
+.bx-warm{background:var(--warmBg);border-color:var(--warmBd);border-left:4px solid var(--warm)}.bx-warm .bx-lbl{color:var(--warm2)}
+.bx-rose{background:var(--roseBg);border-color:rgba(194,112,112,.2);border-left:4px solid var(--rose)}.bx-rose .bx-lbl{color:var(--rose)}
+.bx-sage{background:var(--sageBg);border-color:rgba(123,168,123,.2);border-left:4px solid var(--sage)}.bx-sage .bx-lbl{color:var(--sage)}
+
+/* PROMPT CARD */
+.prompt{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--warm);border-radius:14px;padding:24px;margin:24px 0}
+.prompt-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+.prompt-lbl{font-size:12px;font-weight:700;color:var(--warm2);letter-spacing:.04em}
+.prompt-text{background:var(--card2);padding:18px 20px;border-radius:10px;font-size:13px;line-height:1.85;color:var(--text2);border:1px solid var(--border)}
+.copy-btn{background:var(--warmBg);border:1px solid var(--warmBd);color:var(--warm2);padding:8px 18px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif}
+.copy-btn:hover{background:var(--warm);color:white;border-color:var(--warm)}
+.copy-btn.copied{background:var(--sage);border-color:var(--sage);color:white}
+
+/* PAIN MAP TABLE */
+.pain-tbl{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.pain-tbl th{padding:10px 12px;background:var(--card2);font-weight:700;font-size:11px;letter-spacing:.06em;border-bottom:2px solid var(--border);text-align:left}
+.pain-tbl td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6}
+.pain-tbl td:first-child{color:var(--text3);font-style:italic}
+.pain-tbl td:nth-child(2){color:var(--warm2);font-weight:600}
+.pain-tbl td:nth-child(3){color:var(--rose);font-weight:600}
+
+/* HOOK LIST */
+.hook-list{margin:16px 0}
+.hook-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.04)}
+.hook-item:last-child{border:none}
+.hook-num{font-size:12px;font-weight:800;color:var(--warm);min-width:24px;margin-top:2px}
+.hook-text{font-size:14px;font-weight:600;color:var(--text)}
+.hook-note{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* CHECKLIST */
+.check{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin-bottom:8px;cursor:pointer;transition:all .2s}
+.check:hover{border-color:var(--warm)}
+.check.done{background:var(--sageBg);border-color:rgba(123,168,123,.3)}
+.check-row{display:flex;align-items:flex-start;gap:14px}
+.check-box{width:24px;height:24px;border-radius:6px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:14px;font-weight:800;color:white;transition:all .2s}
+.check.done .check-box{background:var(--sage);border-color:var(--sage)}
+.check-title{font-size:14px;font-weight:700;color:var(--text)}
+.check.done .check-title{color:var(--text3);text-decoration:line-through}
+.check-desc{font-size:12px;color:var(--text3);margin-top:2px}
+
+/* COMING SOON */
+.soon{background:var(--card2);border:1px dashed var(--border);border-radius:14px;padding:48px;text-align:center;margin:24px 0}
+.soon-icon{font-size:40px;margin-bottom:12px}
+.soon-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--text);margin-bottom:8px}
+.soon-desc{font-size:14px;color:var(--text3)}
+
+@media(max-width:860px){.mob-btn{display:flex}.sb{transform:translateX(-100%)}.sb.open{transform:translateX(0)}.main{margin-left:0}.sec,.mod-hero{padding:36px 18px}}
+</style>
+</head>
+<body>
+<div class="app">
+<button class="mob-btn" onclick="tSB()">☰</button>
+<div class="overlay" id="ov" onclick="tSB()"></div>
+
+<nav class="sb" id="sb">
+<div class="sb-top">
+<div class="sb-brand"><span>⚡</span> Gyorsítósáv</div>
+<div class="sb-sub">DCE Digital Creator Empire</div>
+</div>
+<div class="sb-nav" id="sb-nav"></div>
+<div class="sb-foot">
+<div class="prog-row"><span class="prog-lbl">HALADÁS</span><span class="prog-pct" id="prog-pct">0%</span></div>
+<div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+</div>
+</nav>
+
+<main class="main" id="main">
+
+<!-- ====== MODULE 1 ====== -->
+<div class="page active" id="page-1">
+<div class="mod-hero">
+<div class="mod-tag">MODUL 01</div>
+<h1 class="mod-h1">Fájdalompont Rendszer</h1>
+<div class="mod-divider"></div>
+<p class="mod-desc">Kész fájdalom-térképek, sablonok és checklist — 5 iparágra azonnal használható. Nem kell kutatnod, csak lemásolnod.</p>
+</div>
+<div class="sec">
+
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">📋</span><div class="acc-info"><div class="acc-title">Fájdalom-térkép sablon (üres, kitöltős)</div><div class="acc-sub">A 3 oszlopos keretrendszer — Felszíni / Érzelmi / Identitás</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<div class="bx bx-warm"><div class="bx-lbl">💡 HASZNÁLATI ÚTMUTATÓ</div><p><strong>1.</strong> Válaszd ki az iparágat. <strong>2.</strong> Töltsd ki a 3 oszlopot — ha elakadsz, használd a validációs checklistet. <strong>3.</strong> Az ÉRZELMI oszlopból írd a hook-jaidat — ez a pénztermelő oszlop. <strong>4.</strong> Az IDENTITÁS oszlopból építsd a sales videók sztorijait.</p></div>
+<table class="tbl"><tr><th>FELSZÍNI — amit Google-be gépel</th><th>ÉRZELMI — amit éjszaka érez</th><th>IDENTITÁS — akivé válni akar</th></tr>
+<tr><td>[Amit keres, ár, összehasonlítás]</td><td>[Félelem, szégyen, frusztráció]</td><td>[Milyen ember akar lenni?]</td></tr>
+<tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></table>
+<p><strong>Minden sorhoz:</strong> Írj 1 hook-ot (max 8 szó) + jelöld: edukációs vagy sales videóhoz való?</p>
+</div></div>
+
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">💄</span><div class="acc-info"><div class="acc-title">Kész térkép #1: Kozmetikus</div><div class="acc-sub">5 sor × 3 szint + 5 hook ötlet</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<table class="pain-tbl"><tr><th>FELSZÍNI</th><th>ÉRZELMI</th><th>IDENTITÁS</th></tr>
+<tr><td>„Kozmetikus árak [város]"</td><td>„Reggel a tükörben nem magamat látom."</td><td>„Olyan nő akarok lenni, aki smink nélkül is magabiztos."</td></tr>
+<tr><td>„Legjobb arckezelés pattanásra"</td><td>„Szégyellem a bőröm, nem merek smink nélkül kimenni."</td><td>„Törődni akarok magammal, nem csak a családdal."</td></tr>
+<tr><td>„Mezoterápia vélemények"</td><td>„Már mindent kipróbáltam és semmi nem működik."</td><td>„Azt akarom, hogy rám nézzenek — nem sajnálatból."</td></tr>
+<tr><td>„Hámlasztás előtte-utána"</td><td>„A párom rég nem mondta, hogy szép vagyok."</td><td>„Az a nő akarok lenni, akiről mondják: de jól néz ki."</td></tr>
+<tr><td>„Ránctalanítás 30 felett"</td><td>„Öregnek érzem magam, pedig nem vagyok az."</td><td>„Jól akarom érezni magam a bőrömben."</td></tr></table>
+<div class="hook-list">
+<div class="hook-item"><span class="hook-num">1</span><div><div class="hook-text">„Mikor láttad utoljára magad és mondtad: igen?"</div><div class="hook-note">→ edukációs</div></div></div>
+<div class="hook-item"><span class="hook-num">2</span><div><div class="hook-text">„Mindent kipróbáltál. Mégsem működik."</div><div class="hook-note">→ sales</div></div></div>
+<div class="hook-item"><span class="hook-num">3</span><div><div class="hook-text">„Nem a krémed a hibás — hanem amit nem mondtak el."</div><div class="hook-note">→ edukációs</div></div></div>
+<div class="hook-item"><span class="hook-num">4</span><div><div class="hook-text">„Smink nélkül ki mersz menni?"</div><div class="hook-note">→ micro hook (3 mp)</div></div></div>
+<div class="hook-item"><span class="hook-num">5</span><div><div class="hook-text">„30 felett más szabályok vannak."</div><div class="hook-note">→ edukációs</div></div></div>
+</div></div></div>
+
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">💐</span><div class="acc-info"><div class="acc-title">Kész térkép #2: Virágkötő</div><div class="acc-sub">5 sor × 3 szint + 5 hook ötlet</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<table class="pain-tbl"><tr><th>FELSZÍNI</th><th>ÉRZELMI</th><th>IDENTITÁS</th></tr>
+<tr><td>„Esküvői csokor árak 2025"</td><td>„Félek, hogy az esküvőm napján nem lesz olyan, amilyet álmodtam."</td><td>„Az a menyasszony akarok lenni, akinek tökéletes az esküvője."</td></tr>
+<tr><td>„Virágküldés aznap"</td><td>„Mindig elfelejtkezem az évfordulóról."</td><td>„Olyan partner akarok lenni, aki figyel a részletekre."</td></tr>
+<tr><td>„Irodai dekoráció virággal"</td><td>„Az irodám szürke, deprimáló."</td><td>„Profi környezetet akarok, ami komolyan vesznek."</td></tr>
+<tr><td>„Temetési koszorú rendelés"</td><td>„Nem tudom kifejezni a fájdalmam."</td><td>„Méltó módon akarok búcsúzni."</td></tr>
+<tr><td>„Ballagási csokor"</td><td>„A gyerekem felnőtt, nem tudom megállítani az időt."</td><td>„Azt akarom, hogy ez a nap különleges legyen."</td></tr></table>
+<div class="hook-list">
+<div class="hook-item"><span class="hook-num">1</span><div><div class="hook-text">„Az esküvőd napján EZT fogod bánni."</div><div class="hook-note">→ edukációs</div></div></div>
+<div class="hook-item"><span class="hook-num">2</span><div><div class="hook-text">„Egy csokor virág megmentheti a kapcsolatod."</div><div class="hook-note">→ micro hook</div></div></div>
+<div class="hook-item"><span class="hook-num">3</span><div><div class="hook-text">„Az irodád azt mondja el rólad, amit te nem mondasz ki."</div><div class="hook-note">→ edukációs</div></div></div>
+<div class="hook-item"><span class="hook-num">4</span><div><div class="hook-text">„Nem a virág számít — hanem amit jelent."</div><div class="hook-note">→ sales</div></div></div>
+<div class="hook-item"><span class="hook-num">5</span><div><div class="hook-text">„Az utolsó csokor, amit valakinek küldesz."</div><div class="hook-note">→ érzelmi/BTS</div></div></div>
+</div></div></div>
+
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">💪</span><div class="acc-info"><div class="acc-title">Kész térkép #3: Edző / Coach</div><div class="acc-sub">5 sor × 3 szint + 5 hook ötlet</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<table class="pain-tbl"><tr><th>FELSZÍNI</th><th>ÉRZELMI</th><th>IDENTITÁS</th></tr>
+<tr><td>„Személyi edző árak"</td><td>„Háromszor kezdtem el edzeni, háromszor adtam fel."</td><td>„Olyan ember akarok lenni, aki kézben tartja az életét."</td></tr>
+<tr><td>„Fogyás otthon edzéssel"</td><td>„Utálom ami a tükörből visszanéz."</td><td>„Azt akarom, hogy a gyerekeim büszkék legyenek rám."</td></tr>
+<tr><td>„Étrend + edzésterv"</td><td>„Tudom mit kéne csinálnom, mégsem csinálom."</td><td>„Fegyelmezett, erős ember akarok lenni."</td></tr>
+<tr><td>„Online edző vélemények"</td><td>„Félek, hogy ítélkezni fognak az edzőteremben."</td><td>„Magabiztosan akarok bemenni egy terembe."</td></tr>
+<tr><td>„30 napos kihívás fogyás"</td><td>„A párom mellett szégyellem magam strandokon."</td><td>„Nem a testem akarom megváltoztatni — az életemet."</td></tr></table>
+<div class="hook-list">
+<div class="hook-item"><span class="hook-num">1</span><div><div class="hook-text">„3-szor kezdted el. 3-szor adtad fel. Miért?"</div><div class="hook-note">→ edukációs</div></div></div>
+<div class="hook-item"><span class="hook-num">2</span><div><div class="hook-text">„Nem a motiváció hiányzik — hanem valami más."</div><div class="hook-note">→ sales</div></div></div>
+<div class="hook-item"><span class="hook-num">3</span><div><div class="hook-text">„Az edzőteremben senki nem figyel rád."</div><div class="hook-note">→ edukációs</div></div></div>
+<div class="hook-item"><span class="hook-num">4</span><div><div class="hook-text">„Utálod a tükröt? Ez nem rólad szól."</div><div class="hook-note">→ micro hook</div></div></div>
+<div class="hook-item"><span class="hook-num">5</span><div><div class="hook-text">„30 nap múlva nem az alakod változik — az önbizalmad."</div><div class="hook-note">→ sales</div></div></div>
+</div></div></div>
+
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">🎨</span><div class="acc-info"><div class="acc-title">Kész térkép #4: Kézműves</div><div class="acc-sub">5 sor × 3 szint + 5 hook ötlet</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<table class="pain-tbl"><tr><th>FELSZÍNI</th><th>ÉRZELMI</th><th>IDENTITÁS</th></tr>
+<tr><td>„Kézműves ékszer vásár online"</td><td>„Mindenki azt mondja, csináljak belőle pénzt, de senki nem veszi meg."</td><td>„Azt akarom, hogy a hobbim legyen a munkám."</td></tr>
+<tr><td>„Egyedi ajándék ötlet nőknek"</td><td>„Nem értik mennyi munka van benne — és alkudoznak."</td><td>„Művész vagyok, nem hobbysta."</td></tr>
+<tr><td>„Kézműves vásár szabályok"</td><td>„Félek kirakni az árat, mert drágállni fogják."</td><td>„Olyan márka akarok lenni, amit ismernek."</td></tr>
+<tr><td>„Etsy eladás Magyarországról"</td><td>„Egyedül csinálom, néha feladnám."</td><td>„Abból akarok megélni, amit a kezem alkot."</td></tr>
+<tr><td>„Gyertya/szappan receptek"</td><td>„Az ismerőseim ingyen kérik."</td><td>„Vállalkozó akarok lenni, nem aki osztogatja."</td></tr></table>
+<div class="hook-list">
+<div class="hook-item"><span class="hook-num">1</span><div><div class="hook-text">„Ha az ismerőseid ingyen kérik — nézd meg ezt."</div><div class="hook-note">→ edukációs</div></div></div>
+<div class="hook-item"><span class="hook-num">2</span><div><div class="hook-text">„A kézműves nem hobbi. Ez üzlet."</div><div class="hook-note">→ micro hook</div></div></div>
+<div class="hook-item"><span class="hook-num">3</span><div><div class="hook-text">„Ezért nem veszik meg — és nem az ár a probléma."</div><div class="hook-note">→ edukációs</div></div></div>
+<div class="hook-item"><span class="hook-num">4</span><div><div class="hook-text">„10 óra munka, és alkudoznak. Ismerős?"</div><div class="hook-note">→ azonosulás</div></div></div>
+<div class="hook-item"><span class="hook-num">5</span><div><div class="hook-text">„A kezed alkotta. Az árad tükrözze."</div><div class="hook-note">→ sales</div></div></div>
+</div></div></div>
+
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">💻</span><div class="acc-info"><div class="acc-title">Kész térkép #5: Online Pénzkeresők</div><div class="acc-sub">5 sor × 3 szint + 5 hook ötlet</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<table class="pain-tbl"><tr><th>FELSZÍNI</th><th>ÉRZELMI</th><th>IDENTITÁS</th></tr>
+<tr><td>„Hogyan keress pénzt online 2025"</td><td>„3 kurzust vettem, még mindig 0 bevételem."</td><td>„Szabadon akarok élni — nem a főnökömtől függve."</td></tr>
+<tr><td>„Passzív jövedelem ötletek"</td><td>„Mindenki más megcsinálja, csak én nem."</td><td>„Az az ember akarok lenni, aki megcsinálta."</td></tr>
+<tr><td>„Affiliate marketing kezdőknek"</td><td>„A családom nem hisz benne."</td><td>„Be akarom bizonyítani — magamnak is."</td></tr>
+<tr><td>„Stan Store beállítás"</td><td>„Posztolok, és csend van. Senki nem reagál."</td><td>„A telefonjából élő vállalkozó akarok lenni."</td></tr>
+<tr><td>„Digitális termék ötletek"</td><td>„Félek elkezdeni, mi van ha nem vagyok elég jó?"</td><td>„A saját utamat akarom járni."</td></tr></table>
+<div class="hook-list">
+<div class="hook-item"><span class="hook-num">1</span><div><div class="hook-text">„3 kurzus. 0 forint bevétel. Te is itt tartasz?"</div><div class="hook-note">→ azonosulás</div></div></div>
+<div class="hook-item"><span class="hook-num">2</span><div><div class="hook-text">„Posztolsz. Csend. Senki nem reagál. Ismerős?"</div><div class="hook-note">→ edukációs</div></div></div>
+<div class="hook-item"><span class="hook-num">3</span><div><div class="hook-text">„Nem a tudás hiányzik — hanem a rendszer."</div><div class="hook-note">→ sales</div></div></div>
+<div class="hook-item"><span class="hook-num">4</span><div><div class="hook-text">„A családod nem hisz benne? Pont ezért csináld."</div><div class="hook-note">→ micro hook</div></div></div>
+<div class="hook-item"><span class="hook-num">5</span><div><div class="hook-text">„Mindenki megcsinálta. Te miért nem?"</div><div class="hook-note">→ provokáció</div></div></div>
+</div></div></div>
+
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">👤</span><div class="acc-info"><div class="acc-title">Célközönség-profil sablon</div><div class="acc-sub">Kitöltős sablon — demográfia, félelmek, vágyak, szóhasználat</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<div class="prompt"><div class="prompt-head"><span class="prompt-lbl">CÉLKÖZÖNSÉG-PROFIL</span><button class="copy-btn" onclick="event.stopPropagation();cpTx(this,'prof1')">MÁSOLÁS</button></div>
+<div class="prompt-text" id="prof1">IPARÁG: _______________
+CÉLCSOPORT: _______________
+
+DEMOGRÁFIA:
+- Életkor: ___
+- Nem: ___
+- Hol él: ___
+- Jövedelem: ___
+- Család: ___
+
+TOP 5 FÉLELEM:
+1. ___  2. ___  3. ___  4. ___  5. ___
+
+TOP 5 VÁGY:
+1. ___  2. ___  3. ___  4. ___  5. ___
+
+ONLINE SZÓHASZNÁLAT (amit SZÓ SZERINT írnak):
+- „___"  - „___"  - „___"  - „___"  - „___"
+
+HOL VANNAK ONLINE:
+- Platform 1: ___  - Platform 2: ___
+- Csoportok: ___  - Kit követnek: ___</div></div>
+</div></div>
+
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">✅</span><div class="acc-info"><div class="acc-title">Validációs checklist</div><div class="acc-sub">Hogyan ellenőrizd, hogy a fájdalompontjaid VALÓSAK</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<p><strong>1. Facebook csoportok (15 perc)</strong></p>
+<div class="check" onclick="this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Keress rá: „[iparág] vélemények" vagy „[város] ajánlások"</div></div></div></div>
+<div class="check" onclick="this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Olvasd az utolsó 20 posztot és kommentet</div></div></div></div>
+<div class="check" onclick="this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Jegyzetelj: milyen szavakat használnak?</div></div></div></div>
+<div class="check" onclick="this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Másold ki a 3 legerősebb mondatot — ezek lesznek a hook-jaid</div></div></div></div>
+
+<p style="margin-top:20px"><strong>2. Google értékelések (15 perc)</strong></p>
+<div class="check" onclick="this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Keress rá a konkurens cégekre Google-ben</div></div></div></div>
+<div class="check" onclick="this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">1-2 csillagos értékelések = fájdalompontok szó szerint</div></div></div></div>
+<div class="check" onclick="this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">5 csillagosak = identitás-szint (akivé váltak)</div></div></div></div>
+
+<p style="margin-top:20px"><strong>3. Instagram/TikTok kommentek (10 perc)</strong></p>
+<div class="check" onclick="this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Nézd meg a konkurensek videóit — mit kérdeznek a kommentekben?</div></div></div></div>
+<div class="check" onclick="this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Melyik videónak van a legtöbb mentése? Az a fájdalompont ami rezonál.</div></div></div></div>
+
+<div class="bx bx-warm" style="margin-top:20px"><div class="bx-lbl">🔑 ARANYSZABÁLY</div><p>Ami a valódi kutatásban és az AI fájdalom-térképben IS megjelenik → az a BIZTOS fájdalompont. Ami csak az AI-ban van → teszteld. Ami csak a valódi kutatásban → ARANY, mert az AI nem ismeri.</p></div>
+</div></div>
+
+</div>
+</div>
+
+<!-- ====== MODULE 2-8 PLACEHOLDERS ====== -->
+<div class="page" id="page-2">
+<div class="mod-hero"><div class="mod-tag">MODUL 02</div><h1 class="mod-h1">Hook Fegyvertár</h1><div class="mod-divider"></div><p class="mod-desc">50 hook formula kategorizálva + 25 kész, iparág-specifikus hook + tesztelő checklist. Válassz formulát → cseréld ki az iparágadra → kész a hook-od.</p></div>
+<div class="sec">
+
+<div class="bx bx-warm"><div class="bx-lbl">💡 HOGYAN HASZNÁLD</div><p>Válassz egy formulát → cseréld ki a <strong>[zárójelben lévő]</strong> részt a te iparágadra → kész a hook-od. Minden formulánál jelölve: melyik trigger, edukációs vagy sales.</p></div>
+
+<!-- KATEGÓRIA 1 -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">❓</span><div class="acc-info"><div class="acc-title">Kategória 1: KÉRDÉS-HOOK (10 db)</div><div class="acc-sub">Azonosulásra épít — a néző agya automatikusan elkezd válaszolni → megáll</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<table class="tbl"><tr><th>#</th><th>FORMULA</th><th>TRIGGER</th><th>TÍPUS</th></tr>
+<tr><td>01</td><td>„Te is [gyakori hiba]-t csinálod?"</td><td>Liking</td><td>Edukációs</td></tr>
+<tr><td>02</td><td>„Miért [negatív eredmény], ha [amit csinálsz]?"</td><td>Curiosity</td><td>Edukációs</td></tr>
+<tr><td>03</td><td>„Mi lenne, ha [vágyott eredmény] — [meglepően egyszerű módon]?"</td><td>Curiosity</td><td>Sales</td></tr>
+<tr><td>04</td><td>„Tudtad, hogy [meglepő tény] a [iparág]-ban?"</td><td>Authority</td><td>Edukációs</td></tr>
+<tr><td>05</td><td>„Hányszor [frusztráló ismétlődő helyzet]?"</td><td>Liking</td><td>Edukációs</td></tr>
+<tr><td>06</td><td>„Te is azt hiszed, hogy [közhiedelem]?"</td><td>Authority</td><td>Edukációs</td></tr>
+<tr><td>07</td><td>„Miért nem mondja el ezt senki a [téma]-ról?"</td><td>Curiosity</td><td>Edukációs</td></tr>
+<tr><td>08</td><td>„Komolyan még mindig [elavult módszer]-t csinálod?"</td><td>Authority</td><td>Edukációs</td></tr>
+<tr><td>09</td><td>„Mi a különbség [rossz eredmény] és [jó eredmény] között?"</td><td>Curiosity</td><td>Edukációs</td></tr>
+<tr><td>10</td><td>„És ha pont [amit félsz] az, ami visszatart?"</td><td>Liking</td><td>Sales</td></tr>
+</table>
+<div class="bx bx-sage"><div class="bx-lbl">PÉLDÁK</div><p>Kozmetikus: „Te is 3 különböző krémet kensz fel egymásra?"<br>Edző: „Hányszor kezdted újra hétfőn?"<br>Kézműves: „Miért nem veszik meg, ha mindenki azt mondja, szép?"</p></div>
+</div></div>
+
+<!-- KATEGÓRIA 2 -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">💥</span><div class="acc-info"><div class="acc-title">Kategória 2: SOKK / KIJELENTÉS-HOOK (10 db)</div><div class="acc-sub">Megállítja a görgetést — ellentmond annak, amit a néző hisz</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<table class="tbl"><tr><th>#</th><th>FORMULA</th><th>TRIGGER</th><th>TÍPUS</th></tr>
+<tr><td>11</td><td>„[Általánosan elfogadott dolog] tönkreteszi a [eredmény]-t."</td><td>Authority</td><td>Edukációs</td></tr>
+<tr><td>12</td><td>„SOHA ne [gyakori tevékenység] — és most elmondom miért."</td><td>Scarcity</td><td>Edukációs</td></tr>
+<tr><td>13</td><td>„Ez az 1 dolog, amit a [szakember]-ed nem mond el neked."</td><td>Authority</td><td>Edukációs</td></tr>
+<tr><td>14</td><td>„Hagyd abba a [rossz szokás]-t. Most. Azonnal."</td><td>Authority</td><td>Micro</td></tr>
+<tr><td>15</td><td>„[Szám] éve csinálom ezt, és MOST jöttem rá, hogy rosszul."</td><td>Liking</td><td>Edukációs</td></tr>
+<tr><td>16</td><td>„A [iparág] legnagyobb hazugsága: [közhiedelem]."</td><td>Authority</td><td>Edukációs</td></tr>
+<tr><td>17</td><td>„Ezt rontja el a [iparág] 90%-a."</td><td>Social Proof</td><td>Edukációs</td></tr>
+<tr><td>18</td><td>„Nem a [amit gondolsz] a probléma. Hanem [ami valójában]."</td><td>Curiosity</td><td>Edukációs</td></tr>
+<tr><td>19</td><td>„Egyetlen változtatás, ami [eredmény]-t hozott."</td><td>Curiosity</td><td>Sales</td></tr>
+<tr><td>20</td><td>„Valaki végre kimondta."</td><td>Curiosity</td><td>Micro</td></tr>
+</table>
+<div class="bx bx-sage"><div class="bx-lbl">PÉLDÁK</div><p>Kozmetikus: „A bőrápolási rutinod valószínűleg ÖREGÍT."<br>Virágkötő: „SOHA ne rendelj esküvői csokrot azon a napon."<br>Online pénzkereső: „3 kurzust vettem. Egy sem működött."</p></div>
+</div></div>
+
+<!-- KATEGÓRIA 3 -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">🤝</span><div class="acc-info"><div class="acc-title">Kategória 3: AZONOSULÁS-HOOK (10 db)</div><div class="acc-sub">Érzelmi kapcsolat — „ez PONTOSAN én vagyok"</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<table class="tbl"><tr><th>#</th><th>FORMULA</th><th>TRIGGER</th><th>TÍPUS</th></tr>
+<tr><td>21</td><td>„Ha [specifikus helyzet], ez a videó neked szól."</td><td>Liking</td><td>Sales</td></tr>
+<tr><td>22</td><td>„Már [szám]-szer próbáltad, és [negatív eredmény]. Ismerős?"</td><td>Liking</td><td>Edukációs</td></tr>
+<tr><td>23</td><td>„Senki nem beszél arról, milyen [negatív érzés] amikor [helyzet]."</td><td>Liking</td><td>Edukációs</td></tr>
+<tr><td>24</td><td>„Tudom milyen az, amikor [fájdalmas helyzet] — én is ott voltam."</td><td>Liking + Recipr.</td><td>Sales</td></tr>
+<tr><td>25</td><td>„Ez a poszt azoknak szól, akik [specifikus küzdelem]."</td><td>Liking</td><td>Edukációs</td></tr>
+<tr><td>26</td><td>„Amikor [szituáció] és úgy érzed [érzelem] — olvasd el ezt."</td><td>Liking</td><td>Carousel</td></tr>
+<tr><td>27</td><td>„A [célközönség] 80%-a ezt csinálja — és pont ezért nem működik."</td><td>Social Proof</td><td>Edukációs</td></tr>
+<tr><td>28</td><td>„Nem vagy egyedül ezzel."</td><td>Liking</td><td>Micro</td></tr>
+<tr><td>29</td><td>„Ha [belső monológ, amit gondol] — nézd meg."</td><td>Liking</td><td>Sales</td></tr>
+<tr><td>30</td><td>„Ez a 3 jel, hogy [nem tudja amit kellene]."</td><td>Curiosity</td><td>Edukációs</td></tr>
+</table>
+<div class="bx bx-sage"><div class="bx-lbl">PÉLDÁK</div><p>Edző: „Már háromszor kezdted újra hétfőn. Ismerős?"<br>Kézműves: „Senki nem beszél arról, milyen szar érzés, amikor alkudoznak."<br>Online: „Posztolsz. Csend. Senki. Nézd meg ezt."</p></div>
+</div></div>
+
+<!-- KATEGÓRIA 4 -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">⚡</span><div class="acc-info"><div class="acc-title">Kategória 4: KONTRASZT-HOOK (10 db)</div><div class="acc-sub">Két ellentétes dolgot ütköztet → kíváncsiság</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<table class="tbl"><tr><th>#</th><th>FORMULA</th><th>TRIGGER</th><th>TÍPUS</th></tr>
+<tr><td>31</td><td>„Mindenki azt mondja [X]. Az igazság: [Y]."</td><td>Authority</td><td>Edukációs</td></tr>
+<tr><td>32</td><td>„[Rossz módszer] vs [jó módszer] — a különbség [eredmény]."</td><td>Authority</td><td>Edukációs</td></tr>
+<tr><td>33</td><td>„Régen [régi]-t csináltam. Ma [új]. Az eredmény: [szám]."</td><td>Social Proof</td><td>Sales</td></tr>
+<tr><td>34</td><td>„A drága [termék] nem jobb. Csak drágább."</td><td>Authority</td><td>Edukációs</td></tr>
+<tr><td>35</td><td>„Ami NEKED működik, az nem biztos, hogy [célközönség]-nek is."</td><td>Authority</td><td>Edukációs</td></tr>
+<tr><td>36</td><td>„[Közhiedelem]. Ez a legnagyobb tévhit a [iparág]-ban."</td><td>Authority</td><td>Edukációs</td></tr>
+<tr><td>37</td><td>„[Régi] ❌ vs [Új] ✅ — melyiket választod?"</td><td>Curiosity</td><td>Carousel</td></tr>
+<tr><td>38</td><td>„1 év [rossz stratégia] vs 1 hét [jó stratégia]."</td><td>Curiosity</td><td>Sales</td></tr>
+<tr><td>39</td><td>„Amit a [szakember]-ek csinálnak vs amit mondanak."</td><td>Curiosity</td><td>Edukációs</td></tr>
+<tr><td>40</td><td>„A valóság vs amit az Instán látsz."</td><td>Liking</td><td>BTS</td></tr>
+</table>
+<div class="bx bx-sage"><div class="bx-lbl">PÉLDÁK</div><p>Kozmetikus: „A drága krém nem jobb. Csak drágább."<br>Virágkötő: „Pinterest esküvő vs valóság — a különbség nem az ár."<br>Edző: „1 év diéta vs 1 hét rendszer. Melyik működik?"</p></div>
+</div></div>
+
+<!-- KATEGÓRIA 5 -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">🔥</span><div class="acc-info"><div class="acc-title">Kategória 5: MICRO HOOK — 3-5 szó (10 db)</div><div class="acc-sub">Szinte 100% watch time — a legrövidebb, legerősebb formátum</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<table class="tbl"><tr><th>#</th><th>FORMULA</th><th>TRIGGER</th></tr>
+<tr><td>41</td><td>„Ezt ne csináld."</td><td>Authority</td></tr>
+<tr><td>42</td><td>„Hazudtak neked."</td><td>Curiosity</td></tr>
+<tr><td>43</td><td>„Rossz hírem van."</td><td>Curiosity</td></tr>
+<tr><td>44</td><td>„Ezt senki nem mondja el."</td><td>Curiosity</td></tr>
+<tr><td>45</td><td>„Figyelj."</td><td>Curiosity</td></tr>
+<tr><td>46</td><td>„Ezért nem működik."</td><td>Authority</td></tr>
+<tr><td>47</td><td>„Nem az ár a probléma."</td><td>Curiosity</td></tr>
+<tr><td>48</td><td>„Állj. Olvasd el."</td><td>Curiosity</td></tr>
+<tr><td>49</td><td>„Ma megtanulsz valamit."</td><td>Reciprocity</td></tr>
+<tr><td>50</td><td>„Ezt neked találták ki."</td><td>Liking</td></tr>
+</table>
+</div></div>
+
+<!-- 25 KÉSZ HOOK -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">🎯</span><div class="acc-info"><div class="acc-title">25 KÉSZ, iparág-specifikus hook</div><div class="acc-sub">Szó szerint másolhatod — csak használd</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<p><strong>💄 KOZMETIKUS (5 db)</strong></p>
+<div class="hook-list">
+<div class="hook-item"><span class="hook-num">1</span><div><div class="hook-text">„A bőrápolási rutinod valószínűleg árt a bőrödnek."</div></div></div>
+<div class="hook-item"><span class="hook-num">2</span><div><div class="hook-text">„30 felett más szabályok vannak. Senki nem mondta el?"</div></div></div>
+<div class="hook-item"><span class="hook-num">3</span><div><div class="hook-text">„Mikor láttad utoljára magad és gondoltad: igen, jól nézek ki?"</div></div></div>
+<div class="hook-item"><span class="hook-num">4</span><div><div class="hook-text">„3 összetevő, amit SOHA ne keverj a bőrödön."</div></div></div>
+<div class="hook-item"><span class="hook-num">5</span><div><div class="hook-text">„Smink nélkül ki mersz menni?"</div></div></div>
+</div>
+<p style="margin-top:20px"><strong>💐 VIRÁGKÖTŐ (5 db)</strong></p>
+<div class="hook-list">
+<div class="hook-item"><span class="hook-num">1</span><div><div class="hook-text">„Az esküvőd napján EZÉRT fogsz sírni — és nem az örömtől."</div></div></div>
+<div class="hook-item"><span class="hook-num">2</span><div><div class="hook-text">„Nem a virág drága. A rossz választás az."</div></div></div>
+<div class="hook-item"><span class="hook-num">3</span><div><div class="hook-text">„Egy csokor virág megment egy kapcsolatot. Nem vicc."</div></div></div>
+<div class="hook-item"><span class="hook-num">4</span><div><div class="hook-text">„Ezt nézd meg, MIELŐTT esküvői virágot rendelsz."</div></div></div>
+<div class="hook-item"><span class="hook-num">5</span><div><div class="hook-text">„A legolcsóbb csokor a legdrágább hiba."</div></div></div>
+</div>
+<p style="margin-top:20px"><strong>💪 EDZŐ / COACH (5 db)</strong></p>
+<div class="hook-list">
+<div class="hook-item"><span class="hook-num">1</span><div><div class="hook-text">„Nem a motiváció hiányzik. Valami más a baj."</div></div></div>
+<div class="hook-item"><span class="hook-num">2</span><div><div class="hook-text">„3-szor kezdted el. 3-szor adtad fel. Nézd meg miért."</div></div></div>
+<div class="hook-item"><span class="hook-num">3</span><div><div class="hook-text">„Az edzőteremben senki nem figyel rád. Komolyan mondom."</div></div></div>
+<div class="hook-item"><span class="hook-num">4</span><div><div class="hook-text">„30 nap múlva nem az alakod változik — hanem az életed."</div></div></div>
+<div class="hook-item"><span class="hook-num">5</span><div><div class="hook-text">„Utálod a tükröt? Nem a tested a probléma."</div></div></div>
+</div>
+<p style="margin-top:20px"><strong>🎨 KÉZMŰVES (5 db)</strong></p>
+<div class="hook-list">
+<div class="hook-item"><span class="hook-num">1</span><div><div class="hook-text">„Ha az ismerőseid ingyen kérik a munkádat — nézd meg ezt."</div></div></div>
+<div class="hook-item"><span class="hook-num">2</span><div><div class="hook-text">„Ezért nem veszik meg — és nem az ár a probléma."</div></div></div>
+<div class="hook-item"><span class="hook-num">3</span><div><div class="hook-text">„10 óra munka, és alkudoznak. Ismerős?"</div></div></div>
+<div class="hook-item"><span class="hook-num">4</span><div><div class="hook-text">„A kézműves nem hobbi. Ez üzlet."</div></div></div>
+<div class="hook-item"><span class="hook-num">5</span><div><div class="hook-text">„A kezed alkotta. Az árad tükrözze."</div></div></div>
+</div>
+<p style="margin-top:20px"><strong>💻 ONLINE PÉNZKERESŐK (5 db)</strong></p>
+<div class="hook-list">
+<div class="hook-item"><span class="hook-num">1</span><div><div class="hook-text">„3 kurzus. 0 forint. Te is itt tartasz?"</div></div></div>
+<div class="hook-item"><span class="hook-num">2</span><div><div class="hook-text">„Posztolsz. Csend. Senki nem reagál. Ismerős?"</div></div></div>
+<div class="hook-item"><span class="hook-num">3</span><div><div class="hook-text">„Nem a tudás hiányzik — hanem a rendszer."</div></div></div>
+<div class="hook-item"><span class="hook-num">4</span><div><div class="hook-text">„A családod nem hisz benne? Pont ezért csináld."</div></div></div>
+<div class="hook-item"><span class="hook-num">5</span><div><div class="hook-text">„Mindenki megcsinálta. Te miért nem?"</div></div></div>
+</div>
+</div></div>
+
+<!-- TESZTELŐ CHECKLIST -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">✅</span><div class="acc-info"><div class="acc-title">Hook-tesztelő checklist</div><div class="acc-sub">Mielőtt posztolod + posztolás utáni mérés + A/B teszt módszer</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<p><strong>MIELŐTT POSZTOLOD — futtasd végig:</strong></p>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Max 8 szó?</div><div class="check-desc">Ha több, rövidítsd. Micro hook-ok (3-5 szó) most a legerősebbek.</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Melyik triggert használja?</div><div class="check-desc">Ha nem tudod megnevezni, a hook gyenge.</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Az ÉRZELMI fájdalompontra céloz?</div><div class="check-desc">Ha felszíni szinten marad, nem fog megállítani.</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Ha te látnád Reels-en, megállnál?</div><div class="check-desc">Ha nem → írd újra.</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Ismerős-teszt: felolvasod, azt mondja „és? mi van utána?"</div><div class="check-desc">Ha igen → működik. Ha „ja, oké" → gyenge.</div></div></div></div>
+
+<p style="margin-top:24px"><strong>POSZTOLÁS UTÁN — mit mérj:</strong></p>
+<table class="tbl"><tr><th>MIT MÉRJ</th><th>JÓ EREDMÉNY</th><th>GYENGE → ÍRD ÚJRA</th></tr>
+<tr><td>Watch time %</td><td>40% felett</td><td>20% alatt</td></tr>
+<tr><td>Mentések</td><td>2%+ az elérésből</td><td>0.5% alatt</td></tr>
+<tr><td>Profil-látogatás</td><td>Nő a videó után</td><td>Nem változik</td></tr>
+<tr><td>Kommentek</td><td>Kérdeznek / vitáznak</td><td>Csend</td></tr>
+</table>
+
+<div class="bx bx-warm" style="margin-top:20px"><div class="bx-lbl">🔄 A/B TESZT MÓDSZER</div><p><strong>1.</strong> Vedd fel UGYANAZT a videót 2 különböző hook-kal. <strong>2.</strong> Posztold különböző napokon (azonos időpontban). <strong>3.</strong> 3 nap után nézd meg: melyiknek jobb a watch time %? <strong>4.</strong> A nyertes hook-típust használd többször. <strong>5.</strong> Ismételd — ez a hook-fejlesztés végtelen ciklusa.</p></div>
+</div></div>
+
+</div>
+</div>
+
+<div class="page" id="page-3">
+<div class="mod-hero"><div class="mod-tag">MODUL 03</div><h1 class="mod-h1">Forgatókönyv Sablonok</h1><div class="mod-divider"></div><p class="mod-desc">Nem kell író legyél. Csak töltsd ki az üres helyeket, vedd fel, posztold. Kitöltős sablonok + kész scriptek + érzelem-görbe guide.</p></div>
+<div class="sec">
+
+<div class="bx bx-warm"><div class="bx-lbl">💡 HOGYAN HASZNÁLD</div><p><strong>1.</strong> Válaszd ki a videó típusát (edukációs / sales / micro / carousel / BTS). <strong>2.</strong> Nyisd meg a sablont. <strong>3.</strong> Töltsd ki a [zárójelben lévő] részeket a fájdalom-térképedből. <strong>4.</strong> Olvasd el 2x. <strong>5.</strong> Tedd le — mondd el a kamerának a SAJÁT szavaiddal. <strong>NE olvasd fel szóról szóra</strong> — a néző azonnal megérzi.</p></div>
+
+<!-- SABLON 1: EDUKÁCIÓS 30s -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">📚</span><div class="acc-info"><div class="acc-title">Sablon 1: Edukációs videó — 30 mp</div><div class="acc-sub">Gyors tipp, 1 tanács, bizalomépítés. Heti 2-3x ezt posztold.</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<div class="prompt"><div class="prompt-head"><span class="prompt-lbl">EDUKÁCIÓS 30s SABLON</span><button class="copy-btn" onclick="event.stopPropagation();cpTx(this,'s1')">MÁSOLÁS</button></div>
+<div class="prompt-text" id="s1">⏱️ 0-3 mp | HOOK | Sokk/kíváncsiság
+📷 Közeli arc, szemkontaktus VAGY szöveg a képernyőn
+
+„[Sokk-kijelentés vagy kérdés a fájdalom-térképed ÉRZELMI oszlopából]"
+
+⏱️ 3-10 mp | PROBLÉMA | Azonosulás
+📷 B-roll: a probléma vizuális megjelenítése
+
+„A legtöbben azt hiszik, hogy [közhiedelem].
+De az igazság az, hogy [meglepő tény]."
+
+⏱️ 10-25 mp | MEGOLDÁS | Megkönnyebbülés
+📷 Te beszélsz VAGY lépéseket mutatsz
+
+„Amit helyette csinálnod kell:
+[1. lépés — max 1 mondat]
+[2. lépés — max 1 mondat]
+[3. lépés — opcionális]"
+
+⏱️ 25-30 mp | CTA | Cselekvés
+📷 Közeli arc, szemkontaktus
+
+„Mentsd el, mert erre szükséged lesz.
+Kövess, ha [ígéret, amit a csatornád ad]."</div></div>
+
+<div class="bx bx-sage"><div class="bx-lbl">KITÖLTVE — KOZMETIKUS PÉLDA</div><p>🪝 „A bőrápolási rutinod valószínűleg árt a bőrödnek."<br><br>„A legtöbben azt hiszik, hogy minél több terméket használsz, annál jobb. De az igazság az, hogy a bőröd max 3 réteget tud felszívni — a többi csak ül rajta és irritálja."<br><br>„Amit helyette csinálj:<br>1. Tisztítás — EGY enyhe lemosóval, nem hárommal.<br>2. Szérum — EGY, a te bőrtípusodra.<br>3. Fényvédő — MINDEN nap, télen is."<br><br>„Mentsd el, mert holnap reggel kelleni fog. Kövess, ha végre normális bőrápolási tippeket akarsz."</p></div>
+</div></div>
+
+<!-- SABLON 2: EDUKÁCIÓS 60s -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">🎓</span><div class="acc-info"><div class="acc-title">Sablon 2: Edukációs videó — 60 mp</div><div class="acc-sub">Mélyebb tanítás, „3 pont" típusú, fájdalompontra építve.</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<div class="prompt"><div class="prompt-head"><span class="prompt-lbl">EDUKÁCIÓS 60s SABLON</span><button class="copy-btn" onclick="event.stopPropagation();cpTx(this,'s2')">MÁSOLÁS</button></div>
+<div class="prompt-text" id="s2">⏱️ 0-3 mp | HOOK | Kíváncsiság/félelem
+📷 Arc közelről VAGY erős szöveg a képernyőn
+„[Kontraszt-hook VAGY kérdés-hook]"
+
+⏱️ 3-12 mp | HELYZET | Azonosulás
+📷 B-roll: a célközönség hétköznapjai
+„Ha te is [specifikus szituáció] — nem vagy egyedül. A [célközönség] [szám]%-a pontosan ezt csinálja. És pont ez a probléma."
+
+⏱️ 12-20 mp | 1. PONT | „Aha!"
+📷 Te beszélsz / szöveg overlay
+„Először is: [1. tipp]. [1 mondat kifejtés — MIÉRT fontos]"
+
+⏱️ 20-32 mp | 2. PONT + FORDULAT | Felismerés
+📷 B-roll váltás / másik szög
+„Másodszor: [2. tipp]. [IDE jön a FORDULAT — amit nem vártak.]"
+
+⏱️ 32-45 mp | 3. PONT (a legerősebb) | Meglepetés
+📷 Vissza az arcra, közelebb
+„De ami igazán számít: [3. tipp — legváratlanabb]. Ezt a legtöbb [szakember] nem mondja el, mert [ok]."
+
+⏱️ 45-55 mp | ÖSSZEFOGLALÁS | Remény
+📷 Arc, szemkontaktus
+„Szóval: [1. pont], [2. pont], és legfőképp [3. pont]. Ha ezt betartod, [ígéret]."
+
+⏱️ 55-60 mp | CTA | Cselekvés
+SOFT: „Mentsd el + kövess."
+BRIDGE: „Írd kommentbe [szó], és elküldöm a teljes útmutatót."
+HARD: „Link a bióban."</div></div>
+
+<div class="bx bx-sage"><div class="bx-lbl">KITÖLTVE — EDZŐ PÉLDA</div><p>🪝 „Nem a motiváció hiányzik. Valami teljesen más a baj."<br><br>„Ha te is úgy érzed, hogy tudod mit kéne csinálnod, mégse csinálod — nem vagy egyedül. Az emberek 90%-a azt hiszi, motiváció kell. Nem. Rendszer kell."<br><br>„Először is: ne akarj minden nap edzeni. Heti 3 elég. De azt TÉNYLEG csináld meg."<br><br>„Másodszor: ne a kalóriákat számold — az idődet igen. 20 perc edzés jobb, mint 0 perc tökéletes edzésterv a fiókban."<br><br>„De ami igazán számít: az első 5 napot túl kell élned. Nem mert nehéz az edzés — hanem mert az agyad meg akar győzni, hogy hagyd abba. Az 5. nap után az agyad feladja. Te nyersz."<br><br>„Szóval: heti 3, nem napi 7. 20 perc, nem 90. És túléld az első 5 napot."<br><br>„Írd kommentbe: KÉSZ — és elküldöm az 5 napos kezdő tervet."</p></div>
+</div></div>
+
+<!-- SABLON 3: SALES 60-90s -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">💰</span><div class="acc-info"><div class="acc-title">Sablon 3: Sales videó — 60-90 mp</div><div class="acc-sub">Konverzió. Heti MAX 1x. A bizalmat ITT váltod pénzre.</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<div class="prompt"><div class="prompt-head"><span class="prompt-lbl">SALES 60-90s SABLON</span><button class="copy-btn" onclick="event.stopPropagation();cpTx(this,'s3')">MÁSOLÁS</button></div>
+<div class="prompt-text" id="s3">⏱️ 0-3 mp | HOOK | Azonosulás/fájdalom
+📷 Arc, közel, intim — mintha 1 embernek beszélnél
+„[Azonosulás-hook — az ÉRZELMI fájdalompontból]"
+
+⏱️ 3-15 mp | SZTORI — probléma | Együttérzés
+📷 B-roll: a küzdelem vizualizálása
+„[Rövid sztori — valaki, aki küzdött. Lehet a tied, lehet vásárlóé.] Valaki, aki [küzdelem]. Aki [mit próbált — nem működött]. Aki [mit érzett — ÉRZELMI szint]."
+
+⏱️ 15-30 mp | SZTORI — fordulat | Remény
+📷 Átmenet: sötétből világosba
+„Aztán [mi történt — a fordulat]. Nem azért, mert [amit gondolnál]. Hanem mert [a valódi ok]."
+
+⏱️ 30-45 mp | MEGOLDÁS = a te terméked | Megkönnyebbülés
+📷 A termék bemutatása — NEM reklámosan
+„Pontosan ezért [csináltuk] a [terméked neve]. Nem azért, mert [feature]. Hanem mert [benefit — IDENTITÁS szintből]."
+
+⏱️ 45-55 mp | SOCIAL PROOF | Bizalom
+📷 Screenshot véleményről / before-after
+„[Név] ugyanígy érzett — [eredmény amit elért]."
+
+⏱️ 55-60+ mp | CTA + SÜRGŐSSÉG | Cselekvés MOST
+📷 Arc, szemkontaktus
+„Ha te is [azonosulás]: [CTA — link / foglalj / írj DM-et]. [SÜRGŐSSÉG — DE CSAK HA IGAZ]"</div></div>
+
+<div class="bx bx-sage"><div class="bx-lbl">KITÖLTVE — KOZMETIKUS PÉLDA</div><p>🪝 „Mikor nézted utoljára a tükörbe és gondoltad: igen, ez vagyok én?"<br><br>„Írt nekem egy anyuka. Azt mondta: minden reggel 10 percet tölt a tükör előtt, hogy úgy nézzen ki, ahogy szeretné. De amikor lemossa a sminket, nem ismeri meg magát. Elfelejtette, milyen smink nélkül magabiztosnak lenni."<br><br>„Aztán eljött hozzánk egy konzultációra. Nem azért, mert új krémet akart. Hanem mert valaki végre megkérdezte: te mit AKARSZ?"<br><br>„Pontosan ezért csináljuk a személyre szabott bőrkonzultációt. Mert megérdemled, hogy reggel a tükörbe nézz és azt mondd: igen, jól nézek ki. Smink nélkül is."<br><br>„Ez az anyuka 3 hét után írt: a lánya kérdezte, miért mosolyogsz annyit mostanában?"<br><br>„Ha te is szeretnéd: link a bióban, foglalj konzultációt. Decemberben már csak 4 szabad időpont van."</p></div>
+</div></div>
+
+<!-- SABLON 4: MICRO 15s -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">🔥</span><div class="acc-info"><div class="acc-title">Sablon 4: Micro videó — 15 mp alatt</div><div class="acc-sub">Hatalmas elérés, ~100% watch time. Heti 2-3x kiegészítőnek.</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<div class="prompt"><div class="prompt-head"><span class="prompt-lbl">MICRO 15s SABLON</span><button class="copy-btn" onclick="event.stopPropagation();cpTx(this,'s4')">MÁSOLÁS</button></div>
+<div class="prompt-text" id="s4">⏱️ 0-2 mp | MICRO HOOK | Sokk
+📷 Arc közelről VAGY erős szöveges kép
+„[3-5 szavas micro hook a Modul 2 listádról]"
+
+⏱️ 2-10 mp | PUNCHLINE | Felismerés
+📷 Te beszélsz VAGY szöveg + B-roll
+„[1-2 mondat — a lényeg, a meglepetés. Semmi több.]"
+
+⏱️ 10-15 mp | CTA | Cselekvés
+📷 Arc VAGY szöveg overlay
+„[1 szó: Mentsd. / Kövess. — SEMMI TÖBB]"</div></div>
+
+<p style="margin-top:16px"><strong>3 KÉSZ MICRO VIDEÓ:</strong></p>
+<div class="bx bx-sage"><div class="bx-lbl">#1 — BÁRMELY IPARÁG</div><p>🪝 „Hazudtak neked." (2 mp)<br>„Az algoritmus nem ellened dolgozik. Az emberek viselkedését követi. Ha nem reagálnak, nem az algoritmus a hibás." (8 mp)<br>„Mentsd el." (2 mp)</p></div>
+<div class="bx bx-sage"><div class="bx-lbl">#2 — KÉZMŰVES</div><p>🪝 „Nem az ár a probléma." (2 mp)<br>„Ha alkudoznak a munkádon, az nem azt jelenti, hogy drága. Azt jelenti, hogy nem érzik az értékét. Az a te feladatod, hogy éreztessed." (9 mp)<br>„Kövess." (2 mp)</p></div>
+<div class="bx bx-sage"><div class="bx-lbl">#3 — ONLINE PÉNZKERESŐ</div><p>🪝 „Mindenki megcsinálta. Te miért nem?" (3 mp)<br>„Nem mert okosabbak. Nem mert többet tudnak. Hanem mert ELKEZDTÉK. Te még mindig tervezel." (8 mp)<br>„Írd kommentbe: MA." (3 mp)</p></div>
+</div></div>
+
+<!-- SABLON 5: CAROUSEL -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">📱</span><div class="acc-info"><div class="acc-title">Sablon 5: Carousel poszt — 8-10 slide</div><div class="acc-sub">Óriási trend. Legtöbb mentés. Edukációs tartalomhoz tökéletes.</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<div class="prompt"><div class="prompt-head"><span class="prompt-lbl">CAROUSEL SABLON</span><button class="copy-btn" onclick="event.stopPropagation();cpTx(this,'s5')">MÁSOLÁS</button></div>
+<div class="prompt-text" id="s5">SLIDE 1 | COVER — megállítja a görgetést
+📷 Erős vizuális + nagy szöveg
+„[Hook — max 8 szó]"
+Alcím: „Swipe →"
+
+SLIDE 2 | A PROBLÉMA
+„A legtöbben [közhiedelem / rossz szokás]. Ezért [negatív következmény]."
+
+SLIDE 3 | 1. pont
+„1. [Tipp/tanács]" + [1 mondat magyarázat]
+
+SLIDE 4 | 2. pont
+„2. [Tipp]" + [1 mondat]
+
+SLIDE 5 | 3. pont
+„3. [Tipp]" + [1 mondat]
+
+SLIDE 6-7 | Opcionális 4-5. pont
+
+SLIDE 8 | FORDULAT / LEGFONTOSABB
+📷 Vizuálisan kiemelve — más szín
+„De ami IGAZÁN számít: [legváratlanabb pont]."
+
+SLIDE 9 | ÖSSZEFOGLALÁS
+„✅ [1. pont] ✅ [2. pont] ✅ [3. pont] ⭐ [Legfontosabb]"
+
+SLIDE 10 | CTA
+„Mentsd el 📌 Küldd el 📤 Kövess 👤"</div></div>
+
+<div class="bx bx-sage"><div class="bx-lbl">KITÖLTVE — VIRÁGKÖTŐ (ESKÜVŐ)</div><p><strong>SLIDE 1:</strong> „5 hiba, amit NE kövess el az esküvői virággal → Swipe"<br><strong>SLIDE 2:</strong> „A menyasszonyok 70%-a úgy rendel csokrot, hogy ezeket a hibákat elköveti."<br><strong>SLIDE 3:</strong> „1. Túl későn rendelsz. 3 hónappal előtte MINIMUM."<br><strong>SLIDE 4:</strong> „2. Csak a Pinterest-képet mutatod. Mondd el, mit ÉRZEL."<br><strong>SLIDE 5:</strong> „3. Nem mondod el a helyszínt. Szabadtér ≠ terem."<br><strong>SLIDE 6:</strong> „4. Az árat nézed, nem az értéket. A csokor MINDEN fotón rajta lesz. 30 évig."<br><strong>SLIDE 7:</strong> „5. Nem kérsz próbacsokrot. Mindig kérj."<br><strong>SLIDE 8:</strong> „De ami IGAZÁN számít: Válassz virágkötőt, aki MEGKÉRDEZI, mi a történeted."<br><strong>SLIDE 9:</strong> „✅ 3 hónappal előtte ✅ Érzelmeket mondj ✅ Helyszínt jelezd ✅ Értéket nézd ✅ Próbacsokrot kérj ⭐ Válassz embert, nem katalógust."<br><strong>SLIDE 10:</strong> „Mentsd el — a menyasszony barátnőd hálás lesz 🤍"</p></div>
+</div></div>
+
+<!-- SABLON 6: BTS -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">🎥</span><div class="acc-info"><div class="acc-title">Sablon 6: Behind-the-scenes — 30 mp</div><div class="acc-sub">Szimpátia-trigger (Liking). Az ember mögött az embert mutatod. Heti 1x.</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<div class="prompt"><div class="prompt-head"><span class="prompt-lbl">BTS 30s SABLON</span><button class="copy-btn" onclick="event.stopPropagation();cpTx(this,'s6')">MÁSOLÁS</button></div>
+<div class="prompt-text" id="s6">⏱️ 0-3 mp | HOOK | Kíváncsiság
+📷 Nyers felvétel — telefon, természetes
+„[Személyes, emberi mondat — nem tanítás, nem eladás]"
+Pl: „Ma volt a legrosszabb napom." / „Ezt nem akartam megmutatni, de..."
+
+⏱️ 3-20 mp | A SZTORI | Azonosulás
+📷 B-roll az eseményről + narráció
+„[Mi történt? Röviden, emberi nyelven. LEGYEN BENNE ÉRZELEM.]"
+
+⏱️ 20-28 mp | A TANULSÁG | Felismerés
+📷 Vissza az arcra
+„[1 mondat tanulság. Nem prédikálás — őszinte gondolat.]"
+
+⏱️ 28-30 mp | CTA (nagyon soft)
+„Volt már ilyen napod? Írd meg." / „Ha ismerős, like-old."</div></div>
+
+<div class="bx bx-sage"><div class="bx-lbl">KITÖLTVE — KÉZMŰVES PÉLDA</div><p>🪝 „Ma majdnem sírtam a műhelyben."<br><br>„Egy rendelésre 6 órát dolgoztam. Kézzel festett kerámia tálak, 4 darab. Amikor a vevő megkapta, azt írta: gyönyörű, de kicsit drágállom, legközelebb olcsóbbat keresek. 6 óra. Kézzel. Minden darab egyedi."<br><br>„De tudod mit? Ez nem rólam szól. Ez arról szól, hogy meg kell tanulnom MEGMUTATNI azt a 6 órát. Ha a vevő csak a kész terméket látja, persze hogy csak egy tálat lát. Ha látja a folyamatot — akkor látja az értéket."<br><br>„Volt már ilyen napod? Írd meg. 👇"</p></div>
+</div></div>
+
+<!-- ÉRZELEM-GÖRBE -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">📈</span><div class="acc-info"><div class="acc-title">Érzelem-görbe — vizuális guide</div><div class="acc-sub">Minden videóban KELL lennie érzelmi hullámnak. Ha a videód lapos — a néző elmegy.</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<p><strong>EDUKÁCIÓS VIDEÓ:</strong></p>
+<div class="prompt-text" style="font-family:monospace;font-size:12px;line-height:1.6;margin:12px 0">Érzelem ▲
+         │     ╭─── Fordulat / "aha"
+   Magas │  ╭──╯
+         │ ╭╯
+   Köz.  │╭╯          ╭── Összefoglalás
+         ││           │
+   Ala.  │╯            ╰── CTA
+         │ Hook    Probléma    Megoldás     Zárás
+         └──────────────────────────────────────► Idő</div>
+
+<p><strong>SALES VIDEÓ:</strong></p>
+<div class="prompt-text" style="font-family:monospace;font-size:12px;line-height:1.6;margin:12px 0">Érzelem ▲
+         │  ╭─── Fájdalom csúcsa
+   Magas │ ╭╯
+         │╭╯                    ╭── Social proof
+   Köz.  ││         ╭──────────╯
+         ││        ╭╯  Fordulat (remény)
+   Ala.  │╯       ╭╯
+         │ Hook  Sztori    Megoldás  Proof   CTA
+         └──────────────────────────────────────► Idő</div>
+
+<p><strong>MICRO VIDEÓ:</strong></p>
+<div class="prompt-text" style="font-family:monospace;font-size:12px;line-height:1.6;margin:12px 0">Érzelem ▲
+   Magas │ ╭──╮
+         │╭╯  ╰╮
+   Köz.  ││    │
+   Ala.  │╯    ╰─
+         │Hook Punch CTA
+         └────────────► Idő</div>
+
+<div class="bx bx-rose"><div class="bx-lbl">⚠️ A SZABÁLY</div><p>Ha a görbéd LAPOS (nincs csúcs, nincs völgy) → a videód unalmas. <strong>Mindig kell legalább 1 fordulat</strong> — egy pillanat, ahol az érzelem MEGVÁLTOZIK. Ez az, ami megtartja a nézőt.</p></div>
+</div></div>
+
+<!-- KÉSZ SALES FORGATÓKÖNYV -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">⭐</span><div class="acc-info"><div class="acc-title">Kész forgatókönyv: Sales 90 mp — Kézműves</div><div class="acc-sub">Szó szerint felveheted. Csak az iparágat/nevet cseréld.</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<div class="prompt"><div class="prompt-head"><span class="prompt-lbl">KÉSZ SALES SCRIPT</span><button class="copy-btn" onclick="event.stopPropagation();cpTx(this,'ks1')">MÁSOLÁS</button></div>
+<div class="prompt-text" id="ks1">🪝 „10 óra munka. És valaki azt mondja: drága." [0-3 mp]
+
+„Írt nekem valaki a héten. Megrendelt egy kézzel festett kerámia szettet. 4 darab. Egyenként formázva, égetve, festve, lakkozva. 10 óra munka. Amikor megkapta, azt írta: szépek, de legközelebb olcsóbbat keresek." [3-18 mp]
+
+„Tudod mi fáj igazán? Nem az, hogy drágállja. Hanem az, hogy nem LÁTJA a 10 órát. Csak a kész terméket látja. És egy kész tál — az 'csak egy tál'." [18-28 mp]
+
+„Aztán csináltam valamit. Felvettem a teljes folyamatot. Az agyagot, ahogy formázom. A kemencét. A festést, ecsetvonásonként. A hibákat, amiket kijavítottam. Posztoltam." [28-40 mp]
+
+„Tudod mi történt? A következő vásárlóm azt írta: 'Láttam a videódat. Most már értem az árat. EZÉRT ilyen különleges.' Nem csökkentettem az árat. MEGMUTATTAM az értéket." [40-55 mp]
+
+„Pontosan ezért csináltam a Kézműves Tartalomterv Csomagot. Nem azért, hogy megtanítsalak videózni. Hanem mert megérdemled, hogy az emberek LÁSSÁK a munkádat." [55-70 mp]
+
+„Az elmúlt hónapban 12 kézműves használta ezt a csomagot. Az átlagos eladásaik 40%-kal nőttek. Nem mert olcsóbbak lettek. Mert végre LÁTTÁK az értéket." [70-80 mp]
+
+„Ha te is azt érzed, hogy a munkád többet ér, mint amennyiért adod — link a bióban. Ma még elérhető a bevezető áron." [80-90 mp]</div></div>
+</div></div>
+
+<!-- KÉSZ EDUKÁCIÓS FORGATÓKÖNYV -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">⭐</span><div class="acc-info"><div class="acc-title">Kész forgatókönyv: Edukációs 60 mp — Bármely szolgáltató</div><div class="acc-sub">Univerzálisan használható. Csak az iparágat cseréld.</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<div class="prompt"><div class="prompt-head"><span class="prompt-lbl">KÉSZ EDUKÁCIÓS SCRIPT</span><button class="copy-btn" onclick="event.stopPropagation();cpTx(this,'ks2')">MÁSOLÁS</button></div>
+<div class="prompt-text" id="ks2">🪝 „Az ügyfeleid NEM azért nem jönnek, amiért gondolod." [0-3 mp]
+
+„A legtöbb szolgáltató azt hiszi, az ár a probléma. Vagy a lokáció. Vagy a konkurencia. De az igazság: az emberek nem azért nem jönnek, mert drága vagy — hanem mert nem tudják, MIÉRT jöjjenek pont hozzád." [3-15 mp]
+
+„Az első dolog: ne azt mondd, MIT csinálsz. Mondd el, MIÉRT csinálja jól. A különbség: 'Hajfestés 15 ezer' vs 'Azért jönnek hozzám, mert végre azt kapják, amit akartak.'" [15-25 mp]
+
+„A második: mutasd meg a FOLYAMATOT. Nem a végeredményt — azt mindenki mutatja. Mutasd meg a gondoskodást, a figyelmet, a részleteket. EZ az, ami bizalmat épít." [25-35 mp]
+
+„De ami igazán számít: KÉRDEZZ. Az ügyfeled el akarja mondani, mit szeretne. A legtöbb szolgáltató nem kérdez — hanem magyaráz. Fordítsd meg." [35-50 mp]
+
+„Szóval: ne a MIT-et mondd, hanem a MIÉRT-et. Mutasd a folyamatot, ne csak a végeredményt. És kérdezz, ne magyarázz." [50-55 mp]
+
+„Mentsd el, és holnap próbáld ki az első vendégednél. Kövess a többiért." [55-60 mp]</div></div>
+</div></div>
+
+<!-- KÉSZ CAROUSEL -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">⭐</span><div class="acc-info"><div class="acc-title">Kész carousel: 8 slide — Online pénzkeresők</div><div class="acc-sub">Copy-paste a Canvába.</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<div class="prompt"><div class="prompt-head"><span class="prompt-lbl">KÉSZ CAROUSEL</span><button class="copy-btn" onclick="event.stopPropagation();cpTx(this,'ks3')">MÁSOLÁS</button></div>
+<div class="prompt-text" id="ks3">SLIDE 1: „3 kurzust vettél. 0 Ft bevétel. Íme, amit SENKI nem mondott el → Swipe"
+
+SLIDE 2: „Nem a kurzusokkal van a baj. Veled sincs baj. A SORRENDDEL van baj."
+
+SLIDE 3: „1. Nem a nagy kurzust kell elsőnek eladni. Egy kávé áráért adj kicsi, kész megoldást. EZ nyitja ki az ajtót."
+
+SLIDE 4: „2. Nem több tartalom kell — hanem olyan mondat, ami MEGÁLLÍTJA a görgetést. 1 jó hook > 10 átlagos poszt."
+
+SLIDE 5: „3. Nem tanulni akarnak az emberek. MEGOLDÁST akarnak. Adj kész sablont, ne 50 oldalas e-bookot."
+
+SLIDE 6: „4. Ne mindent egyszerre. 1 platform. 1 formátum. 1 probléma. Amíg nem megy — ne bővíts."
+
+SLIDE 7: „A sorrend ami MŰKÖDIK: Ingyenes tartalom (bizalom) → Kis termék $7-17 (első vásárlás) → Nagyobb csomag (ha már bíznak benned)"
+
+SLIDE 8: „Ha eddig rossz sorrendben csináltad, az NEM kudarc. Az tanulság. Ma újrakezdheted — jól. Mentsd el 📌 Küldd el annak, akinek kell 📤"</div></div>
+</div></div>
+
+<div class="bx bx-warm"><div class="bx-lbl">📊 ÖSSZEGZÉS — MODUL 3</div><p><strong>6 kitöltős sablon:</strong> edukációs 30s + 60s, sales 60-90s, micro 15s, carousel, BTS<br><strong>3 kész script:</strong> sales (kézműves), edukációs (univerzális), carousel (online)<br><strong>3 kész micro:</strong> bármely iparág, kézműves, online<br><strong>3 érzelem-görbe:</strong> edukációs, sales, micro<br><strong>Mindegyikhez:</strong> ⏱️ időjelölés, 🎭 érzelem, 📷 B-roll javaslat, másolás gomb</p></div>
+
+</div>
+</div>
+
+<div class="page" id="page-4">
+<div class="mod-hero"><div class="mod-tag">MODUL 04</div><h1 class="mod-h1">Havi Tartalom-Terv Rendszer</h1><div class="mod-divider"></div><p class="mod-desc">Ne gondolkodj minden nap azon, mit posztolj. Nyisd meg a tervet, nézd meg mi van mára, csináld meg, posztold. Ennyi.</p></div>
+<div class="sec">
+
+<div class="bx bx-rose"><div class="bx-lbl">🚨 A PROBLÉMA</div><p>A legtöbb ember azért ég ki, mert <strong>minden nap nulláról gondolkodik.</strong> „Mit posztoljak ma?" — ez a legrosszabb kérdés. Helyette: <strong>hónap elején 1 óra tervezés → 4 hét autopilóta.</strong></p></div>
+
+<!-- HETI STRUKTÚRA -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">📅</span><div class="acc-info"><div class="acc-title">4 hetes tartalom-naptár sablon</div><div class="acc-sub">A struktúra minden héten ugyanaz — csak a tartalmat cseréled</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<p><strong>1. HÉT:</strong></p>
+<table class="tbl"><tr><th>NAP</th><th>TÍPUS</th><th>FORMÁTUM</th><th>CÉL</th></tr>
+<tr><td>Hétfő</td><td>EDUKÁCIÓS</td><td>Reels/TikTok 60s</td><td>Bizalomépítés</td></tr>
+<tr><td>Kedd</td><td>MICRO</td><td>Reels/TikTok 5-15s</td><td>Elérés boost</td></tr>
+<tr><td>Szerda</td><td>CAROUSEL</td><td>Instagram 7-10 slide</td><td>Mentés, megosztás</td></tr>
+<tr><td>Csütörtök</td><td>EDUKÁCIÓS</td><td>Reels/TikTok 30-45s</td><td>Bizalomépítés</td></tr>
+<tr><td>Péntek</td><td>SALES</td><td>Reels/TikTok 60-90s</td><td>Konverzió</td></tr>
+<tr><td>Szombat</td><td>BTS</td><td>Story + Reels 30s</td><td>Szimpátia</td></tr>
+<tr><td>Vasárnap</td><td>PIHENŐ</td><td>Újraposztolás</td><td>Legjobb tartalom újra</td></tr>
+</table>
+
+<p style="margin-top:20px"><strong>2. HÉT — eltolva:</strong></p>
+<table class="tbl"><tr><th>NAP</th><th>TÍPUS</th><th>FORMÁTUM</th></tr>
+<tr><td>Hétfő</td><td>EDUKÁCIÓS</td><td>Reels 60s</td></tr>
+<tr><td>Kedd</td><td>MICRO</td><td>Reels 3-10s</td></tr>
+<tr><td>Szerda</td><td>EDUKÁCIÓS</td><td>Reels 45s</td></tr>
+<tr><td>Csütörtök</td><td>CAROUSEL</td><td>Instagram 8 slide</td></tr>
+<tr><td>Péntek</td><td>MICRO</td><td>Reels 5s</td></tr>
+<tr><td>Szombat</td><td>SALES</td><td>Reels 60s</td></tr>
+<tr><td>Vasárnap</td><td>BTS / Story</td><td>Személyes, laza</td></tr>
+</table>
+
+<p style="margin-top:20px"><strong>3. HÉT:</strong></p>
+<table class="tbl"><tr><th>NAP</th><th>TÍPUS</th><th>FORMÁTUM</th></tr>
+<tr><td>Hétfő</td><td>EDUKÁCIÓS</td><td>Reels 30s</td></tr>
+<tr><td>Kedd</td><td>CAROUSEL</td><td>Instagram 5-7 slide</td></tr>
+<tr><td>Szerda</td><td>MICRO</td><td>Reels 5s</td></tr>
+<tr><td>Csütörtök</td><td>EDUKÁCIÓS</td><td>Reels 60s</td></tr>
+<tr><td>Péntek</td><td>BTS</td><td>Reels 30s + Story</td></tr>
+<tr><td>Szombat</td><td>SALES</td><td>Reels 90s</td></tr>
+<tr><td>Vasárnap</td><td>PIHENŐ</td><td>—</td></tr>
+</table>
+
+<p style="margin-top:20px"><strong>4. HÉT — záró, erősebb sales:</strong></p>
+<table class="tbl"><tr><th>NAP</th><th>TÍPUS</th><th>FORMÁTUM</th></tr>
+<tr><td>Hétfő</td><td>EDUKÁCIÓS</td><td>Reels 60s</td></tr>
+<tr><td>Kedd</td><td>MICRO</td><td>Reels 3-5s</td></tr>
+<tr><td>Szerda</td><td>EDUKÁCIÓS</td><td>Carousel 8 slide</td></tr>
+<tr><td>Csütörtök</td><td>BTS</td><td>Reels 30s</td></tr>
+<tr><td>Péntek</td><td>SALES</td><td>Reels 60s</td></tr>
+<tr><td>Szombat</td><td>SALES (soft)</td><td>Story-sorozat (3-5)</td></tr>
+<tr><td>Vasárnap</td><td>ÖSSZEGZÉS</td><td>Carousel: „A hónap legjobb tippjei"</td></tr>
+</table>
+</div></div>
+
+<!-- ARÁNYOK -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">📊</span><div class="acc-info"><div class="acc-title">Havi arányok — a rendszer matekja</div><div class="acc-sub">~28 poszt / hónap — tudatosan, nem véletlenszerűen</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<table class="tbl"><tr><th>TÍPUS</th><th>DB / HÓ</th><th>ARÁNY</th><th>CÉL</th></tr>
+<tr><td>Edukációs</td><td>10-12</td><td>~40%</td><td>Bizalom, tekintély, watch time</td></tr>
+<tr><td>Micro</td><td>6-8</td><td>~25%</td><td>Elérés, algoritmus, új nézők</td></tr>
+<tr><td>Carousel</td><td>4-5</td><td>~15%</td><td>Mentések, megosztások</td></tr>
+<tr><td>Sales</td><td>4-5</td><td>~15%</td><td>Konverzió, bevétel</td></tr>
+<tr><td>BTS / személyes</td><td>3-4</td><td>~10%</td><td>Szimpátia, emberi oldal</td></tr>
+<tr><td><strong>ÖSSZESEN</strong></td><td><strong>~28</strong></td><td><strong>100%</strong></td><td></td></tr>
+</table>
+<div class="bx bx-warm"><div class="bx-lbl">💡 SZABÁLY</div><p>Heti 6-7 poszt. Nem heti 14. Nem napi 3. <strong>Konzisztencia > mennyiség.</strong> Jobb heti 5 „elég jó" videó, mint heti 1 „tökéletes" amit 3 napig csiszolsz.</p></div>
+</div></div>
+
+<!-- 30 ÖTLET -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">💡</span><div class="acc-info"><div class="acc-title">30 videó/poszt ötlet — plug-and-play</div><div class="acc-sub">12 edukációs + 5 sales + 8 micro + 5 BTS — bármely iparágra</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<p><strong>EDUKÁCIÓS ÖTLETEK (12 db):</strong></p>
+<div class="hook-list">
+<div class="hook-item"><span class="hook-num">01</span><div><div class="hook-text">„3 hiba, amit [célközönség] elkövet [téma]-ban"</div><div class="hook-note">60s Reels · Sokk-hook</div></div></div>
+<div class="hook-item"><span class="hook-num">02</span><div><div class="hook-text">„Ezt csináld HELYETTE, ha [gyakori rossz megoldás]"</div><div class="hook-note">45s Reels · Kontraszt-hook</div></div></div>
+<div class="hook-item"><span class="hook-num">03</span><div><div class="hook-text">„[Szám] jel, hogy [negatív helyzet]"</div><div class="hook-note">Carousel 7 slide · Kérdés-hook</div></div></div>
+<div class="hook-item"><span class="hook-num">04</span><div><div class="hook-text">„Mindenki [X]-et mond. Az igazság [Y]."</div><div class="hook-note">30s Reels · Kontraszt-hook</div></div></div>
+<div class="hook-item"><span class="hook-num">05</span><div><div class="hook-text">„Ezt a [szakember]-ed nem mondja el neked"</div><div class="hook-note">60s Reels · Sokk-hook</div></div></div>
+<div class="hook-item"><span class="hook-num">06</span><div><div class="hook-text">„Kezdő vs profi — a különbség [téma]-ban"</div><div class="hook-note">Carousel 8 slide · Kontraszt</div></div></div>
+<div class="hook-item"><span class="hook-num">07</span><div><div class="hook-text">„Az 1 dolog, amit változtass meg [téma]-ban"</div><div class="hook-note">30s Reels · Sokk-hook</div></div></div>
+<div class="hook-item"><span class="hook-num">08</span><div><div class="hook-text">„Miért [negatív eredmény]? Mert [meglepő ok]."</div><div class="hook-note">45s Reels · Kérdés-hook</div></div></div>
+<div class="hook-item"><span class="hook-num">09</span><div><div class="hook-text">„Így csináld lépésről lépésre: [folyamat]"</div><div class="hook-note">Carousel 10 slide</div></div></div>
+<div class="hook-item"><span class="hook-num">10</span><div><div class="hook-text">„[Szám] tipp, amit bárcsak korábban tudtam volna"</div><div class="hook-note">60s Reels · Azonosulás</div></div></div>
+<div class="hook-item"><span class="hook-num">11</span><div><div class="hook-text">„A legnagyobb tévhit [iparág]-ban"</div><div class="hook-note">30s Reels · Sokk-hook</div></div></div>
+<div class="hook-item"><span class="hook-num">12</span><div><div class="hook-text">„Kommentek, amiket kaptam — és a válaszom"</div><div class="hook-note">60s Reels · Social Proof</div></div></div>
+</div>
+
+<p style="margin-top:24px"><strong>SALES ÖTLETEK (5 db):</strong></p>
+<div class="hook-list">
+<div class="hook-item"><span class="hook-num">13</span><div><div class="hook-text">„Így változott meg [vendég/vásárló] élete"</div><div class="hook-note">60-90s Reels · Azonosulás</div></div></div>
+<div class="hook-item"><span class="hook-num">14</span><div><div class="hook-text">„Előtte — utána: [valódi eredmény]"</div><div class="hook-note">30s vagy Carousel · Social Proof</div></div></div>
+<div class="hook-item"><span class="hook-num">15</span><div><div class="hook-text">„Ezért csináltuk a [termék/szolgáltatás]-t"</div><div class="hook-note">60s Reels · Azonosulás</div></div></div>
+<div class="hook-item"><span class="hook-num">16</span><div><div class="hook-text">„[X] ember használja — íme mit mondanak"</div><div class="hook-note">Carousel 8 slide · Social Proof</div></div></div>
+<div class="hook-item"><span class="hook-num">17</span><div><div class="hook-text">„Utolsó [szám] hely / Csak [időpontig]"</div><div class="hook-note">15-30s Reels · Scarcity</div></div></div>
+</div>
+
+<p style="margin-top:24px"><strong>MICRO ÖTLETEK (8 db):</strong></p>
+<div class="hook-list">
+<div class="hook-item"><span class="hook-num">18</span><div><div class="hook-text">„Ezt ne csináld." + 1 mondat meglepetés</div><div class="hook-note">5s Reels</div></div></div>
+<div class="hook-item"><span class="hook-num">19</span><div><div class="hook-text">„Hazudtak neked." + 1 mondat igazság</div><div class="hook-note">5s Reels</div></div></div>
+<div class="hook-item"><span class="hook-num">20</span><div><div class="hook-text">„Rossz hírem van." + fordulat</div><div class="hook-note">8s Reels</div></div></div>
+<div class="hook-item"><span class="hook-num">21</span><div><div class="hook-text">„Ezt senki nem mondja el." + tipp</div><div class="hook-note">10s Reels</div></div></div>
+<div class="hook-item"><span class="hook-num">22</span><div><div class="hook-text">„1 mondat, ami megváltoztatta a [területet]"</div><div class="hook-note">5s Reels</div></div></div>
+<div class="hook-item"><span class="hook-num">23</span><div><div class="hook-text">„Állj. Olvasd el." + szöveges kép</div><div class="hook-note">3s Reels</div></div></div>
+<div class="hook-item"><span class="hook-num">24</span><div><div class="hook-text">„Kérdés: [provokáció]?" + csend</div><div class="hook-note">5s Reels</div></div></div>
+<div class="hook-item"><span class="hook-num">25</span><div><div class="hook-text">„Ezt mentsd el." + 1 tipp</div><div class="hook-note">8s Reels</div></div></div>
+</div>
+
+<p style="margin-top:24px"><strong>BTS / SZEMÉLYES (5 db):</strong></p>
+<div class="hook-list">
+<div class="hook-item"><span class="hook-num">26</span><div><div class="hook-text">„A mai napom — [nyers, valódi pillanat]"</div><div class="hook-note">30s Reels + Story · Liking</div></div></div>
+<div class="hook-item"><span class="hook-num">27</span><div><div class="hook-text">„Ezt nem akartam megmutatni, de..."</div><div class="hook-note">30s Reels · Liking + Kíváncsiság</div></div></div>
+<div class="hook-item"><span class="hook-num">28</span><div><div class="hook-text">„A legrosszabb napom [iparág]-ban"</div><div class="hook-note">45s Reels · Liking</div></div></div>
+<div class="hook-item"><span class="hook-num">29</span><div><div class="hook-text">„Kérdezz bármit — válaszolok"</div><div class="hook-note">Story sorozat · Consistency</div></div></div>
+<div class="hook-item"><span class="hook-num">30</span><div><div class="hook-text">„1 éve vs ma — mi változott?"</div><div class="hook-note">Carousel 5 slide · Social Proof</div></div></div>
+</div>
+</div></div>
+
+<!-- KITÖLTŐS TERV -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">📝</span><div class="acc-info"><div class="acc-title">Kitöltős havi tartalom-terv sablon</div><div class="acc-sub">Hónap elején 1 óra → 4 hét autopilóta</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<div class="prompt"><div class="prompt-head"><span class="prompt-lbl">HAVI TERV SABLON</span><button class="copy-btn" onclick="event.stopPropagation();cpTx(this,'ht1')">MÁSOLÁS</button></div>
+<div class="prompt-text" id="ht1">HÓNAP: _______________
+IPARÁG: _______________
+CÉLKÖZÖNSÉG: _______________
+FŐ FÁJDALOMPONT (érzelmi szint): _______________
+
+HÉT 1:
+  Hétfő:   Típus: [   ] | Ötlet #: [   ] | Hook: „___" | CTA: [   ]
+  Kedd:    Típus: [   ] | Ötlet #: [   ] | Hook: „___" | CTA: [   ]
+  Szerda:  Típus: [   ] | Ötlet #: [   ] | Hook: „___" | CTA: [   ]
+  Csüt:    Típus: [   ] | Ötlet #: [   ] | Hook: „___" | CTA: [   ]
+  Péntek:  Típus: [   ] | Ötlet #: [   ] | Hook: „___" | CTA: [   ]
+  Szombat: Típus: [   ] | Ötlet #: [   ] | Hook: „___" | CTA: [   ]
+  Vasárnap: [ ] Pihenő  [ ] Újraposztolás: ___
+
+HÉT 2: (ugyanez)
+HÉT 3: (ugyanez)
+HÉT 4: (ugyanez)
+
+HAVI CÉL:
+  [ ] Új követők: ___
+  [ ] Email feliratkozók: ___
+  [ ] Eladások: ___
+  [ ] DM/megkeresés: ___</div></div>
+</div></div>
+
+<!-- BATCH GYÁRTÁS -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">🎬</span><div class="acc-info"><div class="acc-title">Batch-gyártás naptár + checklist</div><div class="acc-sub">NEM minden nap veszel fel. 1-2 alkalommal MINDENT, utána hetekig posztolod.</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<p><strong>BATCH NAP #1 (hónap eleje — 3-4 óra):</strong></p>
+
+<p style="margin-top:12px"><strong>ELŐKÉSZÍTÉS (30 perc):</strong></p>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Tartalom-terv kinyomtatva / megnyitva</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Forgatókönyvek megírva (Modul 3 sablonok)</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Hook-ok kiválasztva (Modul 2 lista)</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Ruha/háttér kész, telefon töltve, jó fény</div></div></div></div>
+
+<p style="margin-top:16px"><strong>FELVÉTEL — BESZÉLŐS VIDEÓK (1.5-2 óra):</strong></p>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Edukációs #1 (60s)</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Edukációs #2 (30-45s)</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Sales #1 (60-90s)</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">BTS #1 (30s)</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Micro #1, #2, #3 (5-15s)</div><div class="check-desc">Tipp: a micro-kat a végén vedd fel, amikor már bemelegedtél és lazább vagy.</div></div></div></div>
+
+<p style="margin-top:16px"><strong>B-ROLL FELVÉTEL (30 perc):</strong></p>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Termék közelkép</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Munkafolyamat / kezek munka közben</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Környezet / atmoszféra / lifestyle</div></div></div></div>
+<div class="bx bx-warm"><div class="bx-lbl">💡 TIPP</div><p>Vegyél fel TÖBBET mint amennyire szükséged van. <strong>15 perc B-roll = 3-4 hét anyag.</strong></p></div>
+
+<p style="margin-top:20px"><strong>VÁGÁS & ÜTEMEZÉS NAP (batch nap után 1-2 napon belül, 2-3 óra):</strong></p>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Videók importálása CapCut-ba</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Vágás + Auto Caption bekapcsolása + javítás</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">B-roll beillesztése (3-5 mp-enként váltsd)</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Export: 9:16 formátum + feltöltés ütemezőbe</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Carousel-ek Canvában elkészítve + ütemezve</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">2 hét előre ütemezve (Later / Buffer / Meta Suite)</div></div></div></div>
+</div></div>
+
+<!-- AI TWIN -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">🤖</span><div class="acc-info"><div class="acc-title">AI Twin felvételi checklist</div><div class="acc-sub">Ha avatárt használsz — más a felvételi szabály</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<p><strong>ELŐKÉSZÍTÉS:</strong></p>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Egyenletes, meleg fény (NE neon, NE háttérfény)</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Semleges háttér (fehér fal, egyszínű)</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Kamera szemmagasságban, stabil (állvány)</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Szembe kamerával — NE nézz oldalra</div></div></div></div>
+
+<p style="margin-top:16px"><strong>FELVÉTEL:</strong></p>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Lassú, tiszta beszéd — NE hadarj</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">10-15 perc folyamatos anyag</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Különböző érzelmek: mosolygós, komoly, lelkes</div></div></div></div>
+<div class="check" onclick="event.stopPropagation();this.classList.toggle('done')"><div class="check-row"><div class="check-box">✓</div><div><div class="check-title">Több szög/ruha: legalább 2-3 „look"</div></div></div></div>
+
+<div class="bx bx-rose"><div class="bx-lbl">⚠️ FONTOS</div><p>Az AI Twin <strong>NEM helyettesíti a valódi jelenléted.</strong> Használd a beszélős tartalomhoz — de a BTS és személyes tartalom MINDIG legyen valódi. <strong>1 felvételi alkalom = 2-3 hónapnyi AI Twin anyag.</strong></p></div>
+</div></div>
+
+<!-- HASHTAG -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">#️⃣</span><div class="acc-info"><div class="acc-title">Hashtag-stratégia sablon</div><div class="acc-sub">10-15 hashtag / poszt — kategorizálva + kész példa</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<div class="prompt"><div class="prompt-head"><span class="prompt-lbl">HASHTAG SABLON</span><button class="copy-btn" onclick="event.stopPropagation();cpTx(this,'hs1')">MÁSOLÁS</button></div>
+<div class="prompt-text" id="hs1">IPARÁG: _______________
+
+NAGY (500K+ poszt) — eléréshez, 3-5 db:
+#___  #___  #___
+
+KÖZEPES (50K-500K) — felfedezéshez, 3-5 db:
+#___  #___  #___
+
+KICSI/NICHE (10K-50K) — célzott közönséghez, 3-5 db:
+#___  #___  #___
+
+MÁRKÁS (saját) — 1-2 db:
+#___
+
+ÖSSZESEN: 10-15 / poszt (ne több!)
+TikTokon: 3-5 elég | Instán: 10-15
+NE használj #fyp #viral — értéktelen</div></div>
+
+<div class="bx bx-sage"><div class="bx-lbl">KÉSZ PÉLDA — KOZMETIKUS (MAGYAR)</div><p><strong>NAGY:</strong> #szépségápolás #bőrápolás #arcápolás #szépségtipp #kozmetika<br><strong>KÖZEPES:</strong> #bőrápolásitipp #arckezelés #természeteskozmetika #szépségrutin<br><strong>KICSI:</strong> #kozmetikusmagyarország #bőrproblémák #arcápolástitkok<br><strong>MÁRKÁS:</strong> #[szalonneve]tipp</p></div>
+</div></div>
+
+<!-- ÚJRAHASZNOSÍTÁS -->
+<div class="acc" onclick="this.classList.toggle('open')">
+<div class="acc-head"><span class="acc-icon">♻️</span><div class="acc-info"><div class="acc-title">Tartalom-újrahasznosítás: 1 videó → 6 formátum</div><div class="acc-sub">Ne gyárts 6 különböző tartalmat — használd újra okosan</div></div><span class="acc-chev">▾</span></div>
+<div class="acc-body">
+<div class="prompt"><div class="prompt-head"><span class="prompt-lbl">ÚJRAHASZNOSÍTÁS SABLON</span><button class="copy-btn" onclick="event.stopPropagation();cpTx(this,'uj1')">MÁSOLÁS</button></div>
+<div class="prompt-text" id="uj1">EREDETI: 60 mp-es edukációs Reels
+
+↓ ÁTALAKÍTÁSOK:
+
+1. TIKTOK → Ugyanaz, TikTok-ra feltöltve (más felirat-stílus)
+2. YOUTUBE SHORTS → Ugyanaz, Shorts-ra (csatorna-végkártya)
+3. CAROUSEL → A 3 fő pont slide-okra (Canva sablon)
+4. STORY SOROZAT → 3-5 story: Hook → Tipp 1 → Tipp 2 → Tipp 3 → CTA
+5. EMAIL → A videó szövege emailbe. Subject = a hook. CTA = „nézd meg a videót"
+6. SZÖVEGES POSZT → A videó tartalma szövegként (Facebook / LinkedIn)
+
+SZABÁLY: az EREDETIT készítsd el jól →
+az átalakítások max 15 perc / darab.
+1 óra munka = 1 hét tartalom 6 platformra.</div></div>
+</div></div>
+
+<div class="bx bx-warm"><div class="bx-lbl">📊 ÖSSZEGZÉS — MODUL 4</div><p><strong>4 hetes naptár:</strong> 3 variáció, hétről hétre<br><strong>30 videó ötlet:</strong> kategorizálva (edukációs, sales, micro, BTS)<br><strong>Kitöltős terv sablon:</strong> másolható<br><strong>Batch-gyártás checklist:</strong> kipipálható (előkészítés, felvétel, vágás)<br><strong>AI Twin checklist:</strong> kipipálható<br><strong>Hashtag sablon + kész példa</strong><br><strong>Újrahasznosítás sablon:</strong> 1→6 formátum</p></div>
+
+</div>
+</div>
+
+<div class="page" id="page-5"><div class="mod-hero"><div class="mod-tag">MODUL 05</div><h1 class="mod-h1">Email Rendszer</h1><div class="mod-divider"></div><p class="mod-desc">3 lead magnet sablon + 8 kész email + 55 subject line + MailerLite guide.</p></div><div class="sec"><div class="soon"><div class="soon-icon">📧</div><div class="soon-title">Tartalom feltöltés alatt</div><div class="soon-desc">A teljes email rendszer — hamarosan.</div></div></div></div>
+
+<div class="page" id="page-6"><div class="mod-hero"><div class="mod-tag">MODUL 06</div><h1 class="mod-h1">AI Workflow</h1><div class="mod-divider"></div><p class="mod-desc">8 lépéses gyártási workflow + 30 prompt + eszköz-guide.</p></div><div class="sec"><div class="soon"><div class="soon-icon">🤖</div><div class="soon-title">Tartalom feltöltés alatt</div><div class="soon-desc">A teljes AI workflow — hamarosan.</div></div></div></div>
+
+<div class="page" id="page-7"><div class="mod-hero"><div class="mod-tag">MODUL 07</div><h1 class="mod-h1">Üzletépítő Csomag</h1><div class="mod-divider"></div><p class="mod-desc">Szolgáltatási csomagok + árajánlat + szerződés + pitch sablonok + riport.</p></div><div class="sec"><div class="soon"><div class="soon-icon">💼</div><div class="soon-title">Tartalom feltöltés alatt</div><div class="soon-desc">Minden üzleti dokumentum — hamarosan.</div></div></div></div>
+
+<div class="page" id="page-8"><div class="mod-hero"><div class="mod-tag">MODUL 08</div><h1 class="mod-h1">Portfólió + Certifikáció</h1><div class="mod-divider"></div><p class="mod-desc">Portfólió sablon + mock projekt + cold email + záróvizsga + certifikáció.</p></div><div class="sec"><div class="soon"><div class="soon-icon">🎓</div><div class="soon-title">Tartalom feltöltés alatt</div><div class="soon-desc">A portfólió és certifikáció rendszer — hamarosan.</div></div></div></div>
+
+</main>
+</div>
+
+<script>
+const MODS=[
+{id:1,emoji:"📋",title:"Fájdalompont Rendszer"},
+{id:2,emoji:"🪝",title:"Hook Fegyvertár"},
+{id:3,emoji:"📝",title:"Forgatókönyv Sablonok"},
+{id:4,emoji:"📅",title:"Havi Tartalom-Terv"},
+{id:5,emoji:"📧",title:"Email Rendszer"},
+{id:6,emoji:"🤖",title:"AI Workflow"},
+{id:7,emoji:"💼",title:"Üzletépítő Csomag"},
+{id:8,emoji:"🎓",title:"Portfólió + Certifikáció"}
+];
+let activeMod=1,sbOpen=false;
+
+function buildSB(){
+document.getElementById("sb-nav").innerHTML=MODS.map(m=>
+`<div class="sb-mod"><button class="sb-mod-btn${activeMod===m.id?' active':''}" onclick="goMod(${m.id})"><span class="sb-emoji">${m.emoji}</span><span class="sb-num">0${m.id}</span>${m.title}</button></div>`
+).join("");
+}
+
+function goMod(id){
+activeMod=id;
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById("page-"+id)?.classList.add("active");
+buildSB();
+if(sbOpen)tSB();
+window.scrollTo(0,0);
+}
+
+function tSB(){sbOpen=!sbOpen;document.getElementById("sb").classList.toggle("open",sbOpen);document.getElementById("ov").classList.toggle("show",sbOpen);document.querySelector(".mob-btn").textContent=sbOpen?"✕":"☰"}
+
+function cpTx(btn,id){
+const el=document.getElementById(id);
+navigator.clipboard.writeText(el.textContent).then(()=>{
+btn.textContent="✓ MÁSOLVA";btn.classList.add("copied");
+setTimeout(()=>{btn.textContent="MÁSOLÁS";btn.classList.remove("copied")},2000);
+});
+}
+
+buildSB();
+</script>
+</body>
+</html>
